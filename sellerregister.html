@@ -155,7 +155,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="breadcrumb_iner">
-              <h2>登入/註冊</h2>
+              <h2>商家登入/註冊</h2>
             </div>
           </div>
         </div>
@@ -181,11 +181,9 @@
               <div class="login_part_form_iner">
                 <h3>
                   歡迎! <br />
-                  請註冊帳號
+                  請註冊商家帳號
                 </h3>
-                <div>
-                <a class="btn_1 form-group" href="sellerregister.html">商家註冊 </a>
-              </div>
+                <a class="btn_1 form-group" href="register.html">使用者註冊</a>
                 <form
                   class="row contact_form"
                   action="#"
@@ -196,18 +194,18 @@
                     <input
                       type="text"
                       class="form-control"
-                      id="email"
-                      name="email"
+                      id="selleremail"
+                      name="selleremail"
                       value=""
-                      placeholder="電子信箱" required
+                      placeholder="用戶名/電子信箱" required
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
                     <input
                       type="password"
                       class="form-control"
-                      id="password"
-                      name="password"
+                      id="sellerpassword"
+                      name="sellerpassword"
                       value=""
                       placeholder="密碼" required
                     />
@@ -216,8 +214,8 @@
                     <input
                       type="password"
                       class="form-control"
-                      id="phone"
-                      name="phone"
+                      id="sellerphone"
+                      name="sellerphone"
                       value=""
                       placeholder="電話號碼" required
                     />
@@ -226,10 +224,10 @@
                     <input
                       type="password"
                       class="form-control"
-                      id="name"
-                      name="name"
+                      id="sellername"
+                      name="sellername"
                       value=""
-                      placeholder="姓名" required
+                      placeholder="店名" required
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -237,14 +235,25 @@
                       type="password"
                       class="form-control"
                       id="address"
-                      name="address"
+                      name="selleraddress"
                       value=""
                       placeholder="居住地址" required
                     />
                   </div>
+                  <div class="col-md-12 form-group p_star">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="email"
+                      name="introduce"
+                      value=""
+                      placeholder="店家簡介" required
+                    />
+                  </div>
+                 
                   <div class="col-md-12 form-group">
                     <button type="submit" value="submit" class="btn_3">
-                      買家註冊
+                      註冊
                     </button>
                   </div>
                 </form>

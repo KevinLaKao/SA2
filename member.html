@@ -29,6 +29,7 @@
   </head>
 
   <body>
+    
     <!--::header part start::-->
     <header class="main_menu home_menu">
       <div class="container">
@@ -36,8 +37,8 @@
           <div class="col-lg-12">
             <nav class="navbar navbar-expand-lg navbar-light">
               <a class="navbar-brand" href="index.html">
-                <img src="img/newLogo.png" alt="logo" style="height: 80px" />
-                foodcrate
+                <img src="img/foodcrate.png" alt="logo" height="80px"/>
+                Foodcrate
               </a>
               <button
                 class="navbar-toggler"
@@ -106,19 +107,18 @@
                       <a class="dropdown-item" href="checkout.html">下單</a>
                       <a class="dropdown-item" href="cart.html">購物車</a>
                       <a class="dropdown-item" href="confirmation.html"
-                        >歷史訂單</a
+                        >確認訂單</a
                       >
                     </div>
                   </li>
-
                   <li class="nav-item">
                     <a class="nav-link" href="contact.html">聯絡我們</a>
                   </li>
                 </ul>
               </div>
               <div class="hearer_icon d-flex align-items-center">
-                <a id="search_1" href="login.html"
-                  ><i class="ti-user"></i
+                <a id="search_1" href="javascript:void(0)"
+                  ><i class="ti-search"></i
                 ></a>
                 <a href="cart.html">
                   <i class="flaticon-shopping-cart-black-shape"></i>
@@ -147,7 +147,6 @@
         </div>
       </div>
     </header>
-    <!-- Header part end-->
 
     <!-- breadcrumb part start-->
     <section class="breadcrumb_part">
@@ -155,7 +154,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="breadcrumb_iner">
-              <h2>登入/註冊</h2>
+              <h2>下單</h2>
             </div>
           </div>
         </div>
@@ -163,101 +162,96 @@
     </section>
     <!-- breadcrumb part end-->
 
-    <!--================login_part Area =================-->
-    <section class="login_part section_padding">
+    <!--================Checkout Area =================-->
+    <section class="checkout_area section_padding">
       <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 col-md-6">
-            <div class="login_part_text text-center">
-              <div class="login_part_text_iner" style="width: 325px">
-                <h2>有帳號了嗎?</h2>
-                <p>請點擊下方按鈕進行登入</p>
-                <a href="login.html" class="btn_3">登入</a>
-              </div>
+        <div class="billing_details">
+          <div class="row">
+            <div class="col-lg-8">
+              <h3>買家資訊
+              </h3>
+              <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                <div class="col-md-6 form-group p_star">
+                  <input type="text" class="form-control" id="first" name="name">
+                  <span class="placeholder" data-placeholder="姓名"></span>
+                </div>
+                <div class="col-md-6 form-group p_star">
+                  <input type="text" class="form-control" id="number" name="number">
+                  <span class="placeholder" data-placeholder="電話號碼"></span>
+                </div>
+                <div class="col-md-6 form-group p_star">
+                  <input type="text" class="form-control" id="email" name="compemailany">
+                  <span class="placeholder" data-placeholder="電子郵件"></span>
+                </div>
+                
+                <div class="col-md-12 form-group p_star">
+                  <input type="text" class="form-control" id="add1" name="add1">
+                  <span class="placeholder" data-placeholder="住家地址"></span>
+                </div>
+                <div class="col-md-12 form-group p_star">
+                  <input type="text" class="form-control" id="city" name="city">
+                  <span class="placeholder" data-placeholder="居住縣市"></span>
+                </div>
+                
+                <div class="col-md-12 form-group">
+                  <div class="creat_account">
+                    <h3>意見回饋</h3>
+                  </div>
+                  <textarea class="form-control" name="message" id="message" rows="1" placeholder="Order Notes"></textarea>
+                </div>
+              </form>
             </div>
-          </div>
-          <div class="col-lg-6 col-md-6">
-            <div class="login_part_form">
-              <div class="login_part_form_iner">
-                <h3>
-                  歡迎! <br />
-                  請註冊帳號
-                </h3>
-                <div>
-                <a class="btn_1 form-group" href="sellerregister.html">商家註冊 </a>
-              </div>
-                <form
-                  class="row contact_form"
-                  action="#"
-                  method="post"
-                  novalidate="novalidate"
-                >
-                  <div class="col-md-12 form-group p_star">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="email"
-                      name="email"
-                      value=""
-                      placeholder="電子信箱" required
-                    />
-                  </div>
-                  <div class="col-md-12 form-group p_star">
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="password"
-                      name="password"
-                      value=""
-                      placeholder="密碼" required
-                    />
-                  </div>
-                  <div class="col-md-12 form-group p_star">
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="phone"
-                      name="phone"
-                      value=""
-                      placeholder="電話號碼" required
-                    />
-                  </div>
-                  <div class="col-md-12 form-group p_star">
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="name"
-                      name="name"
-                      value=""
-                      placeholder="姓名" required
-                    />
-                  </div>
-                  <div class="col-md-12 form-group p_star">
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="address"
-                      name="address"
-                      value=""
-                      placeholder="居住地址" required
-                    />
-                  </div>
-                  <div class="col-md-12 form-group">
-                    <button type="submit" value="submit" class="btn_3">
-                      買家註冊
-                    </button>
-                  </div>
-                </form>
+            <div class="col-lg-4">
+              <div class="order_box">
+                <h2>你的訂單</h2>
+                <ul class="list">
+                  <li>
+                    <a href="#">品名
+                      <span>單價總計</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">Fresh Blackberry
+                      <span class="middle">x 02</span>
+                      <span class="last">$720.00</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">Fresh Tomatoes
+                      <span class="middle">x 02</span>
+                      <span class="last">$720.00</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">Fresh Brocoli
+                      <span class="middle">x 02</span>
+                      <span class="last">$720.00</span>
+                    </a>
+                  </li>
+                </ul>
+                <ul class="list list_2">
+                  <li>
+                    <a href="#">總計
+                      <span>$2160.00</span>
+                    </a>
+                  </li>
+                </ul>
+                <div class="creat_account">
+                  <input type="checkbox" id="f-option4" name="selector">
+                  <label for="f-option4">已確認無誤 </label>
+                </div>
+                <a class="btn_3" href="#">確認下單</a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!--================login_part end =================-->
+    <!--================End Checkout Area =================-->
 
     <!--::footer_part start::-->
     <footer class="footer_part">
+
       <div class="copyright_part">
         <div class="container">
           <div class="row">
@@ -278,12 +272,12 @@
                   <a href="#">Turms & Conditions</a>
                   <a href="#">FAQ</a>
                 </div>
-                <div class="social_icon">
-                  <a href="#"><i class="fab fa-facebook-f"></i></a>
-                  <a href="#"><i class="fab fa-instagram"></i></a>
-                  <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                  <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+                  <div class="social_icon">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                  </div>
               </div>
             </div>
           </div>
