@@ -1,28 +1,28 @@
 <?php
 $act = $_GET['act'];
-$useremail = $_GET['useremail'];
-$userpassword = $_GET['userpassword'];
-$userphone = $_GET['userphone'];
-$username = $_GET['username'];
-$useraddress = $_GET['useraddress'];
-$userbirthday = $_GET['userbirthday'];
+$selleremail = $_GET['selleremail'];
+$sellerpassword = $_GET['sellerpassword'];
+$sellerphone = $_GET['sellerphone'];
+$sellername = $_GET['sellername'];
+$selleraddress = $_GET['selleraddress'];
+$sellerinfo = $_GET['sellerinfo'];
 $link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
-if ($act == "usercreate") {
+if ($act == "sellercreate") {
     //這裡是新增的語法
-    $sql="INSERT INTO `user`(`userName`, `userEmail`, `userPhone`, `userPassword`, `userAddress`, `userBirthday`) 
-    VALUES ('$useremail', '$userpassword','$userphone','$username','$useraddress','$userbirthday')";
+    $sql="INSERT INTO `seller`(`sellerName`, `sellerEmail`, `sellerPhone`, `sellerPassword`, `sellerAddress`, `sellerInfo`) 
+    VALUES ('$selleremail', '$sellerpassword','$sellerphone','$sellername','$selleraddress','$sellerinfo')";
     if (mysqli_query($link, $sql)) {
 ?>
 <script>
 alert(" 註 冊 成 功 ！");
-location = '../register.html';
+location = '../sellerregister.html';
 </script>
 <?php
     } else {
     ?>
 <script>
 alert(" 註 冊 失 敗 ！");
-location = '../register.html';
+location = '../sellerregister.html';
 </script>
 <?php
     }

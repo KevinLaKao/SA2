@@ -155,7 +155,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="breadcrumb_iner">
-              <h2>使用者登入/註冊</h2>
+              <h2>商家登入/註冊</h2>
             </div>
           </div>
         </div>
@@ -184,22 +184,20 @@
                   請登入帳號
                 </h3>
                 <div>
-                  <a class="btn_1 form-group" href="sellerlogin.html"
-                    >商家登入
-                  </a>
-                </div>
+                    <a class="btn_1 form-group" href="login.html"
+                      >使用者登入
+                    </a>
+                  </div>
                 <form
                   class="row contact_form"
-                  action="./function/logincheck.php"
+                  action="./function/sellerlogincheck.php"
                   method="get"
                 >
                   <div class="col-md-12 form-group p_star">
                     <input
                       type="text"
                       class="form-control"
-                      id="name"
-                      name="userLoginEmail"
-                      value=""
+                      name="sellerLoginEmail"
                       placeholder="電子信箱"
                     />
                   </div>
@@ -207,14 +205,12 @@
                     <input
                       type="password"
                       class="form-control"
-                      id="password"
-                      name="userLoginPassword"
-                      value=""
+                      name="sellerLoginPassword"
                       placeholder="密碼"
                     />
                   </div>
                   <div class="col-md-12 form-group">
-                    <button type="submit" value="userlogin" name="act" class="btn_3">
+                    <button type="submit" value="sellerlogin" name="act"  class="btn_3">
                       登入
                     </button>
                     <a class="lost_pass" href="#">忘記密碼?</a>

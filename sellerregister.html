@@ -186,9 +186,8 @@
                 <a class="btn_1 form-group" href="register.html">使用者註冊</a>
                 <form
                   class="row contact_form"
-                  action="#"
-                  method="post"
-                  novalidate="novalidate"
+                  action="./function/sellerCRUD.php"
+                  method="get"
                 >
                   <div class="col-md-12 form-group p_star">
                     <input
@@ -197,7 +196,7 @@
                       id="selleremail"
                       name="selleremail"
                       value=""
-                      placeholder="用戶名/電子信箱" required
+                      placeholder="電子信箱" 
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -207,7 +206,7 @@
                       id="sellerpassword"
                       name="sellerpassword"
                       value=""
-                      placeholder="密碼" required
+                      placeholder="密碼" 
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -217,7 +216,7 @@
                       id="sellerphone"
                       name="sellerphone"
                       value=""
-                      placeholder="電話號碼" required
+                      placeholder="電話號碼" 
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -227,7 +226,7 @@
                       id="sellername"
                       name="sellername"
                       value=""
-                      placeholder="店名" required
+                      placeholder="店名" 
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -237,7 +236,7 @@
                       id="address"
                       name="selleraddress"
                       value=""
-                      placeholder="居住地址" required
+                      placeholder="居住地址" 
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -245,14 +244,15 @@
                       type="text"
                       class="form-control"
                       id="email"
-                      name="introduce"
+                      name="sellerinfo"
                       value=""
-                      placeholder="店家簡介" required
+                      placeholder="店家簡介"
                     />
                   </div>
+                  
                  
                   <div class="col-md-12 form-group">
-                    <button type="submit" value="submit" class="btn_3">
+                    <button type="submit" value="sellercreate" name="act" class="btn_3">
                       註冊
                     </button>
                   </div>
