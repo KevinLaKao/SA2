@@ -117,9 +117,7 @@
                 </ul>
               </div>
               <div class="hearer_icon d-flex align-items-center">
-                <a id="search_1" href="login.html"
-                  ><i class="ti-user"></i
-                ></a>
+                <a id="search_1" href="login.html"><i class="ti-user"></i></a>
                 <a href="cart.html">
                   <i class="flaticon-shopping-cart-black-shape"></i>
                 </a>
@@ -155,7 +153,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="breadcrumb_iner">
-              <h2>登入/註冊</h2>
+              <h2>使用者登入/註冊</h2>
             </div>
           </div>
         </div>
@@ -164,6 +162,7 @@
     <!-- breadcrumb part end-->
 
     <!--================login_part Area =================-->
+
     <section class="login_part section_padding">
       <div class="container">
         <div class="row align-items-center">
@@ -184,22 +183,23 @@
                   請註冊帳號
                 </h3>
                 <div>
-                <a class="btn_1 form-group" href="sellerregister.html">商家註冊 </a>
-              </div>
+                  <a class="btn_1 form-group" href="sellerregister.html"
+                    >商家註冊
+                  </a>
+                </div>
                 <form
                   class="row contact_form"
-                  action="#"
-                  method="post"
-                  novalidate="novalidate"
+                  action="./function/userCRUD.php"
+                  method="get"
                 >
                   <div class="col-md-12 form-group p_star">
                     <input
                       type="text"
                       class="form-control"
                       id="email"
-                      name="email"
+                      name="useremail"
                       value=""
-                      placeholder="電子信箱" required
+                      placeholder="電子信箱"
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -207,9 +207,9 @@
                       type="password"
                       class="form-control"
                       id="password"
-                      name="password"
+                      name="userpassword"
                       value=""
-                      placeholder="密碼" required
+                      placeholder="密碼"
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -217,34 +217,49 @@
                       type="password"
                       class="form-control"
                       id="phone"
-                      name="phone"
+                      name="userphone"
                       value=""
-                      placeholder="電話號碼" required
+                      placeholder="電話號碼"
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
                     <input
-                      type="password"
+                      type="text"
                       class="form-control"
                       id="name"
-                      name="name"
+                      name="username"
                       value=""
-                      placeholder="姓名" required
+                      placeholder="姓名"
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
                     <input
-                      type="password"
+                      type="text"
                       class="form-control"
                       id="address"
-                      name="address"
+                      name="useraddress"
                       value=""
-                      placeholder="居住地址" required
+                      placeholder="居住地址"
+                    />
+                  </div>
+                  <div class="col-md-12 form-group p_star">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="address"
+                      name="userbirthday"
+                      value=""
+                      placeholder="生日"
                     />
                   </div>
                   <div class="col-md-12 form-group">
-                    <button type="submit" value="submit" class="btn_3">
-                      買家註冊
+                    <button
+                      type="submit"
+                      value="create"
+                      class="btn_3"
+                      name="act"
+                    >
+                      使用者註冊
                     </button>
                   </div>
                 </form>
