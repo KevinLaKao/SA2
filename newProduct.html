@@ -156,7 +156,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="breadcrumb_iner">
-              <h2>店家中心</h2>
+              <h2>新增產品</h2>
             </div>
           </div>
         </div>
@@ -170,82 +170,66 @@
         <div class="billing_details">
           <div class="row">
             <div class="col-lg-8">
-              <h3>店家資訊</h3>
+              <h3>新增商品資訊</h3>
               <form
                 class="row contact_form"
                 action="./function/productCRUD.php"
                 method="get"
-                novalidate="novalidate"
               >
                 <div class="col-md-6 form-group ">
-                  店家名稱
+                  商品名稱
                   <input
                     type="text"
-                    disabled="disabled"
                     class="form-control"
                     id="first"
-                    name="name"
-                    placeholder="店家名稱"
+                    name="productName"
+                    placeholder="商品名稱"
                   />
                   <span class="placeholder" ></span>
                 </div>
                 <div class="col-md-6 form-group">
-                  電話號碼
+                  商品價格
                   <input
-                    type="text"
-                    disabled="disabled"
+                    type="number"
                     class="form-control"
                     id="number"
-                    name="number"
-                    placeholder="電話號碼"
+                    name="productPrice"
+                    placeholder="商品價格"
                   />
                   <span class="placeholder"></span>
                 </div>
-                <div class="col-md-6 form-group">
-                  電子郵件
+                <div class="col-md-6 form-group ">
+                  商品數量
                   <input
-                    type="text"
-                    disabled="disabled"
+                    type="number"
                     class="form-control"
-                    id="email"
-                    name="compemailany"
-                    placeholder="電子郵件"
+                    id="number"
+                    name="productAmount"
+                    placeholder="商品數量"
                   />
                   <span class="placeholder" ></span>
                 </div>
-
-                <div class="col-md-12 form-group">
-                  店家地址
-                  <input
-                    type="text"
-                    disabled="disabled"
-                    class="form-control"
-                    id="add1"
-                    name="add1"
-                    placeholder="店家地址"
-                  />
-                  <span class="placeholder" ></span>
-                </div>
+                
                 <div class="col-md-12 form-group">
                   <div class="creat_account">
-                    <h3>店家簡介</h3>
+                    <h3>商品簡介</h3>
                   </div>
                   <textarea
                     class="form-control"
-                    name="message"
+                    name="productInfo"
                     id="message"
                     rows="1"
-                    placeholder="店家簡介"
-                    disabled="disabled"
+                    placeholder="商品簡介"
                   ></textarea>
                 </div>
+                <button type="submit" name="act" value="create" class="btn_3">
+                  送出產品資料
+                </button>
+                <a href="sellercenter.html" type="submit" value="submit" class="btn_3" >
+                  回店家中心
+                </a>
               </form>
-              <button type="submit" value="submit" class="btn_3">
-                修改店家資料
-              </button>
-              <a href="newProduct.html" type="submit" value="submit" class="btn_3" >
-                新增商品
-              </a>
+              
             </div>
             <div class="sellerPhoto">
               <div class="sellerImg">
@@ -253,7 +237,7 @@
               </div>
               <div class="imgRevise">
               <button type="submit" value="submit" class="btn_3 stick">
-                修改大頭貼
+                新增產品照片
               </button>
               </div>
               <div>
