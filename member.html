@@ -26,10 +26,11 @@
     <link rel="stylesheet" href="css/slick.css" />
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css" />
+    <!-- memeber CSS -->
+    <link rel="stylesheet" href="css/member.css" />
   </head>
 
   <body>
-    
     <!--::header part start::-->
     <header class="main_menu home_menu">
       <div class="container">
@@ -37,7 +38,7 @@
           <div class="col-lg-12">
             <nav class="navbar navbar-expand-lg navbar-light">
               <a class="navbar-brand" href="index.html">
-                <img src="img/foodcrate.png" alt="logo" height="80px"/>
+                <img src="img/foodcrate.png" alt="logo" height="80px" />
                 Foodcrate
               </a>
               <button
@@ -109,6 +110,10 @@
                       <a class="dropdown-item" href="confirmation.html"
                         >確認訂單</a
                       >
+                      <a class="dropdown-item" href="member.html">會員中心</a>
+                      <a class="dropdown-item" href="sellercenter.html"
+                        >店家中心</a
+                      >
                     </div>
                   </li>
                   <li class="nav-item">
@@ -154,7 +159,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="breadcrumb_iner">
-              <h2>下單</h2>
+              <h2>會員中心</h2>
             </div>
           </div>
         </div>
@@ -168,79 +173,89 @@
         <div class="billing_details">
           <div class="row">
             <div class="col-lg-8">
-              <h3>買家資訊
-              </h3>
-              <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+              <h3>使用者資訊</h3>
+              <form
+                class="row contact_form"
+                action="#"
+                method="post"
+                novalidate="novalidate"
+              >
                 <div class="col-md-6 form-group p_star">
-                  <input type="text" class="form-control" id="first" name="name">
-                  <span class="placeholder" data-placeholder="姓名"></span>
+                  用戶名稱
+                  <input
+                   placeholder="John" readonly
+                    type="text"
+                    class="form-control"
+                    id="first"
+                    name="userName"
+                  />
+                  
                 </div>
                 <div class="col-md-6 form-group p_star">
-                  <input type="text" class="form-control" id="number" name="number">
-                  <span class="placeholder" data-placeholder="電話號碼"></span>
+                  用戶電郵
+                  <input
+                  placeholder="abc@gmail.com" readonly
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    name="userEmail"
+                  />
+                  
                 </div>
-                <div class="col-md-6 form-group p_star">
-                  <input type="text" class="form-control" id="email" name="compemailany">
-                  <span class="placeholder" data-placeholder="電子郵件"></span>
-                </div>
-                
+
                 <div class="col-md-12 form-group p_star">
-                  <input type="text" class="form-control" id="add1" name="add1">
-                  <span class="placeholder" data-placeholder="住家地址"></span>
+                  用戶電話
+                  <input
+                  placeholder="0912345678" readonly
+                    type="text"
+                    class="form-control"
+                    id="add1"
+                    name="userPhone"
+                  />
+                  
                 </div>
                 <div class="col-md-12 form-group p_star">
-                  <input type="text" class="form-control" id="city" name="city">
-                  <span class="placeholder" data-placeholder="居住縣市"></span>
+                  用戶密碼
+                  <input
+                  placeholder="a1234567" readonly
+                    type="text"
+                    class="form-control"
+                    id="city"
+                    name="uesrPassword"
+                  />
+                  
                 </div>
-                
-                <div class="col-md-12 form-group">
-                  <div class="creat_account">
-                    <h3>意見回饋</h3>
-                  </div>
-                  <textarea class="form-control" name="message" id="message" rows="1" placeholder="Order Notes"></textarea>
+                <div class="col-md-12 form-group p_star">
+                  用戶地址
+                  <input
+                  placeholder="新北市新莊區中正路" readonly
+                    type="text"
+                    class="form-control"
+                    id="city"
+                    name="userAddress"
+                  />
+                  
                 </div>
+                <div class="col-md-12 form-group p_star">
+                  用戶生日
+                  <input
+                  placeholder="92/05/04" readonly
+                    type="text"
+                    class="form-control"
+                    id="city"
+                    name="userBirth"
+                  />
+                  
+                </div>
+                <button type="submit" value="submit" class="btn_3">修改</button>
               </form>
             </div>
-            <div class="col-lg-4">
-              <div class="order_box">
-                <h2>你的訂單</h2>
-                <ul class="list">
-                  <li>
-                    <a href="#">品名
-                      <span>單價總計</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">Fresh Blackberry
-                      <span class="middle">x 02</span>
-                      <span class="last">$720.00</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">Fresh Tomatoes
-                      <span class="middle">x 02</span>
-                      <span class="last">$720.00</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">Fresh Brocoli
-                      <span class="middle">x 02</span>
-                      <span class="last">$720.00</span>
-                    </a>
-                  </li>
-                </ul>
-                <ul class="list list_2">
-                  <li>
-                    <a href="#">總計
-                      <span>$2160.00</span>
-                    </a>
-                  </li>
-                </ul>
-                <div class="creat_account">
-                  <input type="checkbox" id="f-option4" name="selector">
-                  <label for="f-option4">已確認無誤 </label>
-                </div>
-                <a class="btn_3" href="#">確認下單</a>
+            <div class="col-lg-4 userPhoto">
+              <div class="userImg">
+                <img src="img/client_2.png" alt="" />
+              </div>
+              <div class="imgRevise">
+                <button type="submit" value="submit" class="btn_3">修改</button>
               </div>
             </div>
           </div>
@@ -251,7 +266,6 @@
 
     <!--::footer_part start::-->
     <footer class="footer_part">
-
       <div class="copyright_part">
         <div class="container">
           <div class="row">
@@ -272,12 +286,12 @@
                   <a href="#">Turms & Conditions</a>
                   <a href="#">FAQ</a>
                 </div>
-                  <div class="social_icon">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                  </div>
+                <div class="social_icon">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                  <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
               </div>
             </div>
           </div>
