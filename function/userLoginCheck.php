@@ -1,6 +1,6 @@
 <?php
 $act = $_GET['act'];
-$suerLoginEmail = $_GET['userLoginEmail'];
+$userLoginEmail = $_GET['userLoginEmail'];
 $userLoginPassword = $_GET['userLoginPassword'];
 $link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
 $sql = "SELECT * FROM user";
@@ -9,17 +9,24 @@ if ($act = "userlogin") {
     while($row=mysqli_fetch_array($result)){
         if($row['userEmail']=="$userLoginEmail"){
             if($row['userPassword']=="$userLoginPassword"){
+                $_SESSION['userName']=$row['userName'];
+                $_SESSION['userEmail']=$row['userEmail'];
+                $_SESSION['userPhone']=$row['userPhone'];
+                $_SESSION['userPassword']=$row['userPassword'];
+                $_SESSION['userAddress']=$row['userAddress'];
+                $_SESSION['userBirthday']=$row['userBirthday'];
+                
     ?>
 <script>
 alert("登入成功！");
-location = '../sellerlogin.html';
+location = '../userLogin.php';
 </script>
 <?php
 }}}
 ?>
 <script>
 alert("登入失敗！");
-location = '../sellerlogin.html';
+location = '../login.html';
 </script>
 <?php
 }
