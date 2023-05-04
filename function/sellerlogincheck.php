@@ -9,10 +9,17 @@ if ($act = "sellerlogin") {
     while($row=mysqli_fetch_array($result)){
         if($row['sellerEmail']=="$sellerLoginEmail"){
             if($row['sellerPassword']=="$sellerLoginPassword"){
+                $_SESSION['sellerName']=$row['sellerName'];
+                $_SESSION['sellerEmail']=$row['sellerEmail'];
+                $_SESSION['sellerPhone']=$row['sellerPhone'];
+                $_SESSION['sellerPassword']=$row['sellerPassword'];
+                $_SESSION['sellerAddress']=$row['sellerAddress'];
+                $_SESSION['sellerPhoto']=$row['sellerPhoto'];
+                $_SESSION['sellerInfo']=$row['sellerInfo'];
     ?>
 <script>
 alert("登入成功！");
-location = '../sellerlogin.html';
+location = '../sellerLogin.php';
 </script>
 <?php
 }}}
