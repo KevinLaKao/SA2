@@ -16,6 +16,7 @@ if ($act = "sellerlogin") {
                 $_SESSION['sellerAddress']=$row['sellerAddress'];
                 $_SESSION['sellerPhoto']=$row['sellerPhoto'];
                 $_SESSION['sellerInfo']=$row['sellerInfo'];
+                $_SESSION['level']=$row['level'];
     ?>
 <script>
 alert("登入成功！");
