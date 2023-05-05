@@ -43,10 +43,10 @@
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">首頁</a>
+                                    <a class="nav-link" href="index.php">首頁</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">關於我們</a>
+                                    <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
@@ -65,26 +65,32 @@
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="login.html"> 
-                                            登入
-                                            
-                                        </a>
-                                        <a class="dropdown-item" href="checkout.html">下單</a>
-                                        <a class="dropdown-item" href="cart.html">購物車</a>
-                                        <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
+                                      <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                      <a class="dropdown-item" href="checkout.html">下單</a>
+                                      <a class="dropdown-item" href="cart.html">購物車</a>
+                                      <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
+                                      <a class="dropdown-item" href="member.html">使用者中心</a>
+                                      <a class="dropdown-item" href="sellercenter.html">商家中心</a>
                                     </div>
                                 </li>
                                 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">聯絡我們</a>
+                                    <a class="nav-link" href="contact.php">聯絡我們</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
-                            <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
+                            <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <a href="cart.html">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
+                            <a>
+                              <?php
+                                  if(isset($_SESSION['userName'])){
+                                      echo $_SESSION['userName'];
+                                  }
+                              ?>
+                              </a>
                             <!-- <div class="dropdown cart">
                                 <a class="dropdown-toggle" href="cart" id="navbarDropdown3" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
