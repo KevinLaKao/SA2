@@ -15,6 +15,7 @@ if ($act = "userlogin") {
                 $_SESSION['userPassword']=$row['userPassword'];
                 $_SESSION['userAddress']=$row['userAddress'];
                 $_SESSION['userBirthday']=$row['userBirthday'];
+                $_SESSION['level']=$row['level'];
                 
     ?>
 <script>
