@@ -37,23 +37,20 @@
                             <img src="img/newLogo.png" alt="logo" style="height: 80px" />
                             foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">首頁</a>
+                                    <a class="nav-link" href="index.php">首頁</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">關於我們</a>
+                                    <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
@@ -63,12 +60,11 @@
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="login.html"> 登入 </a>
+                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.html">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
@@ -78,18 +74,22 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">聯絡我們</a>
+                                    <a class="nav-link" href="contact.php">聯絡我們</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
-                            <a id="search_1" href="login.html"><i class="ti-user"></i></a>
+                            <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <a href="cart.html">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
-                            <a><?php
-                            echo $_SESSION['userName'];
-                            ?></a>
+                            <a>
+                            <?php
+                                if(isset($_SESSION['userName'])){
+                                    echo $_SESSION['userName'];
+                                }
+                            ?>
+                            </a>
                         </div>
                     </nav>
                 </div>
@@ -147,12 +147,10 @@
                             </div>
                             <form class="row contact_form" action="./function/userLoginCheck.php" method="get">
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="name" name="userLoginEmail" value=""
-                                        placeholder="電子信箱" />
+                                    <input type="text" class="form-control" id="name" name="userLoginEmail" value="" placeholder="電子信箱" />
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="password" name="userLoginPassword"
-                                        value="" placeholder="密碼" />
+                                    <input type="password" class="form-control" id="password" name="userLoginPassword" value="" placeholder="密碼" />
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <button type="submit" value="userlogin" name="act" class="btn_3">
@@ -180,7 +178,7 @@
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                document.write(new Date().getFullYear());
+                                    document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by
