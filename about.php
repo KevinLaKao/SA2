@@ -35,9 +35,7 @@
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="index.html">
                             <img src="img/smile.png" alt="logo" height="80px" />foodcrate</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -50,25 +48,23 @@
                                     <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="product_list.html">
+                                        <a class="dropdown-item" href="productList.php">
                                             產品列表</a>
                                         <a class="dropdown-item" href="single-product.html">產品細項</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
-                                        <a class="dropdown-item" href="cart.html">購物車</a>
+                                        <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
                                         <a class="dropdown-item" href="member.html">使用者中心</a>
                                         <a class="dropdown-item" href="sellercenter.html">商家中心</a>
@@ -82,15 +78,15 @@
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
                             <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
-                            <a href="cart.html">
+                            <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
                             <a>
                                 <?php
-                if (isset($_SESSION['userName'])) {
-                  echo $_SESSION['userName'];
-                }
-                ?>
+                                if (isset($_SESSION['userName'])) {
+                                    echo $_SESSION['userName'];
+                                }
+                                ?>
                             </a>
                         </div>
                     </nav>
@@ -126,8 +122,7 @@
                         </h3>
                         <div class="about_us_video">
                             <img src="img/about_us_video.png" alt="#" class="img-fluid" />
-                            <a class="about_video_icon popup-youtube"
-                                href="https://www.youtube.com/watch?v=DWHB6nTyKDI"></a>
+                            <a class="about_video_icon popup-youtube" href="https://www.youtube.com/watch?v=DWHB6nTyKDI"></a>
                         </div>
                     </div>
                 </div>
@@ -180,7 +175,7 @@
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 copyright &copy;
                                 <script>
-                                document.write(new Date().getFullYear());
+                                    document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by

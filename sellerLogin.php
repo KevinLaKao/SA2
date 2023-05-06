@@ -54,7 +54,7 @@
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="product_list.html">
+                                        <a class="dropdown-item" href="productList.php">
                                             產品列表</a>
                                         <a class="dropdown-item" href="single-product.html">產品細項</a>
                                     </div>
@@ -66,7 +66,7 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
-                                        <a class="dropdown-item" href="cart.html">購物車</a>
+                                        <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
                                         <a class="dropdown-item" href="member.html">使用者中心</a>
                                         <a class="dropdown-item" href="sellercenter.html">商家中心</a>
@@ -80,7 +80,7 @@
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
                             <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
-                            <a href="cart.html">
+                            <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
                             <a>
