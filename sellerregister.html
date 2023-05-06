@@ -78,7 +78,7 @@
                       class="dropdown-menu"
                       aria-labelledby="navbarDropdown_1"
                     >
-                      <a class="dropdown-item" href="product_list.html">
+                      <a class="dropdown-item" href="productList.php">
                         產品列表</a
                       >
                       <a class="dropdown-item" href="single-product.html"
@@ -104,12 +104,14 @@
                     >
                       <a class="dropdown-item" href="login.html"> 登入 </a>
                       <a class="dropdown-item" href="checkout.html">下單</a>
-                      <a class="dropdown-item" href="cart.html">購物車</a>
+                      <a class="dropdown-item" href="cart.php">購物車</a>
                       <a class="dropdown-item" href="confirmation.html"
                         >歷史訂單</a
                       >
                       <a class="dropdown-item" href="member.html">使用者中心</a>
-                      <a class="dropdown-item" href="sellercenter.html">商家中心</a>
+                      <a class="dropdown-item" href="sellercenter.html"
+                        >商家中心</a
+                      >
                     </div>
                   </li>
 
@@ -119,10 +121,8 @@
                 </ul>
               </div>
               <div class="hearer_icon d-flex align-items-center">
-                <a id="search_1" href="login.html"
-                  ><i class="ti-user"></i
-                ></a>
-                <a href="cart.html">
+                <a id="search_1" href="login.html"><i class="ti-user"></i></a>
+                <a href="cart.php">
                   <i class="flaticon-shopping-cart-black-shape"></i>
                 </a>
               </div>
@@ -180,7 +180,7 @@
                       id="selleremail"
                       name="selleremail"
                       value=""
-                      placeholder="電子信箱" 
+                      placeholder="電子信箱"
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -190,7 +190,7 @@
                       id="sellerpassword"
                       name="sellerpassword"
                       value=""
-                      placeholder="密碼" 
+                      placeholder="密碼"
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -200,7 +200,7 @@
                       id="sellerphone"
                       name="sellerphone"
                       value=""
-                      placeholder="電話號碼" 
+                      placeholder="電話號碼"
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -210,7 +210,7 @@
                       id="sellername"
                       name="sellername"
                       value=""
-                      placeholder="店名" 
+                      placeholder="店名"
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -220,7 +220,7 @@
                       id="address"
                       name="selleraddress"
                       value=""
-                      placeholder="居住地址" 
+                      placeholder="居住地址"
                     />
                   </div>
                   <div class="col-md-12 form-group p_star">
@@ -233,10 +233,14 @@
                       placeholder="店家簡介"
                     />
                   </div>
-                  
-                 
+
                   <div class="col-md-12 form-group">
-                    <button type="submit" value="sellercreate" name="act" class="btn_3">
+                    <button
+                      type="submit"
+                      value="sellercreate"
+                      name="act"
+                      class="btn_3"
+                    >
                       註冊
                     </button>
                   </div>

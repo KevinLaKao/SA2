@@ -1,29 +1,51 @@
-<!DOCTYPE html>
+<?php
+if (isset($_GET["add"])) {
+    $proCode = $_GET["delete"];
+    $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+    $find = "select * from product where proCode ='$proCode'";
+    $rs = mysqli_query($link, $find);
+    $row = mysqli_fetch_array($rs);
+    $proAmount = $row['proAmount'];
+    $proPicture = $row['proPicture'];
+    $proName = $row['proName'];
+    $proInfo = $row['proInfo'];
+    $proPrice = $row['proPrice'];
+    $proSeller = $row['proSeller'];
+    $proTag = $row['proTag'];
+
+    $sql1 = "DELETE FROM `cart` WHERE proCode='$proCode'";
+    if ($rs_insert = mysqli_query($link, $sql1)) { ?>
+        <script>
+            alert("刪除成功");
+        </script>
+<?php }
+}
+?>
+<!doctype html>
 <html lang="zxx">
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Food Crate</title>
-    <link rel="icon" href="img/favicon.png" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>pillloMart</title>
+    <link rel="icon" href="img/favicon.png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- animate CSS -->
-    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/animate.css">
     <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
     <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/all.css" />
-    <!-- flaticon CSS -->
-    <link rel="stylesheet" href="css/flaticon.css" />
-    <link rel="stylesheet" href="css/themify-icons.css" />
-    <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/magnific-popup.css" />
-    <!-- swiper CSS -->
-    <link rel="stylesheet" href="css/slick.css" />
+    <link rel="stylesheet" href="css/all.css">
+    <!-- icon CSS -->
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <!-- magnific popup CSS -->
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/nice-select.css">
     <!-- style CSS -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -34,7 +56,7 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="index.html">
-                            <img src="img/newLogo.png" alt="logo" style="height: 80px" />
+                            <img src="img/newLogo.png" alt="logo" style="height: 80px;" />
                             foodcrate
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,20 +105,12 @@
                             <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
-                            <a>
-                                <?php
-                                if (isset($_SESSION['userName'])) {
-                                    echo $_SESSION['userName'];
-                                }
-                                ?>
-                            </a>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
 
-        </div>
     </header>
     <!-- Header part end-->
 
@@ -106,7 +120,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner">
-                        <h2>使用者登入/註冊</h2>
+                        <h2>購物車</h2>
                     </div>
                 </div>
             </div>
@@ -114,52 +128,79 @@
     </section>
     <!-- breadcrumb part end-->
 
-    <!--================login_part Area =================-->
-    <section class="login_part section_padding">
+    <!--================Cart Area =================-->
+    <section class="cart_area section_padding">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-md-6">
-                    <div class="login_part_text text-center">
-                        <div class="login_part_text_iner" style="width: 325px">
-                            <h2>沒有帳號嗎?</h2>
-                            <p>請點擊下方註冊鈕取得新帳號</p>
-                            <a href="register.html" class="btn_3">註冊</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="login_part_form">
-                        <div class="login_part_form_iner">
-                            <h3>
-                                歡迎! <br />
-                                請登入帳號
-                            </h3>
-                            <div>
-                                <a class="btn_1 form-group" href="sellerlogin.html">商家登入
-                                </a>
-                            </div>
-                            <form class="row contact_form" action="./function/userLoginCheck.php" method="get">
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="name" name="userLoginEmail" value="" placeholder="電子信箱" />
-                                </div>
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="password" name="userLoginPassword" value="" placeholder="密碼" />
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <button type="submit" value="userlogin" name="act" class="btn_3">
-                                        登入
-                                    </button>
-                                    <a class="lost_pass" href="#">忘記密碼?</a>
-                                </div>
-                            </form>
-                        </div>
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="font-size: 30px;">產品</th>
+                                <th scope="col" style="font-size: 30px;">價格</th>
+                                <th scope="col" style="font-size: 30px;">數量</th>
+                                <th scope="col" style="font-size: 30px;">金額</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $link = mysqli_connect("localhost", "root", "12345678", "sa");
+                            $sql = "select * from cart";
+                            $rs = mysqli_query($link, $sql);
+                            $total = 0;
+                            while ($product = mysqli_fetch_array($rs)) {
+                            ?>
+                                <tr>
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="img/arrivel/arrivel_1.png" alt="" />
+                                            </div>
+                                            <div class="media-body">
+                                                <p style="font-size: 20px;">
+                                                    <?php echo $product['proName'] ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>$<?php echo $product['proPrice'] ?></h5>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+                                            <span class="input-number-decrement"> <i class="ti-minus"></i></span>
+                                            <input class="input-number" name='amount' type="text" value="1" min="0" max="10">
+                                            <span class="input-number-increment"> <i class="ti-plus"></i></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>50</h5>
+                                    </td>
+                                <tr>
+                                <?php
+                            }
+                                ?>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <h5>總額</h5>
+                                    </td>
+                                    <td>
+                                        <h5>$100.00</h5>
+                                    </td>
+                                </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="checkout_btn_inner float-right">
+                        <a class="btn_1" href="productList.php">繼續購物</a>
+                        <a class="btn_1 checkout_btn_1" href="checkout.html">結帳</a>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
-    <!--================login_part end =================-->
-
+    <!--================End Cart Area =================-->
     <!--::footer_part start::-->
     <footer class="footer_part">
         <div class="copyright_part">
@@ -168,7 +209,7 @@
                     <div class="col-lg-12">
                         <div class="copyright_text">
                             <p>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                <!-- Link back to Colorlib can' t be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
                                     document.write(new Date().getFullYear());
