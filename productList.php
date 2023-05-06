@@ -15,15 +15,15 @@ if (isset($_GET["add"])) {
 
     $sql = "INSERT INTO cart (proCode, proName, proAmount, proPicture, proTag, proInfo, proPrice, proSeller) VALUES ('$proCode','$proName','$proAmount','$proPicture','$proTag','$proInfo','$proPrice','$proSeller')";
     if ($rs_insert = mysqli_query($link, $sql)) { ?>
-        <script>
-            alert("加入購物車");
-        </script>
-    <?php
+<script>
+alert("加入購物車");
+</script>
+<?php
     } else {
     ?>
-        <script>
-            alert("無法加入購物車");
-        </script>
+<script>
+alert("無法加入購物車");
+</script>
 <?php
     }
 }
@@ -57,13 +57,13 @@ if (isset($_GET["add"])) {
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <style>
-    .section_padding {
-        padding-bottom: 0px;
-    }
+.section_padding {
+    padding-bottom: 0px;
+}
 
-    .section_padding1 {
-        padding-bottom: 50px;
-    }
+.section_padding1 {
+    padding-bottom: 50px;
+}
 </style>
 
 <body>
@@ -76,7 +76,9 @@ if (isset($_GET["add"])) {
                         <a class="navbar-brand" href="index.html">
                             <img src="img/smile.png" alt="logo" height="80px" />foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -89,7 +91,8 @@ if (isset($_GET["add"])) {
                                     <a class="nav-link" href="about.html">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
@@ -99,7 +102,8 @@ if (isset($_GET["add"])) {
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
@@ -169,9 +173,9 @@ if (isset($_GET["add"])) {
                                 </div>
                                 <div class="select_option_dropdown">
                                     <p><a href="#"></a></p>
-                                    <p><a href="#">中式</a></p>
-                                    <p><a href="#">西式</a></p>
-                                    <p><a href="#">歐式</a></p>
+                                    <p><a href="productCategories.php?proTag=台式">台式</a></p>
+                                    <p><a href="productCategories.php?proTag=西式">西式</a></p>
+                                    <p><a href="productCategories.php?proTag=歐式">歐式</a></p>
                                 </div>
                             </div>
                         </div>
@@ -186,7 +190,8 @@ if (isset($_GET["add"])) {
                             $rs = mysqli_query($link, $sql);
                             while ($product = mysqli_fetch_array($rs)) {
                             ?>
-                                <div class="col-lg-6 col-sm-6">
+                            <div class="col-lg-6 col-sm-6">
+                                <form method="get" action="productList.php">
                                     <div class="single_product_item">
                                         <img src="<?php echo $product["proPicture"] ?>" alt="#" class="img-fluid" />
                                         <h3>
@@ -197,11 +202,12 @@ if (isset($_GET["add"])) {
                                         <p>$<?php echo $product['proPrice'] ?></p>
                                         <p>店家: <?php echo $product['proSeller'] ?></p>
                                         <form method="get" action="productList.php">
-                                            <button name="add" value="<?php echo $product['proCode'] ?>" class="icon_plus butt">
+                                            <button name="add" value="<?php echo $product['proCode'] ?>"
+                                                class="icon_plus butt">
                                             </button>
                                         </form>
                                     </div>
-                                </div>
+                            </div>
 
                             <?php
                             }
@@ -268,7 +274,7 @@ if (isset($_GET["add"])) {
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                    document.write(new Date().getFullYear());
+                                document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by

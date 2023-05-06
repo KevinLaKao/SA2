@@ -1,6 +1,6 @@
 <?php
-if (isset($_GET["delete"])) {
-    $proCode = $_GET["delete"];
+if (isset($_GET["add"])) {
+    $proCode = $_GET["add"];
     $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
     $find = "select * from product where proCode ='$proCode'";
     $rs = mysqli_query($link, $find);
@@ -13,46 +13,58 @@ if (isset($_GET["delete"])) {
     $proSeller = $row['proSeller'];
     $proTag = $row['proTag'];
 
-    $sql1 = "DELETE FROM `cart` WHERE proCode='$proCode'";
-    if ($rs_insert = mysqli_query($link, $sql1)) { ?>
+    $sql = "INSERT INTO cart (proCode, proName, proAmount, proPicture, proTag, proInfo, proPrice, proSeller) VALUES ('$proCode','$proName','$proAmount','$proPicture','$proTag','$proInfo','$proPrice','$proSeller')";
+    if ($rs_insert = mysqli_query($link, $sql)) { ?>
 <script>
-alert("刪除成功");
-</script>
-<?php }
-}else{
-    ?>
-<script>
-alert("刪除失敗");
+alert("加入購物車");
 </script>
 <?php
+    } else {
+    ?>
+<script>
+alert("無法加入購物車");
+</script>
+<?php
+    }
 }
 ?>
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="zxx">
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>pillloMart</title>
-    <link rel="icon" href="img/favicon.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Foodcrate</title>
+    <link rel="icon" href="img/smile.png" />
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
     <!-- animate CSS -->
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/animate.css" />
     <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" />
     <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/all.css">
-    <!-- icon CSS -->
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <!-- magnific popup CSS -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/all.css" />
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="css/flaticon.css" />
+    <link rel="stylesheet" href="css/themify-icons.css" />
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="css/slick.css" />
     <!-- style CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
 </head>
+<style>
+.section_padding {
+    padding-bottom: 0px;
+}
+
+.section_padding1 {
+    padding-bottom: 50px;
+}
+</style>
 
 <body>
     <!--::header part start::-->
@@ -62,8 +74,7 @@ alert("刪除失敗");
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="index.html">
-                            <img src="img/newLogo.png" alt="logo" style="height: 80px;" />
-                            foodcrate
+                            <img src="img/smile.png" alt="logo" height="80px" />foodcrate
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -74,10 +85,10 @@ alert("刪除失敗");
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.php">首頁</a>
+                                    <a class="nav-link" href="index.html">首頁</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.php">關於我們</a>
+                                    <a class="nav-link" href="about.html">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
@@ -96,22 +107,19 @@ alert("刪除失敗");
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <a class="dropdown-item" href="login.html"> 登入 </a>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
-                                        <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
-                                        <a class="dropdown-item" href="member.html">使用者中心</a>
-                                        <a class="dropdown-item" href="sellercenter.html">商家中心</a>
+                                        <a class="dropdown-item" href="confirmation.html">確認訂單</a>
                                     </div>
                                 </li>
-
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.php">聯絡我們</a>
+                                    <a class="nav-link" href="contact.html">聯絡我們</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
-                            <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
+                            <a id="search_1" href="login.html"><i class="ti-user"></i></a>
                             <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
@@ -120,7 +128,15 @@ alert("刪除失敗");
                 </div>
             </div>
         </div>
-
+        <div class="search_input" id="search_input_box">
+            <div class="container">
+                <form class="d-flex justify-content-between search-inner">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here" />
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                </form>
+            </div>
+        </div>
     </header>
     <!-- Header part end-->
 
@@ -130,7 +146,7 @@ alert("刪除失敗");
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner">
-                        <h2>購物車</h2>
+                        <h2>產品列表</h2>
                     </div>
                 </div>
             </div>
@@ -138,87 +154,118 @@ alert("刪除失敗");
     </section>
     <!-- breadcrumb part end-->
 
-    <!--================Cart Area =================-->
-    <section class="cart_area section_padding">
+    <!-- product list part start-->
+    <?php   
+    $label=$_GET["proTag"];
+    $link=mysqli_connect("localhost","root","12345678","sa");
+    $sql="select * from product where proTag='$label'";
+    $rs=mysqli_query($link,$sql);
+    ?>
+    <section class="product_list section_padding">
         <div class="container">
-            <div class="cart_inner">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col" style="font-size: 30px;">產品</th>
-                                <th scope="col" style="font-size: 30px;">價格</th>
-                                <th scope="col" style="font-size: 30px;">數量</th>
-                                <th scope="col" style="font-size: 30px;">金額</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="product_sidebar">
+                        <div class="single_sedebar">
+                            <form action="#">
+                                <input type="text" name="#" placeholder="搜尋" />
+                                <i class="ti-search"></i>
+                            </form>
+                        </div>
+                        <div class="single_sedebar">
+                            <div class="select_option">
+                                <div class="select_option_list">
+                                    類別 <i class="right fas fa-caret-down"></i>
+                                </div>
+                                <div class="select_option_dropdown">
+                                    <p><a href="#"></a></p>
+                                    <p><a href="productCategories.php?proTag=台式">台式</a></p>
+                                    <p><a href="productCategories.php?proTag=西式">西式</a></p>
+                                    <p><a href="productCategories.php?proTag=歐式">歐式</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="product_list">
+                        <div class="row">
                             <?php
-                            $link = mysqli_connect("localhost", "root", "12345678", "sa");
-                            $sql = "select * from cart";
-                            $rs = mysqli_query($link, $sql);
-                            $total = 0;
                             while ($product = mysqli_fetch_array($rs)) {
                             ?>
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="<?php echo $product['proPicture'] ?>" alt="" />
-                                        </div>
-                                        <div class="media-body">
-                                            <p style="font-size: 20px;">
+                            <div class="col-lg-6 col-sm-6">
+                                <form method="get" action="productList.php">
+                                    <div class="single_product_item">
+                                        <img src="<?php echo $product["proPicture"] ?>" alt="#" class="img-fluid" />
+                                        <h3>
+                                            <a href="single-product.html">
                                                 <?php echo $product['proName'] ?>
-                                            </p>
-                                        </div>
+                                            </a>
+                                        </h3>
+                                        <p>$<?php echo $product['proPrice'] ?></p>
+                                        <p>店家: <?php echo $product['proSeller'] ?></p>
+                                        <form method="get" action="productCategories.php">
+                                            <button name="add" value="<?php echo $product['proCode'] ?>"
+                                                class="icon_plus butt">
+                                            </button>
+                                        </form>
                                     </div>
-                                </td>
-                                <td>
-                                    <h5>$<?php echo $product['proPrice'] ?></h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                                        <input class="input-number" name='amount' type="text" value="1" min="0"
-                                            max="10">
-                                        <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <h5>50
-                                            <form method="get" action="cart.php">
-                                                <button name="delete" value="<?php echo $product['proCode'] ?>"
-                                                    class="icon_plus butt">
-                                                </button>
-                                            </form>
-                                        </h5>
-                                    </div>
-                            <tr>
-                                <?php
-                            }
-                                ?>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <h5>總額</h5>
-                                </td>
-                                <td>
-                                    <h5>$100.00</h5>
-                                </td>
-                            </tr>
+                            </div>
 
-                        </tbody>
-                    </table>
-                    <div class="checkout_btn_inner float-right">
-                        <a class="btn_1" href="productList.php">繼續購物</a>
-                        <a class="btn_1 checkout_btn_1" href="checkout.html">結帳</a>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                        <div class="load_more_btn text-center">
+                            <a href="#" class="btn_3">更多商品</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
     </section>
-    <!--================End Cart Area =================-->
+    <!-- product list part end-->
+
+    <!-- client review part here -->
+
+    <!-- client review part end -->
+
+    <!-- feature part here -->
+    <section class="feature_part section_padding1">
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-sm-6">
+                <div class="single_feature_part">
+                    <img src="img/icon/feature_icon_1.svg" alt="#" />
+                    <h4>不提供信用卡</h4>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="single_feature_part">
+                    <img src="img/icon/feature_icon_2.svg" alt="#" />
+                    <h4>線上訂購</h4>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="single_feature_part">
+                    <img src="img/icon/feature_icon_3.svg" alt="#" />
+                    <h4>自取商品</h4>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="single_feature_part">
+                    <img src="img/icon/feature_icon_4.svg" alt="#" />
+                    <h4>額外優惠</h4>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- feature part end -->
+
+    <!-- subscribe part here -->
+
+    <!-- subscribe part end -->
+
     <!--::footer_part start::-->
     <footer class="footer_part">
         <div class="copyright_part">
@@ -227,7 +274,7 @@ alert("刪除失敗");
                     <div class="col-lg-12">
                         <div class="copyright_text">
                             <p>
-                                <!-- Link back to Colorlib can' t be removed. Template is licensed under CC BY 3.0. -->
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
                                 document.write(new Date().getFullYear());
