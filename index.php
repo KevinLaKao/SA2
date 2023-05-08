@@ -117,6 +117,7 @@ $result = mysqli_query($link, $sql);
                                 <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
+                            <a class="dropdown-item" href="./function/logOut.php">登出</a>
                         </div>
                     </nav>
                 </div>

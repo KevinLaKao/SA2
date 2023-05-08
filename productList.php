@@ -155,15 +155,6 @@ alert("無法加入購物車");
                 </div>
             </div>
         </div>
-        <div class="search_input" id="search_input_box">
-            <div class="container">
-                <form class="d-flex justify-content-between search-inner">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here" />
-                    <button type="submit" class="btn"></button>
-                    <span class="ti-close" id="close_search" title="Close Search"></span>
-                </form>
-            </div>
-        </div>
     </header>
     <!-- Header part end-->
 
@@ -218,7 +209,6 @@ alert("無法加入購物車");
                             while ($product = mysqli_fetch_array($rs)) {
                             ?>
                             <div class="col-lg-6 col-sm-6">
-                                <form method="get" action="productList.php">
                                     <div class="single_product_item">
                                         <img src="<?php echo $product["proPicture"] ?>" alt="#" class="img-fluid" />
                                         <h3>
@@ -228,10 +218,10 @@ alert("無法加入購物車");
                                         </h3>
                                         <p>$<?php echo $product['proPrice'] ?></p>
                                         <p>店家: <?php echo $product['proSeller'] ?></p>
-                                        <form method="get" action="productList.php">
-                                            <button name="add" value="<?php echo $product['proCode'] ?>"
-                                                class="icon_plus butt">
-                                            </button>
+                                        <form method="get" action="./function/addProductToCart.php">
+                                            <input type="hidden" name="proCode" value="<?php echo $product['proCode']; ?>">
+                                            <input type="hidden" name="userEmail" value="<?php if(isset($_SESSION['userEmail'])){ echo $_SESSION['userEmail'];} ?>">
+                                            <button class="btn_3">加入購物車</button>
                                         </form>
                                     </div>
                             </div>
