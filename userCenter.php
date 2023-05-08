@@ -137,20 +137,19 @@
         <div class="row">
           <div class="col-lg-8">
             <h3>使用者資訊<br>
-              (請輸入正確名稱及電郵方可更改其他資料)
             </h3>
             <form class="row contact_form" action="./function/userCenterUpdate.php" method="get">
               <div class="col-md-6 form-group p_star">
                 用戶名稱
                 <input placeholder="<?php if (isset($_SESSION['userName'])) {
                                       echo $_SESSION['userName'];
-                                    } ?>" type="text" class="form-control" id="first" name="userName" />
+                                    } ?>" type="text" class="form-control" id="first" name="userName" disabled/>
               </div>
               <div class="col-md-6 form-group p_star">
                 用戶電郵
                 <input placeholder="<?php if (isset($_SESSION['userEmail'])) {
                                       echo $_SESSION['userEmail'];
-                                    } ?>" type="text" class="form-control" id="email" name="userEmail" />
+                                    } ?>" type="text" class="form-control" id="email" name="userEmail" disabled/>
               </div>
 
               <div class="col-md-12 form-group p_star">
@@ -173,9 +172,9 @@
               </div>
               <div class="col-md-12 form-group p_star">
                 用戶生日 例:(2000/0X/0X)
-                <input placeholder="<?php
+                <input placeholder="<?php if (isset($_SESSION['userAddress'])) {
                                     echo $_SESSION['userBirthday'];
-                                    ?>" type="text" class="form-control" name="userBirthday" />
+                }?>" type="text" class="form-control" name="userBirthday" />
               </div>
               <button type="submit" value="submit" class="btn_3">修改</button>
             </form>

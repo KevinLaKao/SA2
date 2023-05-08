@@ -33,11 +33,8 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.php"> <img src="img/smile.png" alt="logo"
-                                height="80px">foodcrate</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <a class="navbar-brand" href="index.php"> <img src="img/smile.png" alt="logo" height="80px">foodcrate</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -50,8 +47,7 @@
                                     <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
@@ -61,27 +57,26 @@
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
                                         if (empty($_SESSION['level'])) {
                                         ?>
-                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
-                                        <?php }?>
+                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <?php } ?>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                        <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                            <a class="dropdown-item" href="userCenter.php">使用者中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                        <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                            <a class="dropdown-item" href="sellercenter.php">商家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -101,13 +96,13 @@
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
-                                <?php echo $_SESSION['sellerName']; ?>
+                                    <?php echo $_SESSION['sellerName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                             <!-- <div class="dropdown cart">
@@ -154,85 +149,40 @@
 
     <!-- ================ contact section start ================= -->
     <section class="contact-section section_padding">
-        <div class="container">
-            <div class="d-none d-sm-block mb-5 pb-4">
-                <div id="map" style="height: 480px;"></div>
-                <script>
-                function initMap() {
-                    var uluru = {
-                        lat: -24,
-                        lng: 131.044
-                    };
-                    var grayStyles = [{
-                            featureType: "all",
-                            stylers: [{
-                                    saturation: -90
-                                },
-                                {
-                                    lightness: 50
-                                }
-                            ]
-                        },
-                        {
-                            elementType: 'labels.text.fill',
-                            stylers: [{
-                                color: '#ccdee9'
-                            }]
-                        }
-                    ];
-                    var map = new google.maps.Map(document.getElementById('map'), {
-                        center: {
-                            lat: -31.197,
-                            lng: 150.744
-                        },
-                        zoom: 9,
-                        styles: grayStyles,
-                        scrollwheel: false
-                    });
-                }
-                </script>
-                <script
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap">
-                </script>
-
-            </div>
-
-
+        <div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.9337615467102!2d121.43007997510881!3d25.036321877814977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a7dd8be91eaf%3A0xe342a67d6574f896!2z5aSp5Li75pWZ6LyU5LuB5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1683549826094!5m2!1szh-TW!2stw" 
+                width="1000px" 
+                height="500px" 
+                style="border: 0; border-radius: 10px; margin-bottom: 200px;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
             <div class="row">
                 <div class="col-12">
                     <h2 class="contact-title">聯繫我們</h2>
                 </div>
                 <div class="col-lg-8">
-                    <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm"
-                        novalidate="novalidate">
+                    <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
 
-                                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = '輸入訊息'"
-                                        placeholder='Enter Message'></textarea>
+                                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = '輸入訊息'" placeholder='Enter Message'></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control" name="name" id="name" type="text"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'"
-                                        placeholder='你的名字'>
+                                    <input class="form-control" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder='你的名字'>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control" name="email" id="email" type="email"
-                                        onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter email address'" placeholder='電子郵件'>
+                                    <input class="form-control" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder='電子郵件'>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <input class="form-control" name="subject" id="subject" type="text"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'"
-                                        placeholder='輸入主旨'>
+                                    <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder='輸入主旨'>
                                 </div>
                             </div>
                         </div>
@@ -279,10 +229,8 @@
                             <P>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;<script>
-                                document.write(new Date().getFullYear());
-                                </script> All rights reserved | This template is made with <i class="ti-heart"
-                                    aria-hidden="true"></i> by <a href="https://colorlib.com"
-                                    target="_blank">Colorlib</a>
+                                    document.write(new Date().getFullYear());
+                                </script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </P>
                             <div class="copyright_link">

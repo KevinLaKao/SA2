@@ -20,7 +20,7 @@ if ($act = "sellerlogin") {
     ?>
 <script>
 alert("登入成功！");
-location = '../sellerLogin.php';
+location = '../index.php';
 </script>
 <?php
 }}}
