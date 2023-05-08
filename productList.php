@@ -85,10 +85,10 @@ alert("無法加入購物車");
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">首頁</a>
+                                    <a class="nav-link" href="index.php">首頁</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">關於我們</a>
+                                    <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
@@ -107,10 +107,12 @@ alert("無法加入購物車");
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="login.html"> 登入 </a>
+                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">確認訂單</a>
+                                        <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                        <a class="dropdown-item" href="sellercenter.php">商家中心</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -119,22 +121,21 @@ alert("無法加入購物車");
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
-                            <a id="search_1" href="login.html"><i class="ti-user"></i></a>
+                            <a href="login.html"><i class="ti-user"></i></a>
                             <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
+                            <a>
+                                <?php
+                                if (isset($_SESSION['userName'])) {
+                                    echo $_SESSION['userName'];
+                                }
+                                ?>
+                            </a>
+                            <a class="dropdown-item" href="./function/logOut.php">登出</a>
                         </div>
                     </nav>
                 </div>
-            </div>
-        </div>
-        <div class="search_input" id="search_input_box">
-            <div class="container">
-                <form class="d-flex justify-content-between search-inner">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here" />
-                    <button type="submit" class="btn"></button>
-                    <span class="ti-close" id="close_search" title="Close Search"></span>
-                </form>
             </div>
         </div>
     </header>
@@ -191,7 +192,6 @@ alert("無法加入購物車");
                             while ($product = mysqli_fetch_array($rs)) {
                             ?>
                             <div class="col-lg-6 col-sm-6">
-                                <form method="get" action="productList.php">
                                     <div class="single_product_item">
                                         <img src="<?php echo $product["proPicture"] ?>" alt="#" class="img-fluid" />
                                         <h3>
@@ -201,10 +201,10 @@ alert("無法加入購物車");
                                         </h3>
                                         <p>$<?php echo $product['proPrice'] ?></p>
                                         <p>店家: <?php echo $product['proSeller'] ?></p>
-                                        <form method="get" action="productList.php">
-                                            <button name="add" value="<?php echo $product['proCode'] ?>"
-                                                class="icon_plus butt">
-                                            </button>
+                                        <form method="get" action="./function/addProductToCart.php">
+                                            <input type="hidden" name="proCode" value="<?php echo $product['proCode']; ?>">
+                                            <input type="hidden" name="userEmail" value="<?php if(isset($_SESSION['userEmail'])){ echo $_SESSION['userEmail'];} ?>">
+                                            <button class="btn_3">加入購物車</button>
                                         </form>
                                     </div>
                             </div>
