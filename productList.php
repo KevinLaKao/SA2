@@ -1,37 +1,5 @@
-<?php
-if (isset($_GET["add"])) {
-    $proCode = $_GET["add"];
-    $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
-    $find = "select * from product where proCode ='$proCode'";
-    $rs = mysqli_query($link, $find);
-    $row = mysqli_fetch_array($rs);
-    $proAmount = $row['proAmount'];
-    $proPicture = $row['proPicture'];
-    $proName = $row['proName'];
-    $proInfo = $row['proInfo'];
-    $proPrice = $row['proPrice'];
-    $proSeller = $row['proSeller'];
-    $proTag = $row['proTag'];
-
-    $sql = "INSERT INTO cart (proCode, proName, proAmount, proPicture, proTag, proInfo, proPrice, proSeller) VALUES ('$proCode','$proName','$proAmount','$proPicture','$proTag','$proInfo','$proPrice','$proSeller')";
-    if ($rs_insert = mysqli_query($link, $sql)) { ?>
-<script>
-alert("加入購物車");
-</script>
-<?php
-    } else {
-    ?>
-<script>
-alert("無法加入購物車");
-</script>
-<?php
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -187,13 +155,21 @@ alert("無法加入購物車");
                         <div class="single_sedebar">
                             <div class="select_option">
                                 <div class="select_option_list">
-                                    類別 <i class="right fas fa-caret-down"></i>
+                                    <?php
+                                        if(isset($_GET['Categories'])){
+                                            $Categories=$_GET['Categories'];
+                                            echo $Categories;
+                                        }else{
+                                            echo "類別";
+                                        }
+                                    ?> 
+                                    <i class="right fas fa-caret-down"></i>
                                 </div>
                                 <div class="select_option_dropdown">
-                                    <p><a href="#"></a></p>
-                                    <p><a href="productCategories.php?proTag=台式">台式</a></p>
-                                    <p><a href="productCategories.php?proTag=西式">西式</a></p>
-                                    <p><a href="productCategories.php?proTag=歐式">歐式</a></p>
+                                    <p><a href="productList.php">全部</a></p>
+                                    <p><a href="productList.php?Categories=台式">台式</a></p>
+                                    <p><a href="productList.php?Categories=西式">西式</a></p>
+                                    <p><a href="productList.php?Categories=歐式">歐式</a></p>
                                 </div>
                             </div>
                         </div>
@@ -204,7 +180,11 @@ alert("無法加入購物車");
                         <div class="row">
                             <?php
                             $link = mysqli_connect("localhost", "root", "12345678", "sa");
-                            $sql = "select * from product";
+                            if(isset($_GET['Categories'])){
+                                $sql = "select * from product where proTag='$Categories'";
+                            }else{
+                                $sql = "select * from product";
+                            }
                             $rs = mysqli_query($link, $sql);
                             while ($product = mysqli_fetch_array($rs)) {
                             ?>
