@@ -10,20 +10,20 @@ if (isset($_GET["add"])) {
     $proName = $row['proName'];
     $proInfo = $row['proInfo'];
     $proPrice = $row['proPrice'];
-    $proSeller = $row['proSeller'];
+    $sellerName = $row['sellerName'];
     $proTag = $row['proTag'];
 
-    $sql = "INSERT INTO cart (proCode, proName, proAmount, proPicture, proTag, proInfo, proPrice, proSeller) VALUES ('$proCode','$proName','$proAmount','$proPicture','$proTag','$proInfo','$proPrice','$proSeller')";
+    $sql = "INSERT INTO cart (proCode, proName, proAmount, proPicture, proTag, proInfo, proPrice, sellerName) VALUES ('$proCode','$proName','$proAmount','$proPicture','$proTag','$proInfo','$proPrice','$sellerName')";
     if ($rs_insert = mysqli_query($link, $sql)) { ?>
-<script>
-alert("加入購物車");
-</script>
-<?php
+        <script>
+            alert("加入購物車");
+        </script>
+    <?php
     } else {
     ?>
-<script>
-alert("無法加入購物車");
-</script>
+        <script>
+            alert("無法加入購物車");
+        </script>
 <?php
     }
 }
@@ -57,13 +57,13 @@ alert("無法加入購物車");
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <style>
-.section_padding {
-    padding-bottom: 0px;
-}
+    .section_padding {
+        padding-bottom: 0px;
+    }
 
-.section_padding1 {
-    padding-bottom: 50px;
-}
+    .section_padding1 {
+        padding-bottom: 50px;
+    }
 </style>
 
 <body>
@@ -76,9 +76,7 @@ alert("無法加入購物車");
                         <a class="navbar-brand" href="index.php">
                             <img src="img/smile.png" alt="logo" height="80px" />foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -91,8 +89,7 @@ alert("無法加入購物車");
                                     <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
@@ -102,28 +99,27 @@ alert("無法加入購物車");
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
                                         if (empty($_SESSION['level'])) {
                                         ?>
-                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
-                                        <?php }?>>
-                                        <a class="dropdown-item" href="checkout.html">下單</a>
-                                        <a class="dropdown-item" href="cart.php">購物車</a>
-                                        <a class="dropdown-item" href="confirmation.html">確認訂單</a>
-                                        <?php
-                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
-                                        ?>
-                                        <a class="dropdown-item" href="userCenter.php">使用者中心</a>
-                                        <?php }
-                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
-                                        ?>
-                                        <a class="dropdown-item" href="sellercenter.php">商家中心</a>
-                                        <?php } ?>
+                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                            <?php } ?>>
+                                            <a class="dropdown-item" href="checkout.html">下單</a>
+                                            <a class="dropdown-item" href="cart.php">購物車</a>
+                                            <a class="dropdown-item" href="confirmation.html">確認訂單</a>
+                                            <?php
+                                            if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                                            ?>
+                                                <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                            <?php }
+                                            if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                                            ?>
+                                                <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                            <?php } ?>
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -141,13 +137,13 @@ alert("無法加入購物車");
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
-                                <?php echo $_SESSION['sellerName']; ?>
+                                    <?php echo $_SESSION['sellerName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -220,24 +216,23 @@ alert("無法加入購物車");
                             <?php
                             while ($product = mysqli_fetch_array($rs)) {
                             ?>
-                            <div class="col-lg-6 col-sm-6">
-                                <form method="get" action="productList.php">
-                                    <div class="single_product_item">
-                                        <img src="<?php echo $product["proPicture"] ?>" alt="#" class="img-fluid" />
-                                        <h3>
-                                            <a href="single-product.html">
-                                                <?php echo $product['proName'] ?>
-                                            </a>
-                                        </h3>
-                                        <p>$<?php echo $product['proPrice'] ?></p>
-                                        <p>店家: <?php echo $product['proSeller'] ?></p>
-                                        <form method="get" action="productCategories.php">
-                                            <button name="add" value="<?php echo $product['proCode'] ?>"
-                                                class="icon_plus butt">
-                                            </button>
-                                        </form>
-                                    </div>
-                            </div>
+                                <div class="col-lg-6 col-sm-6">
+                                    <form method="get" action="productList.php">
+                                        <div class="single_product_item">
+                                            <img src="<?php echo $product["proPicture"] ?>" alt="#" class="img-fluid" />
+                                            <h3>
+                                                <a href="single-product.html">
+                                                    <?php echo $product['proName'] ?>
+                                                </a>
+                                            </h3>
+                                            <p>$<?php echo $product['proPrice'] ?></p>
+                                            <p>店家: <?php echo $product['sellerName'] ?></p>
+                                            <form method="get" action="productCategories.php">
+                                                <button name="add" value="<?php echo $product['proCode'] ?>" class="icon_plus butt">
+                                                </button>
+                                            </form>
+                                        </div>
+                                </div>
 
                             <?php
                             }
@@ -304,7 +299,7 @@ alert("無法加入購物車");
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                document.write(new Date().getFullYear());
+                                    document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by

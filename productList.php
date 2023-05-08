@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -25,13 +26,13 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <style>
-.section_padding {
-    padding-bottom: 0px;
-}
+    .section_padding {
+        padding-bottom: 0px;
+    }
 
-.section_padding1 {
-    padding-bottom: 50px;
-}
+    .section_padding1 {
+        padding-bottom: 50px;
+    }
 </style>
 
 <body>
@@ -44,9 +45,7 @@
                         <a class="navbar-brand" href="index.php">
                             <img src="img/smile.png" alt="logo" height="80px" />foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -59,8 +58,7 @@
                                     <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
@@ -70,27 +68,26 @@
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
                                         if (empty($_SESSION['level'])) {
                                         ?>
-                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
-                                        <?php }?>
+                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <?php } ?>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">確認訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                        <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                            <a class="dropdown-item" href="userCenter.php">使用者中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                        <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                            <a class="dropdown-item" href="sellercenter.php">商家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -109,13 +106,13 @@
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
-                                <?php echo $_SESSION['sellerName']; ?>
+                                    <?php echo $_SESSION['sellerName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -156,13 +153,13 @@
                             <div class="select_option">
                                 <div class="select_option_list">
                                     <?php
-                                        if(isset($_GET['Categories'])){
-                                            $Categories=$_GET['Categories'];
-                                            echo $Categories;
-                                        }else{
-                                            echo "類別";
-                                        }
-                                    ?> 
+                                    if (isset($_GET['Categories'])) {
+                                        $Categories = $_GET['Categories'];
+                                        echo $Categories;
+                                    } else {
+                                        echo "類別";
+                                    }
+                                    ?>
                                     <i class="right fas fa-caret-down"></i>
                                 </div>
                                 <div class="select_option_dropdown">
@@ -180,15 +177,15 @@
                         <div class="row">
                             <?php
                             $link = mysqli_connect("localhost", "root", "12345678", "sa");
-                            if(isset($_GET['Categories'])){
+                            if (isset($_GET['Categories'])) {
                                 $sql = "select * from product where proTag='$Categories'";
-                            }else{
+                            } else {
                                 $sql = "select * from product";
                             }
                             $rs = mysqli_query($link, $sql);
                             while ($product = mysqli_fetch_array($rs)) {
                             ?>
-                            <div class="col-lg-6 col-sm-6">
+                                <div class="col-lg-6 col-sm-6">
                                     <div class="single_product_item">
                                         <img src="<?php echo $product["proPicture"] ?>" alt="#" class="img-fluid" />
                                         <h3>
@@ -197,14 +194,16 @@
                                             </a>
                                         </h3>
                                         <p>$<?php echo $product['proPrice'] ?></p>
-                                        <p>店家: <?php echo $product['proSeller'] ?></p>
+                                        <p>店家: <?php echo $product['sellerName'] ?></p>
                                         <form method="get" action="./function/addProductToCart.php">
                                             <input type="hidden" name="proCode" value="<?php echo $product['proCode']; ?>">
-                                            <input type="hidden" name="userEmail" value="<?php if(isset($_SESSION['userEmail'])){ echo $_SESSION['userEmail'];} ?>">
+                                            <input type="hidden" name="userEmail" value="<?php if (isset($_SESSION['userEmail'])) {
+                                                                                                echo $_SESSION['userEmail'];
+                                                                                            } ?>">
                                             <button class="btn_3">加入購物車</button>
                                         </form>
                                     </div>
-                            </div>
+                                </div>
 
                             <?php
                             }
@@ -271,7 +270,7 @@
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                document.write(new Date().getFullYear());
+                                    document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by
