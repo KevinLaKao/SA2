@@ -165,6 +165,7 @@ if (isset($_GET["delete"])) {
                         </thead>
                         <tbody>
                             <?php
+                            if(isset($_SESSION['userName']) || isset($_SESSION['sellerName'])){
                             $total = 0;
                             $link = mysqli_connect("localhost", "root", "12345678", "sa");
                             $sql = "select * from cart, product where cart.proCode = product.proCode;";
@@ -205,7 +206,7 @@ if (isset($_GET["delete"])) {
                                         </div>
                                 <tr>
                                 <?php
-                            }
+                                    }
                                 ?>
                                 <tr>
                                     <td></td>
@@ -214,7 +215,7 @@ if (isset($_GET["delete"])) {
                                         <h5>總額</h5>
                                     </td>
                                     <td>
-                                        <h5>$<?php echo $total; ?></h5>
+                                        <h5>$<?php echo $total; }?></h5>
                                     </td>
                                 </tr>
 

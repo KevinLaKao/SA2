@@ -20,7 +20,7 @@ if ($act = "userlogin") {
 ?>
                 <script>
                     alert("登入成功！");
-                    location = '../userLogin.php';
+                    location = '../index.php';
                 </script>
     <?php
             }
