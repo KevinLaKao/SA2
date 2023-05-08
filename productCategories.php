@@ -73,7 +73,7 @@ alert("無法加入購物車");
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.php">
                             <img src="img/smile.png" alt="logo" height="80px" />foodcrate
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -85,10 +85,10 @@ alert("無法加入購物車");
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">首頁</a>
+                                    <a class="nav-link" href="index.php">首頁</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">關於我們</a>
+                                    <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
@@ -107,21 +107,48 @@ alert("無法加入購物車");
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="login.html"> 登入 </a>
+                                        <?php
+                                        if (empty($_SESSION['level'])) {
+                                        ?>
+                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <?php }?>>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">確認訂單</a>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                                        ?>
+                                        <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                        <?php }
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                                        ?>
+                                        <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                        <?php } ?>
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">聯絡我們</a>
+                                    <a class="nav-link" href="contact.php">聯絡我們</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
-                            <a id="search_1" href="login.html"><i class="ti-user"></i></a>
+                            <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
+                            </a>
+                            <a class=dropdown-item>
+                                <?php
+                                if (isset($_SESSION['userName'])) {
+                                    echo $_SESSION['userName']; ?>
+
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <?php
+                                } else if (isset($_SESSION['sellerName'])) {
+                                ?>
+                                <?php echo $_SESSION['sellerName']; ?>
+
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <?php } ?>
                             </a>
                         </div>
                     </nav>
@@ -155,11 +182,11 @@ alert("無法加入購物車");
     <!-- breadcrumb part end-->
 
     <!-- product list part start-->
-    <?php   
-    $label=$_GET["proTag"];
-    $link=mysqli_connect("localhost","root","12345678","sa");
-    $sql="select * from product where proTag='$label'";
-    $rs=mysqli_query($link,$sql);
+    <?php
+    $label = $_GET["proTag"];
+    $link = mysqli_connect("localhost", "root", "12345678", "sa");
+    $sql = "select * from product where proTag='$label'";
+    $rs = mysqli_query($link, $sql);
     ?>
     <section class="product_list section_padding">
         <div class="container">

@@ -10,12 +10,12 @@ $link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
 if ($act == "sellercreate") {
     //這裡是新增的語法
     $sql="INSERT INTO `seller`(`sellerName`, `sellerEmail`, `sellerPhone`, `sellerPassword`, `sellerAddress`, `sellerInfo`, `level`) 
-    VALUES ('$selleremail', '$sellerpassword','$sellerphone','$sellername','$selleraddress','$sellerinfo','seller')";
+    VALUES ('$sellername', '$selleremail','$sellerphone','$sellerpassword','$selleraddress','$sellerinfo','seller')";
     if (mysqli_query($link, $sql)) {
 ?>
 <script>
 alert(" 註 冊 成 功 ！");
-location = '../sellerregister.html';
+location = '../sellerlogin.html';
 </script>
 <?php
     } else {

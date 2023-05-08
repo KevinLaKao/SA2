@@ -73,7 +73,7 @@ alert("無法加入購物車");
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.php">
                             <img src="img/smile.png" alt="logo" height="80px" />foodcrate
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -107,32 +107,49 @@ alert("無法加入購物車");
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                        <?php
+                                        if (empty($_SESSION['level'])) {
+                                        ?>
                                         <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <?php }?>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">確認訂單</a>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                                        ?>
                                         <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                        <?php }
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                                        ?>
                                         <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                        <?php } ?>
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">聯絡我們</a>
+                                    <a class="nav-link" href="contact.php">聯絡我們</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
-                            <a href="login.html"><i class="ti-user"></i></a>
+                            <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
-                            <a>
+                            <a class=dropdown-item>
                                 <?php
                                 if (isset($_SESSION['userName'])) {
-                                    echo $_SESSION['userName'];
-                                }
+                                    echo $_SESSION['userName']; ?>
+
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <?php
+                                } else if (isset($_SESSION['sellerName'])) {
                                 ?>
+                                <?php echo $_SESSION['sellerName']; ?>
+
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <?php } ?>
                             </a>
-                            <a class="dropdown-item" href="./function/logOut.php">登出</a>
                         </div>
                     </nav>
                 </div>
