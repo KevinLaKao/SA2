@@ -59,10 +59,10 @@
               >
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link" href="index.html">首頁</a>
+                    <a class="nav-link" href="index.php">首頁</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="about.html">關於我們</a>
+                    <a class="nav-link" href="about.php">關於我們</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a
@@ -104,20 +104,20 @@
                       class="dropdown-menu"
                       aria-labelledby="navbarDropdown_2"
                     >
-                      <a class="dropdown-item" href="login.html"> 登入 </a>
+                      <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                       <a class="dropdown-item" href="checkout.html">下單</a>
                       <a class="dropdown-item" href="cart.php">購物車</a>
                       <a class="dropdown-item" href="confirmation.html"
                         >確認訂單</a
                       >
-                      <a class="dropdown-item" href="member.html">會員中心</a>
-                      <a class="dropdown-item" href="sellercenter.html"
+                      <a class="dropdown-item" href="userCenter.php">會員中心</a>
+                      <a class="dropdown-item" href="sellercenter.php"
                         >店家中心</a
                       >
                     </div>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="contact.html">聯絡我們</a>
+                    <a class="nav-link" href="contact.php">聯絡我們</a>
                   </li>
                 </ul>
               </div>
@@ -126,6 +126,7 @@
                 <a href="cart.php">
                   <i class="flaticon-shopping-cart-black-shape"></i>
                 </a>
+                <a class="dropdown-item" href="./function/logOut.php">登出</a>
               </div>
             </nav>
           </div>
@@ -156,15 +157,13 @@
               <h3>使用者資訊</h3>
               <form
                 class="row contact_form"
-                action="#"
-                method="post"
-                novalidate="novalidate"
+                action="./function/userCenterUpdate.php"
+                method="get"
               >
                 <div class="col-md-6 form-group p_star">
                   用戶名稱
                   <input
-                    placeholder="John"
-                    readonly
+                    placeholder="<?php if(isset($_SESSION['userName'])){echo $_SESSION['userName'];}?>"
                     type="text"
                     class="form-control"
                     id="first"
@@ -174,8 +173,7 @@
                 <div class="col-md-6 form-group p_star">
                   用戶電郵
                   <input
-                    placeholder="abc@gmail.com"
-                    readonly
+                    placeholder="<?php if(isset($_SESSION['userEmail'])){echo $_SESSION['userEmail'];}?>"
                     type="text"
                     class="form-control"
                     id="email"
@@ -186,8 +184,7 @@
                 <div class="col-md-12 form-group p_star">
                   用戶電話
                   <input
-                    placeholder="0912345678"
-                    readonly
+                    placeholder="<?php if(isset($_SESSION['userPhone'])){echo $_SESSION['userPhone'];}?>"
                     type="text"
                     class="form-control"
                     id="add1"
@@ -197,19 +194,17 @@
                 <div class="col-md-12 form-group p_star">
                   用戶密碼
                   <input
-                    placeholder="a1234567"
-                    readonly
+                    placeholder="<?php if(isset($_SESSION['userPassword'])){echo $_SESSION['userPassword'];}?>"
                     type="text"
                     class="form-control"
                     id="city"
-                    name="uesrPassword"
+                    name="userPassword"
                   />
                 </div>
                 <div class="col-md-12 form-group p_star">
                   用戶地址
                   <input
-                    placeholder="新北市新莊區中正路"
-                    readonly
+                    placeholder="<?php if(isset($_SESSION['userAddress'])){echo $_SESSION['userAddress'];}?>"
                     type="text"
                     class="form-control"
                     id="city"
@@ -219,12 +214,11 @@
                 <div class="col-md-12 form-group p_star">
                   用戶生日
                   <input
-                    placeholder="92/05/04"
-                    readonly
-                    type="text"
+                    placeholder="<?php if(isset($_SESSION['userBirth'])){echo $_SESSION['userBirth'];}?>"
+                    type="date"
                     class="form-control"
                     id="city"
-                    name="userBirth"
+                    name="userBirthday"
                   />
                 </div>
                 <button type="submit" value="submit" class="btn_3">修改</button>

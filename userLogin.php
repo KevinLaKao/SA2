@@ -68,8 +68,8 @@
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
-                                        <a class="dropdown-item" href="member.html">使用者中心</a>
-                                        <a class="dropdown-item" href="sellercenter.html">商家中心</a>
+                                        <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                        <a class="dropdown-item" href="sellercenter.php">商家中心</a>
                                     </div>
                                 </li>
 
@@ -90,6 +90,7 @@
                                 }
                                 ?>
                             </a>
+                            <a class="dropdown-item" href="./function/logOut.php">登出</a>
                         </div>
                     </nav>
                 </div>
