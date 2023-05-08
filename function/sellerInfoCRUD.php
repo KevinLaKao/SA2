@@ -32,23 +32,22 @@ if ($act == "create") {
             sellerAddress='$sellerAddress',
             sellerInfo='$sellerInfo'
             where sellerEmail='$sellerEmail' and sellerName='$sellerName'";
-    $result=mysqli_query($link,$sql);
+    $result = mysqli_query($link, $sql);
     if ($result) {
     ?>
         <script>
             alert(" 修 改 成 功 ！");
-            location = '../sellercenter.html';
+            location = '../sellercenter.php';
         </script>
     <?php
-    }else
+    } else
     ?>
     <script>
-            alert(" 修 改 失 敗 ！");
-            location = '../sellercenter.html';
-        </script>
+        alert(" 修 改 失 敗 ！");
+        location = '../sellercenter.php';
+    </script>
     <?php
-    }
-   elseif ($act == 'delete') {
+} elseif ($act == 'delete') {
     //這裡是刪除
     $sql = "delete from account where member_id='$member_id'";
     if (mysqli_query($link, $sql)) {

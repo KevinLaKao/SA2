@@ -14,18 +14,18 @@ if ($act == "create") {
             values ('$productName', '$productPrice','$productInfo' ,'$productAmount','$sellerName')";
     if (mysqli_query($link, $sql)) {
 ?>
-        <script>
-            alert(" 新 增 成 功 ！");
-            location = '../sellercenter.html';
-        </script>
-    <?php
+<script>
+alert(" 新 增 成 功 ！");
+location = '../sellercenter.php';
+</script>
+<?php
     } else {
     ?>
-        <script>
-            alert(" 新 增 失 敗 ！");
-            location = '../sellercenter.html';
-        </script>
-    <?php
+<script>
+alert(" 新 增 失 敗 ！");
+location = '../sellercenter.php';
+</script>
+<?php
     }
 } elseif ($act == "update") {
     //這裡是修改
@@ -36,35 +36,35 @@ if ($act == "create") {
 
     if (mysqli_query($link, $sql)) {
     ?>
-        <script>
-            alert(" 修 改 成 功 ！");
-            location = 'backStage.php';
-        </script>
-    <?php
+<script>
+alert(" 修 改 成 功 ！");
+location = 'backStage.php';
+</script>
+<?php
     } else {
     ?>
-        <script>
-            alert(" 修 改 失 敗 ！");
-            location = 'backStage.php';
-        </script>
-    <?php
+<script>
+alert(" 修 改 失 敗 ！");
+location = 'backStage.php';
+</script>
+<?php
     }
 } elseif ($act == 'delete') {
     //這裡是刪除
     $sql = "delete from account where productName='$productName'";
     if (mysqli_query($link, $sql)) {
     ?>
-        <script>
-            alert(" 刪 除 成 功 ！");
-            location = 'sellercenter.php';
-        </script>
-    <?php
+<script>
+alert(" 刪 除 成 功 ！");
+location = 'sellercenter.php';
+</script>
+<?php
     } else {
     ?>
-        <script>
-            alert(" 刪 除 成 功 ！");
-            location = 'sellercenter.php';
-        </script>
+<script>
+alert(" 刪 除 成 功 ！");
+location = 'sellercenter.php';
+</script>
 <?php
     }
 }
