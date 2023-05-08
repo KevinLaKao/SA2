@@ -39,9 +39,7 @@
                             <img src="img/foodcrate.png" alt="logo" height="80px" />
                             Foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -54,8 +52,7 @@
                                     <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
@@ -65,27 +62,26 @@
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
                                         if (empty($_SESSION['level'])) {
                                         ?>
-                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
-                                        <?php }?>
+                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <?php } ?>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                        <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                            <a class="dropdown-item" href="userCenter.php">使用者中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                        <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                            <a class="dropdown-item" href="sellercenter.php">商家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -101,16 +97,16 @@
                             </a>
                             <a class=dropdown-item>
                                 <?php
-                if (isset($_SESSION['userName'])) {
-                  echo $_SESSION['userName']; ?>
+                                if (isset($_SESSION['userName'])) {
+                                    echo $_SESSION['userName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
-                } else if (isset($_SESSION['sellerName'])) {
-                ?>
-                                <?php echo $_SESSION['sellerName']; ?>
+                                } else if (isset($_SESSION['sellerName'])) {
+                                ?>
+                                    <?php echo $_SESSION['sellerName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -150,44 +146,38 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <h3>店家資訊</h3>
-                        <form class="row contact_form" action="./function/sellerInfoCRUD.php" method="get"
-                            novalidate="novalidate">
+                        <form class="row contact_form" action="./function/sellerInfoCRUD.php" method="get" novalidate="novalidate">
                             <?php
-              $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
-              $sql = "select * from seller where sellerName='nancy'";
-              $result = mysqli_query($link, $sql);
-              $row = mysqli_fetch_array($result)
-              ?>
+                            $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+                            $sql = "select * from seller where sellerName='nancy'";
+                            $result = mysqli_query($link, $sql);
+                            $row = mysqli_fetch_array($result)
+                            ?>
                             <div class="col-md-6 form-group ">
                                 店家名稱:
-                                <input type="text" disabled="disabled" class="form-control" id="number"
-                                    name="sellerPhone" placeholder=<?php echo $row['sellerName'] ?> />
+                                <input type="text" disabled="disabled" class="form-control" id="number" name="sellerPhone" placeholder=<?php echo $_SESSION['sellerName'] ?> />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group">
                                 電話號碼
-                                <input type="text" class="form-control" id="number" name="sellerPhone"
-                                    placeholder="電話號碼" />
+                                <input type="text" class="form-control" id="number" name="sellerPhone" placeholder="<?php echo $_SESSION['sellerPhone'] ?>" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group">
                                 電子郵件
-                                <input type="text" class="form-control" id="email" name="sellerEmail"
-                                    placeholder="電子郵件" />
+                                <input type="text" disabled="disabled" class="form-control" id="email" name="sellerEmail" placeholder="<?php echo $_SESSION['sellerEmail'] ?>" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-12 form-group">
                                 店家地址
-                                <input type="text" class="form-control" id="add1" name="sellerAddress"
-                                    placeholder="店家地址" />
+                                <input type="text" class="form-control" id="add1" name="sellerAddress" placeholder="<?php echo $_SESSION['sellerAddress'] ?>" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-12 form-group">
                                 <div class="creat_account">
                                     <h3>店家簡介</h3>
                                 </div>
-                                <textarea class="form-control" name="sellerInfo" id="message" rows="1"
-                                    placeholder="店家簡介"></textarea>
+                                <textarea class="form-control" name="sellerInfo" id="message" rows="1" placeholder="<?php echo $_SESSION['sellerInfo'] ?>"></textarea>
                             </div>
                             <button type="submit" name="act" value="update" class="btn_3">
                                 送出修改資料
@@ -215,26 +205,22 @@
                         <form class="row contact_form" action="./function/productCRUD.php" method="get">
                             <div class="col-md-6 form-group ">
                                 店家名稱
-                                <input type="text" class="form-control" id="first" name="sellerName"
-                                    placeholder="店家名稱" />
+                                <input type="text" class="form-control" id="first" name="sellerName" placeholder="店家名稱" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group ">
                                 商品名稱
-                                <input type="text" class="form-control" id="number" name="productName"
-                                    placeholder="商品名稱" />
+                                <input type="text" class="form-control" id="number" name="productName" placeholder="商品名稱" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group">
                                 商品價格
-                                <input type="number" class="form-control" id="number" name="productPrice"
-                                    placeholder="商品價格" />
+                                <input type="number" class="form-control" id="number" name="productPrice" placeholder="商品價格" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group ">
                                 商品數量
-                                <input type="number" class="form-control" id="number" name="productAmount"
-                                    placeholder="商品數量" />
+                                <input type="number" class="form-control" id="number" name="productAmount" placeholder="商品數量" />
                                 <span class="placeholder"></span>
                             </div>
 
@@ -242,8 +228,7 @@
                                 <div class="creat_account">
                                     <h3>商品簡介</h3>
                                 </div>
-                                <textarea class="form-control" name="productInfo" id="message" rows="1"
-                                    placeholder="商品簡介"></textarea>
+                                <textarea class="form-control" name="productInfo" id="message" rows="1" placeholder="商品簡介"></textarea>
                             </div>
                             <button type="submit" name="act" value="create" class="btn_3">
                                 送出產品資料
@@ -284,14 +269,12 @@
                                             <img src="img/arrivel/arrivel_1.png" alt="" />
                                         </div>
                                         <div class="media-body" name="productName">
-                                            <input type="text" class="form-control" id="first" name="sellerName"
-                                                placeholder="商品名稱" />
+                                            <input type="text" class="form-control" id="first" name="sellerName" placeholder="商品名稱" />
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control" id="number" name="productPrice"
-                                        placeholder="商品價格" />
+                                    <input type="number" class="form-control" id="number" name="productPrice" placeholder="商品價格" />
                                 </td>
                                 <td>
                                     <div class="product_count">
@@ -305,8 +288,7 @@
                                   class="reduced input-number-decrement items-count" type="button">
                                   <i class="ti-angle-down"></i>
                                 </button> -->
-                                        <input type="number" class="form-control" id="number" name="productAmount"
-                                            placeholder="數量" />
+                                        <input type="number" class="form-control" id="number" name="productAmount" placeholder="數量" />
                                     </div>
                                 </td>
                                 <td>
@@ -325,19 +307,16 @@
                                             <img src="img/arrivel/arrivel_2.png" alt="" />
                                         </div>
                                         <div class="media-body">
-                                            <input type="text" class="form-control" id="first" name="sellerName"
-                                                placeholder="商品名稱" />
+                                            <input type="text" class="form-control" id="first" name="sellerName" placeholder="商品名稱" />
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control" id="number" name="productPrice"
-                                        placeholder="商品價格" />
+                                    <input type="number" class="form-control" id="number" name="productPrice" placeholder="商品價格" />
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                        <input type="number" class="form-control" id="number" name="productAmount"
-                                            placeholder="數量" />
+                                        <input type="number" class="form-control" id="number" name="productAmount" placeholder="數量" />
                                     </div>
                                 </td>
                                 <td>
@@ -371,7 +350,7 @@
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                document.write(new Date().getFullYear());
+                                    document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by

@@ -1,8 +1,8 @@
 <?php
 $act = $_GET['act'];
+$sellerName = $_SESSION['sellerName'];
+$sellerEmail = $_SESSION['sellerEmail'];
 $sellerPhone = $_GET['sellerPhone'];
-$sellerName = $_GET['sellerName'];
-$sellerEmail = $_GET['sellerEmail'];
 $sellerAddress = $_GET['sellerAddress'];
 $sellerInfo = $_GET['sellerInfo'];
 
@@ -13,18 +13,18 @@ if ($act == "create") {
             values ('$member_id', '$member_password','$member_name')";
     if (mysqli_query($link, $sql)) {
 ?>
-        <script>
-            alert(" 新 增 成 功 ！");
-            location = 'backStage.php';
-        </script>
-    <?php
+<script>
+alert(" 新 增 成 功 ！");
+location = 'backStage.php';
+</script>
+<?php
     } else {
     ?>
-        <script>
-            alert(" 新 增 失 敗 ！");
-            location = 'backStage.php';
-        </script>
-    <?php
+<script>
+alert(" 新 增 失 敗 ！");
+location = 'backStage.php';
+</script>
+<?php
     }
 } elseif ($act == "update") {
     //這裡是修改
@@ -32,37 +32,41 @@ if ($act == "create") {
             sellerAddress='$sellerAddress',
             sellerInfo='$sellerInfo'
             where sellerEmail='$sellerEmail' and sellerName='$sellerName'";
-    $result = mysqli_query($link, $sql);
-    if ($result) {
+     
+    if (mysqli_query($link, $sql)) {
+        $_SESSION['sellerPhone'] = $sellerPhone;
+        $_SESSION['sellerAddress'] = $sellerAddress;
+        $_SESSION['sellerInfo'] = $sellerInfo;
     ?>
-        <script>
-            alert(" 修 改 成 功 ！");
-            location = '../sellercenter.php';
-        </script>
-    <?php
+
+<script>
+alert(" 修 改 成 功 ！");
+location = '../sellercenter.php';
+</script>
+<?php
     } else
     ?>
-    <script>
-        alert(" 修 改 失 敗 ！");
-        location = '../sellercenter.php';
-    </script>
-    <?php
+<script>
+alert(" 修 改 失 敗 ！");
+location = '../sellercenter.php';
+</script>
+<?php
 } elseif ($act == 'delete') {
     //這裡是刪除
     $sql = "delete from account where member_id='$member_id'";
     if (mysqli_query($link, $sql)) {
     ?>
-        <script>
-            alert(" 刪 除 成 功 ！");
-            location = 'backStage.php';
-        </script>
-    <?php
+<script>
+alert(" 刪 除 成 功 ！");
+location = 'backStage.php';
+</script>
+<?php
     } else {
     ?>
-        <script>
-            alert(" 刪 除 成 功 ！");
-            location = 'backStage.php';
-        </script>
+<script>
+alert(" 刪 除 成 功 ！");
+location = 'backStage.php';
+</script>
 <?php
     }
 }
