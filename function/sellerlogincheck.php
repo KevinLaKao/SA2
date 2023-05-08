@@ -27,7 +27,7 @@ location = '../sellerLogin.php';
 ?>
 <script>
 alert("登入失敗！");
-location = '../sellerlogin.html';
+location = '../sellerLogin.php';
 </script>
 <?php
 }
