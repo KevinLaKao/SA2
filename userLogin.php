@@ -33,7 +33,7 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.php">
                             <img src="img/newLogo.png" alt="logo" style="height: 80px" />
                             foodcrate
                         </a>
@@ -64,12 +64,23 @@
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <?php
+                                        if (empty($_SESSION['level'])) {
+                                        ?>
+                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <?php } ?>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
-                                        <a class="dropdown-item" href="userCenter.php">使用者中心</a>
-                                        <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                                        ?>
+                                            <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                        <?php }
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                                        ?>
+                                            <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                        <?php } ?>
                                     </div>
                                 </li>
 
@@ -83,14 +94,21 @@
                             <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
-                            <a>
+                            <a class=dropdown-item>
                                 <?php
                                 if (isset($_SESSION['userName'])) {
-                                    echo $_SESSION['userName'];
-                                }
+                                    echo $_SESSION['userName']; ?>
+
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <?php
+                                } else if (isset($_SESSION['sellerName'])) {
                                 ?>
+                                    <?php echo $_SESSION['sellerName']; ?>
+
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <?php } ?>
                             </a>
-                            <a class="dropdown-item" href="./function/logOut.php">登出</a>
+
                         </div>
                     </nav>
                 </div>

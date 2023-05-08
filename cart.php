@@ -18,14 +18,14 @@ if (isset($_GET["delete"])) {
 <script>
 alert("刪除成功");
 </script>
-<?php }
-else{
+<?php } else {
     ?>
 <script>
 alert("刪除失敗");
 </script>
 <?php
-}}
+    }
+}
 ?>
 <!doctype html>
 <html lang="zxx">
@@ -61,7 +61,7 @@ alert("刪除失敗");
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.php">
                             <img src="img/newLogo.png" alt="logo" style="height: 80px;" />
                             foodcrate
                         </a>
@@ -96,17 +96,23 @@ alert("刪除失敗");
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                        <?php
+                                        if (empty($_SESSION['level'])) {
+                                        ?>
                                         <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <?php }?>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
-                                        <?php if($_SESSION['level']=='user'||$_SESSION['level']==''){
-                                            ?>
-                                        <a class="dropdown-item" href="member.html">使用者中心</a>
-                                        <?php }if($_SESSION['level']=='seller'||$_SESSION['level']==''){
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                        <a class="dropdown-item" href="sellercenter.html">商家中心</a>
-                                        <?php }?>
+                                        <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                        <?php }
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                                        ?>
+                                        <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                        <?php } ?>
                                     </div>
                                 </li>
 
@@ -116,20 +122,23 @@ alert("刪除失敗");
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
-                            <?php if($_SESSION['level']==''){
-                                ?>
                             <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
-                            <?php
-                        }elseif($_SESSION['level']=='user'){
-                            ?>
-                            <a id="search_1" href="member.html"><i class="ti-user"></i></a>
-                            <?php
-                        }elseif($_SESSION['level']=='seller'){
-                            ?>
-                            <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
-                            <?php    }?>
                             <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
+                            </a>
+                            <a class=dropdown-item>
+                                <?php
+                                if (isset($_SESSION['userName'])) {
+                                    echo $_SESSION['userName']; ?>
+
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <?php
+                                } else if (isset($_SESSION['sellerName'])) {
+                                ?>
+                                <?php echo $_SESSION['sellerName']; ?>
+
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <?php } ?>
                             </a>
                         </div>
                     </nav>
