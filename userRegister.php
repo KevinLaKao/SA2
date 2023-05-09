@@ -24,8 +24,6 @@
   <link rel="stylesheet" href="css/slick.css" />
   <!-- style CSS -->
   <link rel="stylesheet" href="css/style.css" />
-  <!-- memeber CSS -->
-  <link rel="stylesheet" href="css/member.css" />
 </head>
 
 <body>
@@ -36,8 +34,8 @@
         <div class="col-lg-12">
           <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="index.php">
-              <img src="img/foodcrate.png" alt="logo" height="80px" />
-              Foodcrate
+              <img src="img/newLogo.png" alt="logo" style="height: 80px" />
+              foodcrate
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="menu_icon"><i class="fas fa-bars"></i></span>
@@ -73,7 +71,7 @@
                     <?php } ?>
                     <a class="dropdown-item" href="checkout.html">下單</a>
                     <a class="dropdown-item" href="cart.php">購物車</a>
-                    <a class="dropdown-item" href="confirmation.html">確認訂單</a>
+                    <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
                     <?php
                     if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                     ?>
@@ -85,6 +83,7 @@
                     <?php } ?>
                   </div>
                 </li>
+
                 <li class="nav-item">
                   <a class="nav-link" href="contact.php">聯絡我們</a>
                 </li>
@@ -99,13 +98,11 @@
                 <?php
                 if (isset($_SESSION['userName'])) {
                   echo $_SESSION['userName']; ?>
-
                   <a class="dropdown-item" href="./function/logOut.php">登出</a>
                 <?php
                 } else if (isset($_SESSION['sellerName'])) {
                 ?>
                   <?php echo $_SESSION['sellerName']; ?>
-
                   <a class="dropdown-item" href="./function/logOut.php">登出</a>
                 <?php } ?>
               </a>
@@ -115,6 +112,7 @@
       </div>
     </div>
   </header>
+  <!-- Header part end-->
 
   <!-- breadcrumb part start-->
   <section class="breadcrumb_part">
@@ -122,7 +120,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="breadcrumb_iner">
-            <h2>會員中心</h2>
+            <h2>使用者登入/註冊</h2>
           </div>
         </div>
       </div>
@@ -130,79 +128,63 @@
   </section>
   <!-- breadcrumb part end-->
 
-  <!--================Checkout Area =================-->
-  <section class="checkout_area section_padding">
+  <!--================login_part Area =================-->
+
+  <section class="login_part section_padding">
     <div class="container">
-      <div class="billing_details">
-        <div class="row">
-          <div class="col-lg-8">
-            <h3>使用者資訊<br>
-            </h3>
-            <form class="row contact_form" action="./function/userCenterUpdate.php" method="get">
-              <div class="col-md-6 form-group p_star">
-                用戶名稱
-                <input value="<?php if (isset($_SESSION['userName'])) {
-                                echo $_SESSION['userName'];
-                              } ?>" placeholder="<?php if (isset($_SESSION['userName'])) {
-                                                    echo $_SESSION['userName'];
-                                                  } ?>" type="text" class="form-control" id="first" name="userName" disabled />
-              </div>
-              <div class="col-md-6 form-group p_star">
-                用戶電郵
-                <input value="<?php if (isset($_SESSION['userEmail'])) {
-                                echo $_SESSION['userEmail'];
-                              } ?>" placeholder="<?php if (isset($_SESSION['userEmail'])) {
-                                                    echo $_SESSION['userEmail'];
-                                                  } ?>" type="text" class="form-control" id="email" name="userEmail" disabled />
-              </div>
-              <div class="col-md-12 form-group p_star">
-                用戶電話
-                <input value="<?php if (isset($_SESSION['userPhone'])) {
-                                echo $_SESSION['userPhone'];
-                              } ?>" placeholder="<?php if (isset($_SESSION['userPhone'])) {
-                                                    echo $_SESSION['userPhone'];
-                                                  } ?>" type="text" class="form-control" id="add1" name="userPhone" />
-              </div>
-              <div class="col-md-12 form-group p_star">
-                用戶密碼
-                <input value="<?php if (isset($_SESSION['userPassword'])) {
-                                echo $_SESSION['userPassword'];
-                              } ?>" placeholder="<?php if (isset($_SESSION['userPassword'])) {
-                                                    echo $_SESSION['userPassword'];
-                                                  } ?>" type="text" class="form-control" id="city" name="userPassword" disabled />
-              </div>
-              <div class="col-md-12 form-group p_star">
-                用戶地址
-                <input value="<?php if (isset($_SESSION['userAddress'])) {
-                                echo $_SESSION['userAddress'];
-                              } ?>" placeholder="<?php if (isset($_SESSION['userAddress'])) {
-                                                    echo $_SESSION['userAddress'];
-                                                  } ?>" type="text" class="form-control" id="city" name="userAddress" />
-              </div>
-              <div class="col-md-12 form-group p_star">
-                用戶生日 例:(2000/0X/0X)
-                <input value="<?php if (isset($_SESSION['userBirthday'])) {
-                                echo $_SESSION['userBirthday'];
-                              } ?>" placeholder="<?php if (isset($_SESSION['userBirthday'])) {
-                                                    echo $_SESSION['userBirthday'];
-                                                  } ?>" type="text" class="form-control" name="userBirthday" />
-              </div>
-              <button type="submit" value="submit" class="btn_3">修改</button>
-            </form>
-          </div>
-          <div class="col-lg-4 userPhoto">
-            <div class="userImg">
-              <img src="img/client_2.png" alt="" />
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-md-6">
+          <div class="login_part_text text-center">
+            <div class="login_part_text_iner" style="width: 325px">
+              <h2>有帳號了嗎?</h2>
+              <p>請點擊下方按鈕進行登入</p>
+              <a href="userLogin.php" class="btn_3">登入</a>
             </div>
-            <div class="imgRevise">
-              <button type="submit" value="submit" class="btn_3">修改</button>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="login_part_form">
+            <div class="login_part_form_iner">
+              <h3>
+                歡迎! <br />
+                請註冊帳號
+              </h3>
+              <div>
+                <a class="btn_1 form-group" href="sellerRegister.php">商家註冊
+                </a>
+              </div>
+              <form class="row contact_form" action="./function/userCRUD.php" method="get">
+                <div class="col-md-12 form-group p_star">
+                  <input type="email" class="form-control" id="email" name="useremail" value="" placeholder="電子信箱" required />
+                </div>
+                <div class="col-md-12 form-group p_star">
+                  <input type="password" class="form-control" id="password" name="userpassword" value="" placeholder="密碼" required />
+                </div>
+                <div class="col-md-12 form-group p_star">
+                  <input type="text" class="form-control" id="phone" name="userphone" value="" placeholder="電話號碼" required />
+                </div>
+                <div class="col-md-12 form-group p_star">
+                  <input type="text" class="form-control" id="name" name="username" value="" placeholder="姓名" required />
+                </div>
+                <div class="col-md-12 form-group p_star">
+                  <input type="text" class="form-control" id="address" name="useraddress" value="" placeholder="居住地址" required />
+                </div>
+                <div class="col-md-12 form-group p_star">
+                  <input type="text" class="form-control" id="address" name="userbirthday" value="" placeholder="生日" required />
+                </div>
+                <div class="col-md-12 form-group">
+                  <button type="submit" value="usercreate" class="btn_3" name="act">
+                    使用者註冊
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!--================End Checkout Area =================-->
+  <!--================login_part end =================-->
 
   <!--::footer_part start::-->
   <footer class="footer_part">

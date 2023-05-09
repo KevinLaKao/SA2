@@ -33,7 +33,10 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.php"> <img src="img/smile.png" alt="logo" height="80px">foodcrate</a>
+                        <a class="navbar-brand" href="index.php">
+                            <img src="img/newLogo.png" alt="logo" style="height: 80px" />
+                            foodcrate
+                        </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
@@ -51,9 +54,9 @@
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="productList.php"> 產品列表</a>
+                                        <a class="dropdown-item" href="productList.php">
+                                            產品列表</a>
                                         <a class="dropdown-item" href="single-product.html">產品細項</a>
-
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -72,11 +75,11 @@
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                            <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                            <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -95,39 +98,17 @@
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
-
                                     <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
                                     <?php echo $_SESSION['sellerName']; ?>
-
                                     <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
-                            <!-- <div class="dropdown cart">
-                                <a class="dropdown-toggle" href="cart" id="navbarDropdown3" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="flaticon-shopping-cart-black-shape"></i>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <div class="single_product">
-    
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </nav>
                 </div>
-            </div>
-        </div>
-        <div class="search_input" id="search_input_box">
-            <div class="container ">
-                <form class="d-flex justify-content-between search-inner">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                    <button type="submit" class="btn"></button>
-                    <span class="ti-close" id="close_search" title="Close Search"></span>
-                </form>
             </div>
         </div>
     </header>
@@ -150,13 +131,7 @@
     <!-- ================ contact section start ================= -->
     <section class="contact-section section_padding">
         <div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.9337615467102!2d121.43007997510881!3d25.036321877814977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a7dd8be91eaf%3A0xe342a67d6574f896!2z5aSp5Li75pWZ6LyU5LuB5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1683549826094!5m2!1szh-TW!2stw" 
-                width="1000px" 
-                height="500px" 
-                style="border: 0; border-radius: 10px; margin-bottom: 200px;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.9337615467102!2d121.43007997510881!3d25.036321877814977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a7dd8be91eaf%3A0xe342a67d6574f896!2z5aSp5Li75pWZ6LyU5LuB5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1683549826094!5m2!1szh-TW!2stw" width="1000px" height="500px" style="border: 0; border-radius: 10px; margin-bottom: 200px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <div class="row">
                 <div class="col-12">
                     <h2 class="contact-title">聯繫我們</h2>

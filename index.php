@@ -1,8 +1,3 @@
-<?php
-$link = mysqli_connect('localhost', 'root', '12345678', 'sa');
-$sql = "select * from news";
-$result = mysqli_query($link, $sql);
-?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -80,11 +75,11 @@ $result = mysqli_query($link, $sql);
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                            <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                            <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -103,7 +98,6 @@ $result = mysqli_query($link, $sql);
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
-
                                     <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
@@ -131,7 +125,7 @@ $result = mysqli_query($link, $sql);
     <!-- banner part start-->
 
     <!-- trending item start-->
-    <section class="trending_items" style="margin-top: 100px;">
+    <section class="trending_items" style="margin-top: 100px; padding: 100px 0 50px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -141,62 +135,22 @@ $result = mysqli_query($link, $sql);
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_product_item">
-                        <div class="single_product_item_thumb">
-                            <img src="img/s1.jpg" alt="#" class="img-fluid" />
+                <?php
+                $link = mysqli_connect('localhost', 'root', '', 'sa');
+                $sql = "select * from product limit 6;";
+                $result = mysqli_query($link, $sql);
+                while ($row = mysqli_fetch_array($result)) {
+                ?>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="single_product_item">
+                            <img src="<?php echo $row['productPicture']; ?>" alt="#" class="img-fluid" />
+                            <h3>
+                                <a href="single-product.html"><?php echo $row['productName']; ?></a>
+                            </h3>
+                            <p>$<?php echo $row['productPrice']; ?></p>
                         </div>
-                        <h3>
-                            <a href="single-product.html">義大利麵</a>
-                        </h3>
-                        <p>$50</p>
                     </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_product_item">
-                        <img src="img/s2.jpg" alt="#" class="img-fluid" />
-                        <h3>
-                            <a href="single-product.html">義大利麵</a>
-                        </h3>
-                        <p>$50</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_product_item">
-                        <img src="img/s3.jpg" alt="#" class="img-fluid" />
-                        <h3>
-                            <a href="single-product.html">義大利麵</a>
-                        </h3>
-                        <p>$50</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_product_item">
-                        <img src="img/s4.jpg" alt="#" class="img-fluid" />
-                        <h3>
-                            <a href="single-product.html">義大利麵</a>
-                        </h3>
-                        <p>$50</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_product_item">
-                        <img src="img/s5.jpg" alt="#" class="img-fluid" />
-                        <h3>
-                            <a href="single-product.html">義大利麵</a>
-                        </h3>
-                        <p>$50</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_product_item">
-                        <img src="img/s6.jpg" alt="#" class="img-fluid" />
-                        <h3>
-                            <a href="single-product.html">義大利麵</a>
-                        </h3>
-                        <p>$50</p>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </section>
@@ -208,7 +162,12 @@ $result = mysqli_query($link, $sql);
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="client_review_slider owl-carousel">
-                        <?php while ($row = mysqli_fetch_array($result)) { ?>
+                        <?php
+                        $link = mysqli_connect('localhost', 'root', '', 'sa');
+                        $sql = "select * from news";
+                        $result = mysqli_query($link, $sql);
+                        while ($row = mysqli_fetch_array($result)) {
+                        ?>
                             <div class="single_client_review">
                                 <p><?php echo $row['newsTitle']; ?></p>
                                 <p><?php echo $row['newsContent']; ?></p>
@@ -222,7 +181,7 @@ $result = mysqli_query($link, $sql);
     <!-- client review part end -->
 
     <!-- feature part here -->
-    <section class="feature_part section_padding">
+    <section class="feature_part section_padding" style="padding: 50px 0px 150px;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-3 col-sm-6">

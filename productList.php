@@ -43,7 +43,8 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="index.php">
-                            <img src="img/smile.png" alt="logo" height="80px" />foodcrate
+                            <img src="img/newLogo.png" alt="logo" style="height: 80px" />
+                            foodcrate
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
@@ -79,18 +80,19 @@
                                         <?php } ?>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
-                                        <a class="dropdown-item" href="confirmation.html">確認訂單</a>
+                                        <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                            <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                            <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.php">聯絡我們</a>
                                 </li>
@@ -105,13 +107,11 @@
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
-
                                     <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
                                     <?php echo $_SESSION['sellerName']; ?>
-
                                     <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
@@ -176,9 +176,9 @@
                     <div class="product_list">
                         <div class="row">
                             <?php
-                            $link = mysqli_connect("localhost", "root", "12345678", "sa");
+                            $link = mysqli_connect("localhost", "root", "", "sa");
                             if (isset($_GET['Categories'])) {
-                                $sql = "select * from product where proTag='$Categories'";
+                                $sql = "select * from product where productTag='$Categories'";
                             } else {
                                 $sql = "select * from product";
                             }
@@ -187,16 +187,16 @@
                             ?>
                                 <div class="col-lg-6 col-sm-6">
                                     <div class="single_product_item">
-                                        <img src="<?php echo $product["proPicture"] ?>" alt="#" class="img-fluid" />
+                                        <img src="<?php echo $product["productPicture"] ?>" alt="#" class="img-fluid" />
                                         <h3>
                                             <a href="single-product.html">
-                                                <?php echo $product['proName'] ?>
+                                                <?php echo $product['productName'] ?>
                                             </a>
                                         </h3>
-                                        <p>$<?php echo $product['proPrice'] ?></p>
+                                        <p>$<?php echo $product['productPrice'] ?></p>
                                         <p>店家: <?php echo $product['sellerName'] ?></p>
                                         <form method="get" action="./function/addProductToCart.php">
-                                            <input type="hidden" name="proCode" value="<?php echo $product['proCode']; ?>">
+                                            <input type="hidden" name="productCode" value="<?php echo $product['productCode']; ?>">
                                             <input type="hidden" name="userEmail" value="<?php if (isset($_SESSION['userEmail'])) {
                                                                                                 echo $_SESSION['userEmail'];
                                                                                             } ?>">
@@ -224,33 +224,34 @@
     <!-- client review part end -->
 
     <!-- feature part here -->
-    <section class="feature_part section_padding1">
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-sm-6">
-                <div class="single_feature_part">
-                    <img src="img/icon/feature_icon_1.svg" alt="#" />
-                    <h4>不提供信用卡</h4>
+    <section class="feature_part section_padding" style="padding: 50px 0px 150px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_feature_part">
+                        <img src="img/icon/feature_icon_1.svg" alt="#" />
+                        <h4>不提供信用卡</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_feature_part">
+                        <img src="img/icon/feature_icon_2.svg" alt="#" />
+                        <h4>線上訂購</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_feature_part">
+                        <img src="img/icon/feature_icon_3.svg" alt="#" />
+                        <h4>自取商品</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_feature_part">
+                        <img src="img/icon/feature_icon_4.svg" alt="#" />
+                        <h4>額外優惠</h4>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="single_feature_part">
-                    <img src="img/icon/feature_icon_2.svg" alt="#" />
-                    <h4>線上訂購</h4>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="single_feature_part">
-                    <img src="img/icon/feature_icon_3.svg" alt="#" />
-                    <h4>自取商品</h4>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="single_feature_part">
-                    <img src="img/icon/feature_icon_4.svg" alt="#" />
-                    <h4>額外優惠</h4>
-                </div>
-            </div>
-        </div>
         </div>
     </section>
     <!-- feature part end -->

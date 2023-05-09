@@ -1,5 +1,5 @@
 <?php
-$proCode = $_GET['proCode'];
+$productCode = $_GET['productCode'];
 
 if (!empty($_GET['userEmail'])) {
     $userEmail = $_GET['userEmail'];
@@ -12,14 +12,14 @@ if (!empty($_GET['userEmail'])) {
     <?php
 }
 
-$link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+$link = mysqli_connect('localhost', 'root', '', 'sa');
 $isExistSql = "select * from cart";
 $result = mysqli_query($link, $isExistSql);
 while ($row = mysqli_fetch_array($result)) {
-    if ($proCode == $row['proCode']) {
+    if ($productCode == $row['productCode']) {
         $newAmount = $row['cartAmount'] + 1;
         $update = "update cart set cartAmount='$newAmount'
-            where proCode='$proCode'";
+            where productCode='$productCode'";
         if (mysqli_query($link, $update)) {
     ?>
             <script>
@@ -35,8 +35,8 @@ while ($row = mysqli_fetch_array($result)) {
     alert(" 正在新增 ！");
 </script>
 <?php
-$sql  = "insert into cart (proCode, userEmail) 
-            values ('$proCode', '$userEmail')";
+$sql  = "insert into cart (productCode, userEmail) 
+            values ('$productCode', '$userEmail')";
 if (mysqli_query($link, $sql)) {
 ?>
     <script>

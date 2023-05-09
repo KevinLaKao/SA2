@@ -1,8 +1,8 @@
 <?php
 if (isset($_GET["delete"])) {
-    $proCode = $_GET["delete"];
-    $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
-    $sql = "DELETE FROM `cart` WHERE proCode='$proCode'";
+    $productCode = $_GET["delete"];
+    $link = mysqli_connect('localhost', 'root', '', 'sa');
+    $sql = "DELETE FROM `cart` WHERE productCode='$productCode'";
     $result = mysqli_query($link, $sql);
     if ($result) { ?>
         <script>
@@ -85,19 +85,19 @@ if (isset($_GET["delete"])) {
                                         <?php
                                         if (empty($_SESSION['level'])) {
                                         ?>
-                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
-                                        <?php }?>
+                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <?php } ?>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                        <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                        <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -117,13 +117,13 @@ if (isset($_GET["delete"])) {
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
-                                <?php echo $_SESSION['sellerName']; ?>
+                                    <?php echo $_SESSION['sellerName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -165,59 +165,59 @@ if (isset($_GET["delete"])) {
                         </thead>
                         <tbody>
                             <?php
-                            if(isset($_SESSION['userName']) || isset($_SESSION['sellerName'])){
-                            $total = 0;
-                            $link = mysqli_connect("localhost", "root", "12345678", "sa");
-                            $sql = "select * from cart, product where cart.proCode = product.proCode;";
-                            $rs = mysqli_query($link, $sql);
-                            $total = 0;
-                            while ($product = mysqli_fetch_array($rs)) {
+                            if (isset($_SESSION['userName']) || isset($_SESSION['sellerName'])) {
+                                $total = 0;
+                                $link = mysqli_connect("localhost", "root", "", "sa");
+                                $sql = "select * from cart, product where cart.productCode = product.productCode;";
+                                $rs = mysqli_query($link, $sql);
+                                while ($product = mysqli_fetch_array($rs)) {
                             ?>
-                                <tr>
-                                    <td>
-                                        <div class="media">
-                                            <div class="d-flex">
-                                                <img src="<?php echo $product['proPicture'] ?>" alt="" />
+                                    <tr>
+                                        <td>
+                                            <div class="media">
+                                                <div class="d-flex">
+                                                    <img src="<?php echo $product['productPicture'] ?>" alt="" />
+                                                </div>
+                                                <div class="media-body">
+                                                    <p style="font-size: 20px;">
+                                                        <?php echo $product['productName'] ?>
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="media-body">
-                                                <p style="font-size: 20px;">
-                                                    <?php echo $product['proName'] ?>
-                                                </p>
+                                        </td>
+                                        <td>
+                                            <h5>$<?php $total += $product['productPrice'] * $product['cartAmount'];
+                                                    echo $product['productPrice']; ?></h5>
+                                        </td>
+                                        <td>
+                                            <div class="product_count">
+                                                <input class="input-number" readonly name='amount' type="text" value="<?php echo $product['cartAmount']; ?>" min="0" max="50" style="text-align: center; padding-left: 0px; ">
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>$<?php $total += $product['proPrice'] * $product['cartAmount'];
-                                                echo $product['proPrice']; ?></h5>
-                                    </td>
-                                    <td>
-                                        <div class="product_count">
-                                            <input class="input-number" readonly name='amount' type="text" value="<?php echo $product['cartAmount']; ?>" min="0" max="50" style="text-align: center; padding-left: 0px; ">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <h5>$<?php echo $product['proPrice'] * $product['cartAmount']; ?>
-                                                <form method="get" action="cart.php">
-                                                    <button style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="delete" value="<?php echo $product['proCode'] ?>" class="btn_5">刪除
-                                                    </button>
-                                                </form>
-                                            </h5>
-                                        </div>
-                                <tr>
-                                <?php
-                                    }
-                                ?>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <h5>總額</h5>
-                                    </td>
-                                    <td>
-                                        <h5>$<?php echo $total; }?></h5>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <h5>$<?php echo $product['productPrice'] * $product['cartAmount']; ?>
+                                                    <form method="get" action="cart.php">
+                                                        <button style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="delete" value="<?php echo $product['productCode'] ?>" class="btn_5">刪除
+                                                        </button>
+                                                    </form>
+                                                </h5>
+                                            </div>
+                                    <tr>
+                                    <?php
+                                }
+                                    ?>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <h5>總額</h5>
+                                        </td>
+                                        <td>
+                                            <h5>$<?php echo $total;
+                                                } ?></h5>
+                                        </td>
+                                    </tr>
 
                         </tbody>
                     </table>
