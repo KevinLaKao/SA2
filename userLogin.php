@@ -75,11 +75,11 @@
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                            <a class="dropdown-item" href="userCenter.php">使用者中心</a>
+                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                            <a class="dropdown-item" href="sellercenter.php">商家中心</a>
+                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -98,23 +98,18 @@
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
-
                                     <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
                                     <?php echo $_SESSION['sellerName']; ?>
-
                                     <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
-
                         </div>
                     </nav>
                 </div>
             </div>
-        </div>
-
         </div>
     </header>
     <!-- Header part end-->
@@ -142,7 +137,7 @@
                         <div class="login_part_text_iner" style="width: 325px">
                             <h2>沒有帳號嗎?</h2>
                             <p>請點擊下方註冊鈕取得新帳號</p>
-                            <a href="register.html" class="btn_3">註冊</a>
+                            <a href="userRegister.php" class="btn_3">註冊</a>
                         </div>
                     </div>
                 </div>
@@ -154,7 +149,7 @@
                                 請登入帳號
                             </h3>
                             <div>
-                                <a class="btn_1 form-group" href="sellerlogin.html">商家登入
+                                <a class="btn_1 form-group" href="sellerLogin.php">商家登入
                                 </a>
                             </div>
                             <form class="row contact_form" action="./function/userLoginCheck.php" method="get">

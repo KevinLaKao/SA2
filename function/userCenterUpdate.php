@@ -1,26 +1,21 @@
 <?php
-$userName = $_GET['userName'];
+$userName = $_SESSION['userName'];
 $userPhone = $_GET['userPhone'];
-$userPassword = $_GET['userPassword'];
+$userPassword = $_SESSION['userPassword'];
 $userAddress = $_GET['userAddress'];
 $userBirthday = $_GET['userBirthday'];
-$userEmail = $_GET['userEmail'];
+$userEmail = $_SESSION['userEmail'];
 
-$link = mysqli_connect('localhost', 'root', '12345678', 'sa');
-$sql = "update user set userName='$userName',
-userPhone='$userPhone',
-userPassword='$userPassword',
-userAddress='$userAddress',
-userBirthday='$userBirthday'
-where userEmail='$userEmail'";
-
+$link = mysqli_connect('localhost', 'root', '', 'sa');
+$sql = "update user set userPhone='$userPhone',
+    userAddress='$userAddress',
+    userBirthday='$userBirthday'
+    where userEmail='$userEmail';";  
+    
 if (mysqli_query($link, $sql)) {
     $_SESSION['userPhone'] = $userPhone;
-    $_SESSION['userPassword'] = $userPassword;
     $_SESSION['userAddress'] = $userAddress;
     $_SESSION['userBirthday'] = $userBirthday;
-
-
 ?>
     <script>
         alert(" 修 改 成 功 ！");
@@ -35,5 +30,4 @@ if (mysqli_query($link, $sql)) {
     </script>
 <?php
 }
-
 ?>
