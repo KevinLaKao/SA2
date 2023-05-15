@@ -120,7 +120,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="breadcrumb_iner">
-            <h2>使用者登入/註冊</h2>
+            <h2>會員登入/註冊</h2>
           </div>
         </div>
       </div>
@@ -174,7 +174,7 @@
                 </div>
                 <div class="col-md-12 form-group">
                   <button type="submit" value="usercreate" class="btn_3" name="act">
-                    使用者註冊
+                    會員註冊
                   </button>
                 </div>
               </form>
