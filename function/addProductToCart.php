@@ -7,7 +7,7 @@ if (!empty($_GET['userEmail'])) {
 ?>
     <script>
         alert(" 加入購物車失敗請先登入 ！");
-        location = '../productList.php';
+        location = '../productSeller.php';
     </script>
     <?php
 }
@@ -24,7 +24,7 @@ while ($row = mysqli_fetch_array($result)) {
     ?>
             <script>
                 alert(" 更改商品成功 ！");
-                location = '../productList.php';
+                location = '../productSeller.php';
             </script>
 <?php
         }
@@ -41,14 +41,14 @@ if (mysqli_query($link, $sql)) {
 ?>
     <script>
         alert(" 新 增 成 功 ！");
-        location = '../productList.php';
+        location = '../productSeller.php';
     </script>
 <?php
 } else {
 ?>
     <script>
         alert(" 新 增 失 敗 ！");
-        location = '../productList.php';
+        location = '../productSeller.php';
     </script>
 <?php
 }

@@ -26,13 +26,13 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <style>
-.section_padding {
-    padding-bottom: 0px;
-}
+    .section_padding {
+        padding-bottom: 0px;
+    }
 
-.section_padding1 {
-    padding-bottom: 50px;
-}
+    .section_padding1 {
+        padding-bottom: 50px;
+    }
 </style>
 
 <body>
@@ -46,9 +46,7 @@
                             <img src="img/newLogo.png" alt="logo" style="height: 80px" />
                             foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -61,8 +59,7 @@
                                     <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
@@ -72,15 +69,14 @@
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
                                         if (empty($_SESSION['level'])) {
                                         ?>
-                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
@@ -88,11 +84,11 @@
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                        <a class="dropdown-item" href="userCenter.php">會員中心</a>
+                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                        <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -111,12 +107,12 @@
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
-                                <?php echo $_SESSION['sellerName']; ?>
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <?php echo $_SESSION['sellerName']; ?>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -133,7 +129,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner">
-                        <h2>產品列表</h2>
+                        <h2>店家列表</h2>
                     </div>
                 </div>
             </div>
@@ -167,10 +163,13 @@
                                     <i class="right fas fa-caret-down"></i>
                                 </div>
                                 <div class="select_option_dropdown">
-                                    <p><a href="productList.php">全部</a></p>
-                                    <p><a href="productList.php?Categories=生鮮">生鮮</a></p>
-                                    <p><a href="productList.php?Categories=雜糧">雜糧</a></p>
-                                    <p><a href="productList.php?Categories=蔬果">蔬果</a></p>
+                                    <p><a href="productSeller.php">全部</a></p>
+                                    <p><a href="productSeller.php?Categories=新莊區">新莊區</a></p>
+                                    <p><a href="productSeller.php?Categories=淡水區">淡水區</a></p>
+                                    <p><a href="productSeller.php?Categories=林口區">林口區</a></p>
+                                    <p><a href="productSeller.php?Categories=汐止區">汐止區</a></p>
+                                    <p><a href="productSeller.php?Categories=信義區">信義區</a></p>
+                                    <p><a href="productSeller.php?Categories=士林區">士林區</a></p>
                                 </div>
                             </div>
                         </div>
@@ -181,35 +180,30 @@
                         <div class="row">
                             <?php
                             $link = mysqli_connect("localhost", "root", "12345678", "sa");
-                            $sellerName = $_GET['sellerName'];
                             if (isset($_GET['Categories'])) {
-                                $sql = "select * from product where productTag='$Categories' and sellerName='$sellerName'";
+                                $sql = "select * from seller where sellerAddress like '%$Categories%'";
                             } else {
-                                $sql = "select * from product";
+                                $sql = "select * from seller";
                             }
                             $rs = mysqli_query($link, $sql);
-                            while ($product = mysqli_fetch_array($rs)) {
+                            while ($seller = mysqli_fetch_array($rs)) {
                             ?>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src="<?php echo $product["productPicture"] ?>" alt="#" class="img-fluid" />
-                                    <h3>
-                                        <a href="single-product.html">
-                                            <?php echo $product['productName'] ?>
-                                        </a>
-                                    </h3>
-                                    <p>$<?php echo $product['productPrice'] ?></p>
-                                    <p>店家: <?php echo $product['sellerName'] ?></p>
-                                    <form method="get" action="./function/addProductToCart.php">
-                                        <input type="hidden" name="productCode"
-                                            value="<?php echo $product['productCode']; ?>">
-                                        <input type="hidden" name="userEmail" value="<?php if (isset($_SESSION['userEmail'])) {
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="single_product_item">
+                                        <img src="<?php echo $seller["sellerPhoto"] ?>" alt="#" class="img-fluid" />
+                                        <h3>
+                                            <?php echo $seller['sellerName'] ?>
+                                        </h3>
+                                        <p>地區: <?php echo $seller['sellerAddress'] ?></p>
+                                        <form method="get" action="./productList.php">
+                                            <input type="hidden" name="sellerName" value="<?php echo $seller['sellerName']; ?>">
+                                            <input type="hidden" name="userEmail" value="<?php if (isset($_SESSION['userEmail'])) {
                                                                                                 echo $_SESSION['userEmail'];
                                                                                             } ?>">
-                                        <button class="btn_3">加入購物車</button>
-                                    </form>
+                                            <button class="btn_3">顯示店家商品頁</a></button>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
 
                             <?php
                             }
@@ -277,7 +271,7 @@
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                document.write(new Date().getFullYear());
+                                    document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by
