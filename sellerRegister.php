@@ -148,7 +148,7 @@
                 歡迎! <br />
                 請註冊商家帳號
               </h3>
-              <a class="btn_1 form-group" href="userRegister.php">使用者註冊</a>
+              <a class="btn_1 form-group" href="userRegister.php">會員註冊</a>
               <form class="row contact_form" action="./function/sellerCRUD.php" method="get">
                 <div class="col-md-12 form-group p_star">
                   <input type="email" class="form-control" id="sellerEmail" name="sellerEmail" value="" placeholder="電子信箱" />

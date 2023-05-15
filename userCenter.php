@@ -136,7 +136,7 @@
       <div class="billing_details">
         <div class="row">
           <div class="col-lg-8">
-            <h3>使用者資訊<br>
+            <h3>會員資訊<br>
             </h3>
             <form class="row contact_form" action="./function/userCenterUpdate.php" method="get">
               <div class="col-md-6 form-group p_star">

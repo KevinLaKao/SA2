@@ -149,7 +149,7 @@
                                 請登入帳號
                             </h3>
                             <div>
-                                <a class="btn_1 form-group" href="userLogin.php">使用者登入
+                                <a class="btn_1 form-group" href="userLogin.php">會員登入
                                 </a>
                             </div>
                             <form class="row contact_form" action="./function/sellerLoginCheck.php" method="get">
