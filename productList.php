@@ -157,6 +157,7 @@
                             <div class="select_option">
                                 <div class="select_option_list">
                                     <?php
+                                    $sellerName = $_GET['sellerName'];
                                     if (isset($_GET['Categories'])) {
                                         $Categories = $_GET['Categories'];
                                         echo $Categories;
@@ -167,10 +168,16 @@
                                     <i class="right fas fa-caret-down"></i>
                                 </div>
                                 <div class="select_option_dropdown">
-                                    <p><a href="productList.php">全部</a></p>
-                                    <p><a href="productList.php?Categories=生鮮">生鮮</a></p>
-                                    <p><a href="productList.php?Categories=雜糧">雜糧</a></p>
-                                    <p><a href="productList.php?Categories=蔬果">蔬果</a></p>
+                                    <p><a href="productList.php?sellerName=<?php echo $sellerName; ?>">全部</a></p>
+                                    <p><a
+                                            href="productList.php?Categories=生鮮&sellerName=<?php echo $sellerName; ?>">生鮮</a>
+                                    </p>
+                                    <p><a
+                                            href="productList.php?Categories=雜糧&sellerName=<?php echo $sellerName; ?>">雜糧</a>
+                                    </p>
+                                    <p><a
+                                            href="productList.php?Categories=蔬果&sellerName=<?php echo $sellerName; ?>">蔬果</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -181,11 +188,10 @@
                         <div class="row">
                             <?php
                             $link = mysqli_connect("localhost", "root", "12345678", "sa");
-                            $sellerName = $_GET['sellerName'];
                             if (isset($_GET['Categories'])) {
                                 $sql = "select * from product where productTag='$Categories' and sellerName='$sellerName'";
                             } else {
-                                $sql = "select * from product";
+                                $sql = "select * from product where sellerName='$sellerName'";
                             }
                             $rs = mysqli_query($link, $sql);
                             while ($product = mysqli_fetch_array($rs)) {
