@@ -72,8 +72,8 @@ if (isset($_GET["delete"])) {
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="productList.php">
-                                            產品列表</a>
+                                        <a class="dropdown-item" href="productSeller.php">
+                                            店家列表</a>
                                         <a class="dropdown-item" href="single-product.html">產品細項</a>
                                     </div>
                                 </li>
@@ -222,7 +222,7 @@ if (isset($_GET["delete"])) {
                         </tbody>
                     </table>
                     <div class="checkout_btn_inner float-right">
-                        <a class="btn_1" href="productList.php">繼續購物</a>
+                        <a class="btn_1" href="productSeller.php">繼續購物</a>
                         <a class="btn_1 checkout_btn_1" href="checkout.html">結帳</a>
                     </div>
                 </div>

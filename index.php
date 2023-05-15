@@ -54,8 +54,8 @@
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="productList.php">
-                                            產品列表</a>
+                                        <a class="dropdown-item" href="productSeller.php">
+                                            店家列表</a>
                                         <a class="dropdown-item" href="single-product.html">產品細項</a>
                                     </div>
                                 </li>
@@ -130,24 +130,23 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section_tittle text-center">
-                        <h2>熱銷商品</h2>
+                        <h2>熱門店家</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <?php
-                $link = mysqli_connect('localhost', 'root', '', 'sa');
-                $sql = "select * from product limit 6;";
+                $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+                $sql = "select * from seller limit 6;";
                 $result = mysqli_query($link, $sql);
                 while ($row = mysqli_fetch_array($result)) {
                 ?>
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-4 col-sm-6" align='center'>
                         <div class="single_product_item">
-                            <img src="<?php echo $row['productPicture']; ?>" alt="#" class="img-fluid" />
+                            <img src="<?php echo $row['sellerPhoto']; ?>" alt="#" class="img-fluid" />
                             <h3>
-                                <a href="single-product.html"><?php echo $row['productName']; ?></a>
+                                <?php echo $row['sellerName']; ?>
                             </h3>
-                            <p>$<?php echo $row['productPrice']; ?></p>
                         </div>
                     </div>
                 <?php } ?>
@@ -163,7 +162,7 @@
                 <div class="col-lg-8">
                     <div class="client_review_slider owl-carousel">
                         <?php
-                        $link = mysqli_connect('localhost', 'root', '', 'sa');
+                        $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
                         $sql = "select * from news";
                         $result = mysqli_query($link, $sql);
                         while ($row = mysqli_fetch_array($result)) {

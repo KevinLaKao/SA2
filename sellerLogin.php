@@ -54,8 +54,8 @@
                                         產品
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="productList.php">
-                                            產品列表</a>
+                                        <a class="dropdown-item" href="productSeller.php">
+                                            店家列表</a>
                                         <a class="dropdown-item" href="single-product.html">產品細項</a>
                                     </div>
                                 </li>
