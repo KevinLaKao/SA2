@@ -1,7 +1,7 @@
 <?php
 $sellerLoginEmail = $_GET['sellerLoginEmail'];
 $sellerLoginPassword = $_GET['sellerLoginPassword'];
-$link = @mysqli_connect('localhost', 'root', '', 'sa');
+$link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
 $sql = "SELECT * FROM seller";
 $result = mysqli_query($link, $sql);
 while ($row = mysqli_fetch_array($result)) {
