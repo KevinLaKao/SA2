@@ -144,8 +144,8 @@
                 <div class="col-md-4">
                     <div class="product_sidebar">
                         <div class="single_sedebar">
-                            <form action="#">
-                                <input type="text" name="#" placeholder="搜尋" />
+                            <form action="productList.php" method="get">
+                                <input type="text" name="findProduct" placeholder="搜尋產品" />
                                 <i class="ti-search"></i>
                             </form>
                         </div>
@@ -157,7 +157,7 @@
                                         $Categories = $_GET['Categories'];
                                         echo $Categories;
                                     } else {
-                                        echo "類別";
+                                        echo "依店家分布";
                                     }
                                     ?>
                                     <i class="right fas fa-caret-down"></i>
@@ -170,6 +170,21 @@
                                     <p><a href="productSeller.php?Categories=汐止區">汐止區</a></p>
                                     <p><a href="productSeller.php?Categories=信義區">信義區</a></p>
                                     <p><a href="productSeller.php?Categories=士林區">士林區</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single_sedebar">
+                            <div class="select_option">
+                                <div class="select_option_list">
+                                    <?php
+                                    echo "依所有產品類別";
+                                    ?>
+                                    <i class="right fas fa-caret-down"></i>
+                                </div>
+                                <div class="select_option_dropdown">
+                                    <p><a href="productList.php?Tag=生鮮">生鮮</a></p>
+                                    <p><a href="productList.php?Tag=雜糧">雜糧</a></p>
+                                    <p><a href="productList.php?Tag=蔬果">蔬果</a></p>
                                 </div>
                             </div>
                         </div>

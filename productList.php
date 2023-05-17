@@ -148,8 +148,8 @@
                 <div class="col-md-4">
                     <div class="product_sidebar">
                         <div class="single_sedebar">
-                            <form action="#">
-                                <input type="text" name="#" placeholder="搜尋" />
+                            <form action="productList.php">
+                                <input type="text" name="findProduct" placeholder="關鍵字搜尋所有產品" />
                                 <i class="ti-search"></i>
                             </form>
                         </div>
@@ -157,14 +157,24 @@
                             <div class="select_option">
                                 <div class="select_option_list">
                                     <?php
-                                    $sellerName = $_GET['sellerName'];
-                                    if (isset($_GET['Categories'])) {
-                                        $Categories = $_GET['Categories'];
-                                        echo $Categories;
-                                    } else {
-                                        echo "類別";
+                                    if (isset($_GET['sellerName'])) {
+                                        $sellerName = $_GET['sellerName'];
                                     }
-                                    ?>
+                                    if (isset($_GET['Categories']) && empty($sellerName)) {
+                                        $Categories = $_GET['Categories'];
+                                        echo "依所有商品分類"; ?>
+                                    <i class="right fas fa-caret-down"></i>
+                                </div>
+                                <div class="select_option_dropdown">
+                                    <p><a href="productList.php?Categories=生鮮">生鮮</a>
+                                    </p>
+                                    <p><a href="productList.php?Categories=雜糧">雜糧</a>
+                                    </p>
+                                    <p><a href="productList.php?Categories=蔬果">蔬果</a>
+                                    </p>
+                                    <?php } else if (isset($sellerName)) {
+                                        echo "依此店家產品類別";
+                                ?>
                                     <i class="right fas fa-caret-down"></i>
                                 </div>
                                 <div class="select_option_dropdown">
@@ -178,6 +188,21 @@
                                     <p><a
                                             href="productList.php?Categories=蔬果&sellerName=<?php echo $sellerName; ?>">蔬果</a>
                                     </p>
+                                    <?php } else {
+                                        echo "依所有商品分類";
+                                ?>
+                                    <i class="right fas fa-caret-down"></i>
+                                </div>
+                                <div class="select_option_dropdown">
+                                    <p><a href="productList.php?Categories=生鮮">生鮮</a>
+                                    </p>
+                                    <p><a href="productList.php?Categories=雜糧">雜糧</a>
+                                    </p>
+                                    <p><a href="productList.php?Categories=蔬果">蔬果</a>
+                                    </p>
+                                    <i class="right fas fa-caret-down"></i>
+                                    <?php }
+                                ?>
                                 </div>
                             </div>
                         </div>
@@ -187,14 +212,12 @@
                     <div class="product_list">
                         <div class="row">
                             <?php
-                            $link = mysqli_connect("localhost", "root", "12345678", "sa");
-                            if (isset($_GET['Categories'])) {
-                                $sql = "select * from product where productTag='$Categories' and sellerName='$sellerName'";
-                            } else {
-                                $sql = "select * from product where sellerName='$sellerName'";
-                            }
-                            $rs = mysqli_query($link, $sql);
-                            while ($product = mysqli_fetch_array($rs)) {
+                            if (isset($_GET['findProduct'])) {
+                                $findProduct = $_GET['findProduct'];
+                                $link = mysqli_connect("localhost", "root", "12345678", "sa");
+                                $sql = "SELECT * FROM product WHERE productName Like '%$findProduct%'";
+                                $rs = mysqli_query($link, $sql);
+                                while ($product = mysqli_fetch_array($rs)) {
                             ?>
                             <div class="col-lg-6 col-sm-6">
                                 <div class="single_product_item">
@@ -210,16 +233,129 @@
                                         <input type="hidden" name="productCode"
                                             value="<?php echo $product['productCode']; ?>">
                                         <input type="hidden" name="userEmail" value="<?php if (isset($_SESSION['userEmail'])) {
-                                                                                                echo $_SESSION['userEmail'];
-                                                                                            } ?>">
-                                        <button class="btn_3">加入購物車</button>
+                                                                                                    echo $_SESSION['userEmail'];
+                                                                                                } ?>">
+                                        <button class="btn_3" name="act" value="insert">加入購物車</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <?php
+                                }
+                            }
+                            ?>
+                            <?php
+                            $link = mysqli_connect("localhost", "root", "12345678", "sa");
+                            if (isset($_GET['Tag'])) {
+                                $Tag = $_GET['Tag'];
+                                $sql = "select * from product where productTag='$Tag'";
+                                $rs = mysqli_query($link, $sql);
+                                while ($product = mysqli_fetch_array($rs)) { ?>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="single_product_item">
+                                    <img src="<?php echo $product["productPicture"] ?>" alt="#" class="img-fluid" />
+                                    <h3>
+                                        <a href="single-product.html">
+                                            <?php echo $product['productName'] ?>
+                                        </a>
+                                    </h3>
+                                    <p>$<?php echo $product['productPrice'] ?></p>
+                                    <p>店家: <?php echo $product['sellerName'] ?></p>
+                                    <form method="get" action="./function/addProductToCart.php">
+                                        <input type="hidden" name="productCode"
+                                            value="<?php echo $product['productCode']; ?>">
+                                        <input type="hidden" name="userEmail" value="<?php if (isset($_SESSION['userEmail'])) {
+                                                                                                    echo $_SESSION['userEmail'];
+                                                                                                } ?>">
+                                        <button class="btn_3" name="act" value="insert">加入購物車</button>
                                     </form>
                                 </div>
                             </div>
 
                             <?php
+                                }
                             }
-                            ?>
+                            if (isset($_GET['Categories']) && isset($sellerName)) {
+                                $Categories = $_GET['Categories'];
+                                $sql = "select * from product where productTag='$Categories' and sellerName='$sellerName'";
+                                $rs = mysqli_query($link, $sql);
+                                while ($product = mysqli_fetch_array($rs)) { ?>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="single_product_item">
+                                    <img src="<?php echo $product["productPicture"] ?>" alt="#" class="img-fluid" />
+                                    <h3>
+                                        <a href="single-product.html">
+                                            <?php echo $product['productName'] ?>
+                                        </a>
+                                    </h3>
+                                    <p>$<?php echo $product['productPrice'] ?></p>
+                                    <p>店家: <?php echo $product['sellerName'] ?></p>
+                                    <form method="get" action="./function/addProductToCart.php">
+                                        <input type="hidden" name="productCode"
+                                            value="<?php echo $product['productCode']; ?>">
+                                        <input type="hidden" name="userEmail" value="<?php if (isset($_SESSION['userEmail'])) {
+                                                                                                    echo $_SESSION['userEmail'];
+                                                                                                } ?>">
+                                        <button class="btn_3" name="act" value="insert">加入購物車</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <?php
+                                }
+                            } else if ((empty($_GET['Categories']) && isset($sellerName))) {
+                                $sql = "select * from product where sellerName='$sellerName'";
+                                $rs = mysqli_query($link, $sql);
+                                while ($product = mysqli_fetch_array($rs)) { ?>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="single_product_item">
+                                    <img src="<?php echo $product["productPicture"] ?>" alt="#" class="img-fluid" />
+                                    <h3>
+                                        <a href="single-product.html">
+                                            <?php echo $product['productName'] ?>
+                                        </a>
+                                    </h3>
+                                    <p>$<?php echo $product['productPrice'] ?></p>
+                                    <p>店家: <?php echo $product['sellerName'] ?></p>
+                                    <form method="get" action="./function/addProductToCart.php">
+                                        <input type="hidden" name="productCode"
+                                            value="<?php echo $product['productCode']; ?>">
+                                        <input type="hidden" name="userEmail" value="<?php if (isset($_SESSION['userEmail'])) {
+                                                                                                    echo $_SESSION['userEmail'];
+                                                                                                } ?>">
+                                        <button class="btn_3" name="act" value="insert">加入購物車</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <?php
+                                }
+                            } else if ((isset($_GET['Categories']) && empty($sellerName))) {
+                                $sql = "select * from product where productTag='$Categories'";
+                                $rs = mysqli_query($link, $sql);
+                                while ($product = mysqli_fetch_array($rs)) { ?>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="single_product_item">
+                                    <img src="<?php echo $product["productPicture"] ?>" alt="#" class="img-fluid" />
+                                    <h3>
+                                        <a href="single-product.html">
+                                            <?php echo $product['productName'] ?>
+                                        </a>
+                                    </h3>
+                                    <p>$<?php echo $product['productPrice'] ?></p>
+                                    <p>店家: <?php echo $product['sellerName'] ?></p>
+                                    <form method="get" action="./function/addProductToCart.php">
+                                        <input type="hidden" name="productCode"
+                                            value="<?php echo $product['productCode']; ?>">
+                                        <input type="hidden" name="userEmail" value="<?php if (isset($_SESSION['userEmail'])) {
+                                                                                                    echo $_SESSION['userEmail'];
+                                                                                                } ?>">
+                                        <button class="btn_3" name="act" value="insert">加入購物車</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <?php }
+                            } ?>
                         </div>
                         <div class="load_more_btn text-center">
                             <a href="#" class="btn_3">更多商品</a>
