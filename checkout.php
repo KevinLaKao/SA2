@@ -34,8 +34,8 @@
         <div class="col-lg-12">
           <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="index.php">
-              <img src="img/newLogo.png" alt="logo" style="height: 80px" />
-              foodcrate
+              <img src="img/foodcrate.png" alt="logo" height="80px" />
+              Foodcrate
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="menu_icon"><i class="fas fa-bars"></i></span>
@@ -83,7 +83,6 @@
                     <?php } ?>
                   </div>
                 </li>
-
                 <li class="nav-item">
                   <a class="nav-link" href="contact.php">聯絡我們</a>
                 </li>
@@ -112,7 +111,6 @@
       </div>
     </div>
   </header>
-  <!-- Header part end-->
 
   <!-- breadcrumb part start-->
   <section class="breadcrumb_part">
@@ -120,7 +118,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="breadcrumb_iner">
-            <h2>會員登入/註冊</h2>
+            <h2>下單</h2>
           </div>
         </div>
       </div>
@@ -128,55 +126,75 @@
   </section>
   <!-- breadcrumb part end-->
 
-  <!--================login_part Area =================-->
-
-  <section class="login_part section_padding">
+  <!--================Checkout Area =================-->
+  <section class="checkout_area section_padding">
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 col-md-6">
-          <div class="login_part_text text-center">
-            <div class="login_part_text_iner" style="width: 325px">
-              <h2>有帳號了嗎?</h2>
-              <p>請點擊下方按鈕進行登入</p>
-              <a href="userLogin.php" class="btn_3">登入</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-6">
-          <div class="login_part_form">
-            <div class="login_part_form_iner">
-              <h3>
-                歡迎! <br />
-                請註冊帳號
-              </h3>
-              <div>
-                <a class="btn_1 form-group" href="sellerRegister.php">商家註冊
-                </a>
+      <div class="billing_details">
+        <div class="row">
+          <div class="col-lg-8">
+            <h3>領貨人資訊</h3>
+            <form class="row contact_form" action="historyOrder.php" method="post" novalidate="novalidate">
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="first" name="name" />
+                <span class="placeholder" data-placeholder="姓名"></span>
               </div>
-              <form class="row contact_form" action="./function/userCRUD.php" method="get">
-                <div class="col-md-12 form-group p_star">
-                  <input type="email" class="form-control" id="email" name="useremail" value="" placeholder="電子信箱" required />
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="number" name="number" />
+                <span class="placeholder" data-placeholder="電話號碼"></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="email" name="compemailany" />
+                <span class="placeholder" data-placeholder="電子郵件"></span>
+              </div>
+
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="add1" name="add1" />
+                <span class="placeholder" data-placeholder="住家地址"></span>
+              </div>
+              <div class="col-md-12 form-group">
+                <div class="creat_account">
+                  <h3>意見回饋</h3>
                 </div>
-                <div class="col-md-12 form-group p_star">
-                  <input type="password" class="form-control" id="password" name="userpassword" value="" placeholder="密碼" required />
-                </div>
-                <div class="col-md-12 form-group p_star">
-                  <input type="text" class="form-control" id="phone" name="userphone" value="" placeholder="電話號碼" required />
-                </div>
-                <div class="col-md-12 form-group p_star">
-                  <input type="text" class="form-control" id="name" name="username" value="" placeholder="姓名" required />
-                </div>
-                <div class="col-md-12 form-group p_star">
-                  <input type="text" class="form-control" id="address" name="useraddress" value="" placeholder="居住地址" required />
-                </div>
-                <div class="col-md-12 form-group p_star">
-                  <input type="text" class="form-control" id="address" name="userbirthday" value="" placeholder="生日" required />
-                </div>
-                <div class="col-md-12 form-group">
-                  <button type="submit" value="usercreate" class="btn_3" name="act">
-                    會員註冊
-                  </button>
-                </div>
+                <textarea class="form-control" name="message" id="message" rows="1" placeholder="Order Notes"></textarea>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="order_box">
+              <h2>你的訂單</h2>
+              <form action="./function/changeStatus.php" method="get">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>品名</th>
+                      <th>數量</th>
+                      <th>單價</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                  if (isset($_SESSION['userName'])) {
+                    $link = mysqli_connect("localhost", "root", "", "sa");
+                    $sql = "select * from cart, product where cart.productCode = product.productCode and historyStatus='notReady';";
+                    $rs = mysqli_query($link, $sql);
+                    $total = 0;
+                    while ($row = mysqli_fetch_array($rs)) {
+                      $total += $row['productPrice'] * $row['cartAmount'];
+                  ?>
+                    <tr>
+                      <td><?php echo $row['productName']; ?></td>
+                      <td>x<?php echo $row['cartAmount']; ?></td>
+                      <td>$<?php echo $row['productPrice']; ?></td>
+                    </tr>
+                  <?php
+                    }
+                  }
+                  ?>
+                  </tbody>
+                </table>
+                總計$<?php echo $total; ?>
+                <button class="btn_3" type="submit" name="act" value="processing">確認下單</button>
               </form>
             </div>
           </div>
@@ -184,7 +202,7 @@
       </div>
     </div>
   </section>
-  <!--================login_part end =================-->
+  <!--================End Checkout Area =================-->
 
   <!--::footer_part start::-->
   <footer class="footer_part">

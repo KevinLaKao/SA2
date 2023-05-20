@@ -87,9 +87,9 @@ if (isset($_GET["delete"])) {
                                         ?>
                                             <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
-                                        <a class="dropdown-item" href="checkout.html">下單</a>
+                                        <a class="dropdown-item" href="checkout.php">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
-                                        <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
+                                        <a class="dropdown-item" href="historyOrder.php">歷史訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
@@ -166,9 +166,10 @@ if (isset($_GET["delete"])) {
                         <tbody>
                             <?php
                             if (isset($_SESSION['userName']) || isset($_SESSION['sellerName'])) {
+                                $userEmail = $_SESSION['userEmail'];
                                 $total = 0;
                                 $link = mysqli_connect("localhost", "root", "", "sa");
-                                $sql = "select * from cart, product where cart.productCode = product.productCode;";
+                                $sql = "select * from cart, product where cart.productCode = product.productCode and historyStatus = 'notReady' and cart.userEmail = '$userEmail';";
                                 $rs = mysqli_query($link, $sql);
                                 while ($product = mysqli_fetch_array($rs)) {
                             ?>
@@ -223,7 +224,7 @@ if (isset($_GET["delete"])) {
                     </table>
                     <div class="checkout_btn_inner float-right">
                         <a class="btn_1" href="productSeller.php">繼續購物</a>
-                        <a class="btn_1 checkout_btn_1" href="checkout.html">結帳</a>
+                        <a class="btn_1 checkout_btn_1" href="checkout.php">結帳</a>
                     </div>
                 </div>
             </div>

@@ -82,9 +82,9 @@
                                         ?>
                                         <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
-                                        <a class="dropdown-item" href="checkout.html">下單</a>
+                                        <a class="dropdown-item" href="checkout.php">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
-                                        <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
+                                        <a class="dropdown-item" href="historyOrder.php">歷史訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
@@ -187,7 +187,7 @@
                     <div class="product_list">
                         <div class="row">
                             <?php
-                            $link = mysqli_connect("localhost", "root", "12345678", "sa");
+                            $link = mysqli_connect("localhost", "root", "", "sa");
                             if (isset($_GET['Categories'])) {
                                 $sql = "select * from product where productTag='$Categories' and sellerName='$sellerName'";
                             } else {

@@ -21,29 +21,22 @@ while ($row = mysqli_fetch_array($result)) {
         $update = "update cart set cartAmount='$newAmount'
             where productCode='$productCode'";
         if (mysqli_query($link, $update)) {
-    ?>
+            header("location:../productSeller.php");
+        }else{
+            ?>
             <script>
-                alert(" 更改商品成功 ！");
+                alert(" 新 增 失 敗 ！");
                 location = '../productSeller.php';
             </script>
-<?php
+            <?php
         }
     }
 }
-?>
-<script>
-    alert(" 正在新增 ！");
-</script>
-<?php
+
 $sql  = "insert into cart (productCode, userEmail) 
             values ('$productCode', '$userEmail')";
 if (mysqli_query($link, $sql)) {
-?>
-    <script>
-        alert(" 新 增 成 功 ！");
-        location = '../productSeller.php';
-    </script>
-<?php
+    header("location:../productSeller.php");
 } else {
 ?>
     <script>
