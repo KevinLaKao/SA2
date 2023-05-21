@@ -15,12 +15,7 @@ while ($row = mysqli_fetch_array($result)) {
             $_SESSION['sellerPhoto'] = $row['sellerPhoto'];
             $_SESSION['sellerInfo'] = $row['sellerInfo'];
             $_SESSION['level'] = $row['level'];
-?>
-            <script>
-                alert("登入成功！");
-                location = '../index.php';
-            </script>
-<?php
+            header('Location: ../index.php');
         }
     }
 }
