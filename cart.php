@@ -1,18 +1,18 @@
 <?php
 if (isset($_GET["delete"])) {
     $productCode = $_GET["delete"];
-    $link = mysqli_connect('localhost', 'root', '', 'sa');
+    $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
     $sql = "DELETE FROM `cart` WHERE productCode='$productCode'";
     $result = mysqli_query($link, $sql);
     if ($result) { ?>
-        <script>
-            alert("刪除成功");
-        </script>
-    <?php } else {
+<script>
+alert("刪除成功");
+</script>
+<?php } else {
     ?>
-        <script>
-            alert("刪除失敗");
-        </script>
+<script>
+alert("刪除失敗");
+</script>
 <?php
     }
 }
@@ -55,7 +55,9 @@ if (isset($_GET["delete"])) {
                             <img src="img/newLogo.png" alt="logo" style="height: 80px;" />
                             foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -68,24 +70,19 @@ if (isset($_GET["delete"])) {
                                     <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        產品
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="productSeller.php">
-                                            店家列表</a>
-                                        <a class="dropdown-item" href="single-product.html">產品細項</a>
-                                    </div>
+                                    <a class="nav-link" href="productSeller.php">
+                                        店家列表</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
                                         if (empty($_SESSION['level'])) {
                                         ?>
-                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
                                         <a class="dropdown-item" href="checkout.php">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
@@ -93,11 +90,11 @@ if (isset($_GET["delete"])) {
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
+                                        <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                        <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -108,7 +105,16 @@ if (isset($_GET["delete"])) {
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
-                            <a href="userLogin.php"><i class="ti-user"></i></a>
+                            <?php
+                            if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                            ?>
+                            <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
+                            <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                            ?>
+                            <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                            <?php } else { ?>
+                            <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
+                            <?php } ?>
                             <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
@@ -117,13 +123,13 @@ if (isset($_GET["delete"])) {
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
 
-                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
-                                    <?php echo $_SESSION['sellerName']; ?>
+                                <?php echo $_SESSION['sellerName']; ?>
 
-                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -173,52 +179,57 @@ if (isset($_GET["delete"])) {
                                 $rs = mysqli_query($link, $sql);
                                 while ($product = mysqli_fetch_array($rs)) {
                             ?>
-                                    <tr>
-                                        <td>
-                                            <div class="media">
-                                                <div class="d-flex">
-                                                    <img src="<?php echo $product['productPicture'] ?>" alt="" />
-                                                </div>
-                                                <div class="media-body">
-                                                    <p style="font-size: 20px;">
-                                                        <?php echo $product['productName'] ?>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <h5>$<?php $total += $product['productPrice'] * $product['cartAmount'];
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="<?php echo $product['productPicture'] ?>" alt="" />
+                                        </div>
+                                        <div class="media-body">
+                                            <p style="font-size: 20px;">
+                                                <?php echo $product['productName'] ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>$<?php $total += $product['productPrice'] * $product['cartAmount'];
                                                     echo $product['productPrice']; ?></h5>
-                                        </td>
-                                        <td>
-                                            <div class="product_count">
-                                                <input class="input-number" readonly name='amount' type="text" value="<?php echo $product['cartAmount']; ?>" min="0" max="50" style="text-align: center; padding-left: 0px; ">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <h5>$<?php echo $product['productPrice'] * $product['cartAmount']; ?>
-                                                    <form method="get" action="cart.php">
-                                                        <button style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="delete" value="<?php echo $product['productCode'] ?>" class="btn_5">刪除
-                                                        </button>
-                                                    </form>
-                                                </h5>
-                                            </div>
-                                    <tr>
-                                    <?php
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        <input class="input-number" readonly name='amount' type="text"
+                                            value="<?php echo $product['cartAmount']; ?>" min="0" max="50"
+                                            style="text-align: center; padding-left: 0px; ">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <h5>$<?php echo $product['productPrice'] * $product['cartAmount']; ?>
+                                            <form method="get" action="cart.php">
+                                                <button
+                                                    style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;"
+                                                    name="delete" value="<?php echo $product['productCode'] ?>"
+                                                    class="btn_5">刪除
+                                                </button>
+                                            </form>
+                                        </h5>
+                                    </div>
+                            <tr>
+                                <?php
                                 }
                                     ?>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <h5>總額</h5>
-                                        </td>
-                                        <td>
-                                            <h5>$<?php echo $total;
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h5>總額</h5>
+                                </td>
+                                <td>
+                                    <h5>$<?php echo $total;
                                                 } ?></h5>
-                                        </td>
-                                    </tr>
+                                </td>
+                            </tr>
 
                         </tbody>
                     </table>
@@ -241,7 +252,7 @@ if (isset($_GET["delete"])) {
                                 <!-- Link back to Colorlib can' t be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                    document.write(new Date().getFullYear());
+                                document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by
@@ -280,7 +291,7 @@ if (isset($_GET["delete"])) {
     <script src="js/mixitup.min.js"></script>
     <!-- particles js -->
     <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
+
     <!-- slick js -->
     <script src="js/slick.min.js"></script>
     <script src="js/jquery.counterup.min.js"></script>

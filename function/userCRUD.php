@@ -6,7 +6,7 @@ $userphone = $_GET['userphone'];
 $username = $_GET['username'];
 $useraddress = $_GET['useraddress'];
 $userbirthday = $_GET['userbirthday'];
-$link = @mysqli_connect('localhost', 'root', '', 'sa');
+$link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
 if ($act == "usercreate") {
     //這裡是新增的語法
     $sql = "INSERT INTO `user`(`userName`, `userEmail`, `userPhone`, `userPassword`, `userAddress`, `userBirthday`, `level`) 

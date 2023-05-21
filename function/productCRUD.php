@@ -7,7 +7,7 @@ $productAmount = $_GET['productAmount'];
 $sellerName = $_SESSION['sellerName'];
 $productTag = $_GET['productTag'];
 
-$link = mysqli_connect('localhost', 'root', '', 'sa');
+$link = mysqli_connect('localhost', 'root', '12345678', 'sa');
 if ($act == "create") {
     //這裡是新增的語法
     $sqlProduct = "SELECT * FROM product";

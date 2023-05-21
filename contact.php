@@ -52,15 +52,8 @@
                                     <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        產品
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="productSeller.php">
-                                            店家列表</a>
-                                        <a class="dropdown-item" href="single-product.html">產品細項</a>
-                                    </div>
+                                    <a class="nav-link" href="productSeller.php">
+                                        店家列表</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
@@ -70,20 +63,20 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
                                         if (empty($_SESSION['level'])) {
-                                            ?>
-                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        ?>
+                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
                                         <a class="dropdown-item" href="checkout.php">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
                                         <a class="dropdown-item" href="historyOrder.php">歷史訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
-                                            ?>
-                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
+                                        ?>
+                                        <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
-                                            ?>
-                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                        ?>
+                                        <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -94,7 +87,16 @@
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
+                            <?php
+                            if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                            ?>
+                            <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
+                            <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                            ?>
+                            <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                            <?php } else { ?>
                             <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
+                            <?php } ?>
                             <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
@@ -102,12 +104,12 @@
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
-                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
-                                    <?php
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <?php
                                 } else if (isset($_SESSION['sellerName'])) {
-                                    ?>
-                                    <?php echo $_SESSION['sellerName']; ?>
-                                        <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                ?>
+                                <?php echo $_SESSION['sellerName']; ?>
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -220,9 +222,8 @@
                         <div class="copyright_text">
                             <P>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;
-                                <script>
-                                    document.write(new Date().getFullYear());
+                                Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
                                 </script> All rights reserved | This template is made with <i class="ti-heart"
                                     aria-hidden="true"></i> by <a href="https://colorlib.com"
                                     target="_blank">Colorlib</a>
@@ -260,7 +261,7 @@
     <script src="js/mixitup.min.js"></script>
     <!-- particles js -->
     <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
+
     <!-- slick js -->
     <script src="js/slick.min.js"></script>
     <script src="js/jquery.counterup.min.js"></script>

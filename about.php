@@ -52,15 +52,8 @@
                                     <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        產品
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="productSeller.php">
-                                            店家列表</a>
-                                        <a class="dropdown-item" href="single-product.html">產品細項</a>
-                                    </div>
+                                    <a class="nav-link" href="productSeller.php">
+                                        店家列表</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
@@ -94,7 +87,16 @@
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
+                            <?php
+                            if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                            ?>
+                            <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
+                            <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                            ?>
+                            <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                            <?php } else { ?>
                             <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
+                            <?php } ?>
                             <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
@@ -237,7 +239,7 @@
     <script src="js/mixitup.min.js"></script>
     <!-- particles js -->
     <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
+
     <!-- slick js -->
     <script src="js/slick.min.js"></script>
     <script src="js/jquery.counterup.min.js"></script>

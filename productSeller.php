@@ -26,13 +26,13 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <style>
-    .section_padding {
-        padding-bottom: 0px;
-    }
+.section_padding {
+    padding-bottom: 0px;
+}
 
-    .section_padding1 {
-        padding-bottom: 50px;
-    }
+.section_padding1 {
+    padding-bottom: 50px;
+}
 </style>
 
 <body>
@@ -46,7 +46,9 @@
                             <img src="img/newLogo.png" alt="logo" style="height: 80px" />
                             foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -59,24 +61,19 @@
                                     <a class="nav-link" href="about.php">關於我們</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        產品
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="productSeller.php">
-                                            店家列表</a>
-                                        <a class="dropdown-item" href="single-product.html">產品細項</a>
-                                    </div>
+                                    <a class="nav-link" href="productSeller.php">
+                                        店家列表</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
                                         if (empty($_SESSION['level'])) {
                                         ?>
-                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
                                         <a class="dropdown-item" href="checkout.php">下單</a>
                                         <a class="dropdown-item" href="cart.php">購物車</a>
@@ -84,11 +81,11 @@
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
+                                        <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                        <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -99,7 +96,16 @@
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex align-items-center">
+                            <?php
+                            if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                            ?>
+                            <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
+                            <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                            ?>
+                            <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                            <?php } else { ?>
                             <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
+                            <?php } ?>
                             <a href="cart.php">
                                 <i class="flaticon-shopping-cart-black-shape"></i>
                             </a>
@@ -107,12 +113,12 @@
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
-                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
-                                    <?php echo $_SESSION['sellerName']; ?>
-                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <?php echo $_SESSION['sellerName']; ?>
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -144,8 +150,8 @@
                 <div class="col-md-4">
                     <div class="product_sidebar">
                         <div class="single_sedebar">
-                            <form action="#">
-                                <input type="text" name="#" placeholder="搜尋" />
+                            <form action="productList.php" method="get">
+                                <input type="text" name="findProduct" placeholder="搜尋產品" />
                                 <i class="ti-search"></i>
                             </form>
                         </div>
@@ -157,7 +163,7 @@
                                         $Categories = $_GET['Categories'];
                                         echo $Categories;
                                     } else {
-                                        echo "類別";
+                                        echo "依店家分布";
                                     }
                                     ?>
                                     <i class="right fas fa-caret-down"></i>
@@ -170,6 +176,21 @@
                                     <p><a href="productSeller.php?Categories=汐止區">汐止區</a></p>
                                     <p><a href="productSeller.php?Categories=信義區">信義區</a></p>
                                     <p><a href="productSeller.php?Categories=士林區">士林區</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single_sedebar">
+                            <div class="select_option">
+                                <div class="select_option_list">
+                                    <?php
+                                    echo "依所有產品類別";
+                                    ?>
+                                    <i class="right fas fa-caret-down"></i>
+                                </div>
+                                <div class="select_option_dropdown">
+                                    <p><a href="productList.php?Tag=生鮮">生鮮</a></p>
+                                    <p><a href="productList.php?Tag=雜糧">雜糧</a></p>
+                                    <p><a href="productList.php?Tag=蔬果">蔬果</a></p>
                                 </div>
                             </div>
                         </div>
@@ -188,22 +209,23 @@
                             $rs = mysqli_query($link, $sql);
                             while ($seller = mysqli_fetch_array($rs)) {
                             ?>
-                                <div class="col-lg-6 col-sm-6">
-                                    <div class="single_product_item">
-                                        <img src="<?php echo $seller["sellerPhoto"] ?>" alt="#" class="img-fluid" />
-                                        <h3>
-                                            <?php echo $seller['sellerName'] ?>
-                                        </h3>
-                                        <p>地區: <?php echo $seller['sellerAddress'] ?></p>
-                                        <form method="get" action="./productList.php">
-                                            <input type="hidden" name="sellerName" value="<?php echo $seller['sellerName']; ?>">
-                                            <input type="hidden" name="userEmail" value="<?php if (isset($_SESSION['userEmail'])) {
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="single_product_item">
+                                    <img src="<?php echo $seller["sellerPhoto"] ?>" alt="#" class="img-fluid" />
+                                    <h3>
+                                        <?php echo $seller['sellerName'] ?>
+                                    </h3>
+                                    <p>地區: <?php echo $seller['sellerAddress'] ?></p>
+                                    <form method="get" action="./productList.php">
+                                        <input type="hidden" name="sellerName"
+                                            value="<?php echo $seller['sellerName']; ?>">
+                                        <input type="hidden" name="userEmail" value="<?php if (isset($_SESSION['userEmail'])) {
                                                                                                 echo $_SESSION['userEmail'];
                                                                                             } ?>">
-                                            <button class="btn_3">顯示店家商品頁</a></button>
-                                        </form>
-                                    </div>
+                                        <button class="btn_3">顯示店家商品頁</a></button>
+                                    </form>
                                 </div>
+                            </div>
 
                             <?php
                             }
@@ -271,7 +293,7 @@
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                    document.write(new Date().getFullYear());
+                                document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by
@@ -310,7 +332,7 @@
     <script src="js/mixitup.min.js"></script>
     <!-- particles js -->
     <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
+
     <!-- slick js -->
     <script src="js/slick.min.js"></script>
     <script src="js/jquery.counterup.min.js"></script>
