@@ -16,10 +16,10 @@ $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
 $isExistSql = "select * from cart";
 $result = mysqli_query($link, $isExistSql);
 while ($row = mysqli_fetch_array($result)) {
-    if ($productCode == $row['productCode']) {
+    if ($productCode == $row['productCode'] && $userEmail == $row['userEmail']) {
         $newAmount = $row['cartAmount'] + 1;
         $update = "update cart set cartAmount='$newAmount'
-            where productCode='$productCode'";
+            where productCode='$productCode'and userEmail='$userEmail'";
         if (mysqli_query($link, $update)) {
             header("location:../productSeller.php");
             exit();

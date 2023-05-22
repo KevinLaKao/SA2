@@ -16,6 +16,26 @@ if (isset($_GET["delete"])) {
 <?php
     }
 }
+if (isset($_GET["update"])) {
+    $productCode = $_GET['update'];
+    echo $productCode;
+    $cartAmount = $_GET["amount"];
+    echo $cartAmount;
+    $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+    $sql = "UPDATE `cart` SET cartAmount='$cartAmount'  WHERE productCode='$productCode'";
+    $result = mysqli_query($link, $sql);
+    if ($result) { ?>
+<script>
+alert("更新成功");
+</script>
+<?php } else {
+    ?>
+<script>
+alert("更新失敗");
+</script>
+<?php
+    }
+}
 ?>
 <!doctype html>
 <html lang="zxx">
@@ -24,7 +44,7 @@ if (isset($_GET["delete"])) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>pillloMart</title>
+    <title>Food Crate</title>
     <link rel="icon" href="img/favicon.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -185,57 +205,69 @@ if (isset($_GET["delete"])) {
                             if (isset($_SESSION['userName']) || isset($_SESSION['sellerName'])) {
                                 $userEmail = $_SESSION['userEmail'];
                                 $total = 0;
-                                $link = mysqli_connect("localhost", "root", '12345678', "sa");
+                                $link = mysqli_connect("localhost", "root", "12345678", "sa");
                                 $sql = "select * from cart, product where cart.productCode = product.productCode and historyStatus = 'notReady' and cart.userEmail = '$userEmail';";
                                 $rs = mysqli_query($link, $sql);
                                 while ($product = mysqli_fetch_array($rs)) {
                             ?>
-                                    <tr>
-                                        <td>
-                                            <div class="media">
-                                                <div class="d-flex">
-                                                    <img src="<?php echo $product['productPicture'] ?>" alt="" />
-                                                </div>
-                                                <div class="media-body">
-                                                    <p style="font-size: 20px;">
-                                                        <?php echo $product['productName'] ?>
-                                                    </p>
-                                                </div>
+                            <form method="get" action="cart.php">
+                                <tr>
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="<?php echo $product['productPicture'] ?>" alt="" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <h5>$<?php $total += $product['productPrice'] * $product['cartAmount'];
-                                                    echo $product['productPrice']; ?></h5>
-                                        </td>
-                                        <td>
-                                            <div class="product_count">
-                                                <input class="input-number" readonly name='amount' type="text" value="<?php echo $product['cartAmount']; ?>" min="0" max="50" style="text-align: center; padding-left: 0px; ">
+                                            <div class="media-body">
+                                                <p style="font-size: 20px;">
+                                                    <?php echo $product['productName'] ?>
+                                                </p>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <h5>$<?php echo $product['productPrice'] * $product['cartAmount']; ?>
-                                                    <form method="get" action="cart.php">
-                                                        <button style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="delete" value="<?php echo $product['productCode'] ?>" class="btn_5">刪除
-                                                        </button>
-                                                    </form>
-                                                </h5>
-                                            </div>
-                                    <tr>
-                                    <?php
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>$<?php $total += $product['productPrice'] * $product['cartAmount'];
+                                                        echo $product['productPrice']; ?></h5>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+                                            <input class="input-number" name='amount' type="number"
+                                                value="<?php echo $product['cartAmount'] ?>"
+                                                placeholder="<?php echo $product['cartAmount'] ?>" min="0" max="50"
+                                                style="text-align: center; padding-left: 0px; " />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <h5>$<?php echo $product['productPrice'] * $product['cartAmount']; ?>
+
+                                                <button
+                                                    style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;"
+                                                    name="update" value="<?php echo $product['productCode'] ?>"
+                                                    class="btn_5">更新</button>
+                                                <button
+                                                    style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;"
+                                                    name="delete" value="<?php echo $product['productCode'] ?>"
+                                                    class="btn_5">刪除
+                                                </button>
+
+                                            </h5>
+                                        </div>
+                                <tr>
+                            </form>
+                            <?php
                                 }
-                                    ?>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <h5>總額</h5>
-                                        </td>
-                                        <td>
-                                            <h5>$<?php echo $total;
-                                                } ?></h5>
-                                        </td>
-                                    </tr>
+                                ?>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h5>總額</h5>
+                                </td>
+                                <td>
+                                    <h5>$<?php echo $total;
+                                            } ?></h5>
+                                </td>
+                            </tr>
 
                         </tbody>
                     </table>
