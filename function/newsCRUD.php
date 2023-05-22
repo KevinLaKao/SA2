@@ -10,6 +10,7 @@ if ($act == "create") {
     $productCount = mysqli_query($link, $sqlNews);
     $sql  = "INSERT INTO news (newsId, newsTitle, newsContent) 
             values ('$newsId', '$newsTitle','$newsContent')";
+            echo $sql;
     if (mysqli_query($link, $sql)) {
 ?>
         <script>
@@ -27,24 +28,24 @@ if ($act == "create") {
     }
 } elseif ($act == "update") {
     //這裡是修改
-    $productCode = $_GET['productCode'];
-    $sql = "update product set productName='$productName',
-            productAmount='$productAmount',
-            productPrice='$productPrice'
-            where productCode='$productCode'";
+    $newsId = $_GET['newsId'];
+    $sql = "update news set newsId='$newsId',
+            newsTitle='$newsTitle',
+            newsContent='$newsContent'
+            where newsId='$newsId'";
 
     if (mysqli_query($link, $sql)) {
     ?>
         <script>
             alert(" 修 改 成 功 ！");
-            location = '../sellerCenter.php';
+            location = '../manager.php';
         </script>
     <?php
     } else {
     ?>
         <script>
             alert(" 修 改 失 敗 ！");
-            location = '../sellerCenter.php';
+            location = '../manager.php';
         </script>
     <?php
     }
@@ -52,25 +53,20 @@ if ($act == "create") {
     //這裡是刪除
     $newsId = $_GET['newsId'];
     $sql = "DELETE FROM news WHERE newsId='$newsId'";
-    echo $sql;
-    //     if (mysqli_query($link, $sql)) {
-    //     
+    if (mysqli_query($link, $sql)) {
     ?>
-    // <script>
-        //             alert(" 刪 除 成 功 ！");
-        //             location = '../manager.php';
-        //         
-    </script>
-    // <?php
-        //     } else {
-        //     
-        ?>
-    // <script>
-        //             alert(" 刪 除 失 敗 ！");
-        //             location = '../manager.php';
-        //         
-    </script>
-    // <?php
-        //     }
+        <script>
+            alert(" 刪 除 成 功 ！");
+            location = '../manager.php';
+        </script>
+    <?php
+    } else {
+    ?>
+        <script>
+            alert(" 刪 除 失 敗 ！");
+            location = '../manager.php';
+        </script>
+<?php
     }
-        ?>
+}
+?>

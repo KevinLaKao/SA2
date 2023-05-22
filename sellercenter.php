@@ -277,7 +277,6 @@
                                 <th scope="col" style="font-size: 30px;">價格</th>
                                 <th scope="col" style="font-size: 30px; padding-right: 25px;">數量</th>
                                 <th scope="col" style="font-size: 30px;">類型</th>
-                                <th scope="col" style="font-size: 30px;">簡介</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -290,54 +289,64 @@
                                 $rs = mysqli_query($link, $sql);
                                 while ($product = mysqli_fetch_array($rs)) {
                             ?>
-                                    <tr>
-                                        <form action="./function/productCRUD.php">
-                                            <td>
-                                                <div class="media">
-                                                    <div class="d-flex">
-                                                        <img src="<?php echo $product['productPicture'] ?>" alt="" />
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productName' type="text" value="<?php echo $product['productName']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productPrice' type="text" value="<?php echo $product['productPrice']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productAmount' type="text" value="<?php echo $product['productAmount']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productTag' type="text" value="<?php echo $product['productTag']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productInfo' type="text" value="<?php echo $product['productInfo']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
-                                            </td>
-                                            <input type="hidden" value="<?php echo $product['productPicture']; ?>" name="productPicture">
-                                            <input type="hidden" value="<?php echo $product['productCode']; ?>" name="productCode">
-                                            <td>
-                                                <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="update" class="btn_5">修改
-                                                </button>
-                                                <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="delete" class="btn_5">刪除
-                                                </button>
-                                            </td>
-                                        </form>
-                                    <tr>
-                                <?php
+                            <tr>
+                                <form action="./function/productCRUD.php">
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="<?php echo $product['productPicture'] ?>" alt="" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+                                            <input class="input-number" name='productName' type="text"
+                                                value="<?php echo $product['productName']; ?>" min="0" max="10"
+                                                style="text-align: center; padding-left: 0px; ">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+                                            <input class="input-number" name='productPrice' type="text"
+                                                value="<?php echo $product['productPrice']; ?>" min="0" max="10"
+                                                style="text-align: center; padding-left: 0px; ">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+                                            <input class="input-number" name='productAmount' type="text"
+                                                value="<?php echo $product['productAmount']; ?>" min="0" max="10"
+                                                style="text-align: center; padding-left: 0px; ">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+                                            <input class="input-number" name='productTag' type="text"
+                                                value="<?php echo $product['productTag']; ?>" min="0" max="10"
+                                                style="text-align: center; padding-left: 0px; ">
+                                        </div>
+                                    </td>
+                                    
+                                    <input type="hidden" value="<?php echo $product['productPicture']; ?>"
+                                        name="productPicture">
+                                    <input type="hidden" value="<?php echo $product['productCode']; ?>"
+                                        name="productCode">
+                                    <td>
+                                        <button type="submit"
+                                            style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;"
+                                            name="act" value="update" class="btn_5">修改
+                                        </button>
+                                        <button type="submit"
+                                            style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;"
+                                            name="act" value="delete" class="btn_5">刪除
+                                        </button>
+                                    </td>
+                                </form>
+                            <tr>
+                            <?php
                                 }
                             }
-                                ?>
+                            ?>
                         </tbody>
                     </table>
                 </div>
