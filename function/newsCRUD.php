@@ -53,20 +53,24 @@ if ($act == "create") {
     $newsId = $_GET['newsId'];
     $sql = "DELETE FROM news WHERE newsId='$newsId'";
     echo $sql;
-//     if (mysqli_query($link, $sql)) {
-//     ?>
-//         <script>
-//             alert(" 刪 除 成 功 ！");
-//             location = '../manager.php';
-//         </script>
-//     <?php
-//     } else {
-//     ?>
-//         <script>
-//             alert(" 刪 除 失 敗 ！");
-//             location = '../manager.php';
-//         </script>
-// <?php
-//     }
-}
-?>
+    //     if (mysqli_query($link, $sql)) {
+    //     
+    ?>
+    // <script>
+        //             alert(" 刪 除 成 功 ！");
+        //             location = '../manager.php';
+        //         
+    </script>
+    // <?php
+        //     } else {
+        //     
+        ?>
+    // <script>
+        //             alert(" 刪 除 失 敗 ！");
+        //             location = '../manager.php';
+        //         
+    </script>
+    // <?php
+        //     }
+    }
+        ?>

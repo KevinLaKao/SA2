@@ -70,7 +70,16 @@
                       <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                     <?php } ?>
                     <a class="dropdown-item" href="checkout.php">下單</a>
-                    <a class="dropdown-item" href="cart.php">購物車</a>
+                    <?php
+                    if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                    ?>
+                      <a class="dropdown-item" href="cart.php">購物車</a>
+                    <?php } ?>
+                    <?php
+                    if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                    ?>
+                      <a class="dropdown-item" href="orderStatus.php">訂單狀態</a>
+                    <?php } ?>
                     <a class="dropdown-item" href="historyOrder.php">歷史訂單</a>
                     <?php
                     if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
@@ -90,9 +99,13 @@
             </div>
             <div class="hearer_icon d-flex align-items-center">
               <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
-              <a href="cart.php">
-                <i class="flaticon-shopping-cart-black-shape"></i>
-              </a>
+              <?php
+              if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+              ?>
+                <a href="cart.php">
+                  <i class="flaticon-shopping-cart-black-shape"></i>
+                </a>
+              <?php } ?>
               <a class=dropdown-item>
                 <?php
                 if (isset($_SESSION['userName'])) {
@@ -148,28 +161,29 @@
               <tbody>
                 <?php
                 if (isset($_SESSION['userName'])) {
-                  $link = mysqli_connect("localhost", "root", "", "sa");
-                  $sql = "select * from cart, product where cart.productCode = product.productCode and (historyStatus='processing' or historyStatus='pickUp') order by product.sellerName;";
+                  $userEmail = $_SESSION['userEmail'];
+                  $link = mysqli_connect("localhost", "root", '12345678', "sa");
+                  $sql = "select * from cart, product where cart.productCode = product.productCode and (historyStatus='processing' or historyStatus='pickUp') and userEmail='$userEmail' order by product.sellerName;";
                   $rs = mysqli_query($link, $sql);
                   while ($row = mysqli_fetch_array($rs)) {
                 ?>
-                <tr>
-                  <td>
-                    <span><?php echo $row['sellerName']; ?></span>
-                  </td>
-                  <td>
-                    <span><?php echo $row['productName']; ?></span>
-                  </td>
-                  <td>
-                    <span>x<?php echo $row['cartAmount']; ?></span>
-                  </td>
-                  <td> 
-                    <span>$<?php echo $row['productPrice'] * $row['cartAmount']; ?></span>
-                  </td>
-                  <td>
-                    <span><?php echo $row['historyStatus']; ?></span>
-                  </td>
-                </tr>
+                    <tr>
+                      <td>
+                        <span><?php echo $row['sellerName']; ?></span>
+                      </td>
+                      <td>
+                        <span><?php echo $row['productName']; ?></span>
+                      </td>
+                      <td>
+                        <span>x<?php echo $row['cartAmount']; ?></span>
+                      </td>
+                      <td>
+                        <span>$<?php echo $row['productPrice'] * $row['cartAmount']; ?></span>
+                      </td>
+                      <td>
+                        <span><?php echo $row['historyStatus']; ?></span>
+                      </td>
+                    </tr>
                 <?php
                   }
                 }
@@ -179,7 +193,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- 歷史訂單 -->
       <div class="row">
         <div class="col-lg-12">
@@ -198,28 +212,28 @@
               <tbody>
                 <?php
                 if (isset($_SESSION['userName'])) {
-                  $link = mysqli_connect("localhost", "root", "", "sa");
+                  $link = mysqli_connect("localhost", "root", '12345678', "sa");
                   $sql = "select * from cart, product where cart.productCode = product.productCode and historyStatus='complete' order by product.sellerName;";
                   $rs = mysqli_query($link, $sql);
                   while ($row = mysqli_fetch_array($rs)) {
                 ?>
-                <tr>
-                  <td>
-                    <span><?php echo $row['sellerName']; ?></span>
-                  </td>
-                  <td>
-                    <span><?php echo $row['productName']; ?></span>
-                  </td>
-                  <td>
-                    <span>x<?php echo $row['cartAmount']; ?></span>
-                  </td>
-                  <td> 
-                    <span>$<?php echo $row['productPrice'] * $row['cartAmount']; ?></span>
-                  </td>
-                  <td>
-                    <span><?php echo $row['historyStatus']; ?></span>
-                  </td>
-                </tr>
+                    <tr>
+                      <td>
+                        <span><?php echo $row['sellerName']; ?></span>
+                      </td>
+                      <td>
+                        <span><?php echo $row['productName']; ?></span>
+                      </td>
+                      <td>
+                        <span>x<?php echo $row['cartAmount']; ?></span>
+                      </td>
+                      <td>
+                        <span>$<?php echo $row['productPrice'] * $row['cartAmount']; ?></span>
+                      </td>
+                      <td>
+                        <span><?php echo $row['historyStatus']; ?></span>
+                      </td>
+                    </tr>
                 <?php
                   }
                 }
@@ -229,7 +243,7 @@
           </div>
         </div>
       </div>
-      
+
     </div>
   </section>
   <!--================ confirmation part end =================-->

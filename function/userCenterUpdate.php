@@ -6,12 +6,12 @@ $userAddress = $_GET['userAddress'];
 $userBirthday = $_GET['userBirthday'];
 $userEmail = $_SESSION['userEmail'];
 
-$link = mysqli_connect('localhost', 'root', '', 'sa');
+$link = mysqli_connect('localhost', 'root', '12345678', 'sa');
 $sql = "update user set userPhone='$userPhone',
     userAddress='$userAddress',
     userBirthday='$userBirthday'
-    where userEmail='$userEmail';";  
-    
+    where userEmail='$userEmail';";
+
 if (mysqli_query($link, $sql)) {
     $_SESSION['userPhone'] = $userPhone;
     $_SESSION['userAddress'] = $userAddress;

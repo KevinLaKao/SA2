@@ -2,7 +2,7 @@
 $act = $_GET['act'];
 $userLoginEmail = $_GET['userLoginEmail'];
 $userLoginPassword = $_GET['userLoginPassword'];
-$link = @mysqli_connect('localhost', 'root', '', 'sa');
+$link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
 $sql = "SELECT * FROM user";
 $result = mysqli_query($link, $sql);
 if ($act = "userlogin") {
@@ -20,7 +20,7 @@ if ($act = "userlogin") {
             }
         }
     }
-    ?>
+?>
     <script>
         alert("登入失敗！");
         location = '../userLogin.php';
