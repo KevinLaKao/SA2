@@ -20,7 +20,7 @@ if ($act = "userlogin") {
             }
         }
     }
-    ?>
+?>
     <script>
         alert("登入失敗！");
         location = '../userLogin.php';

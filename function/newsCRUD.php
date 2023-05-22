@@ -69,5 +69,4 @@ if ($act == "create") {
 <?php
     }
 }
-
 ?>

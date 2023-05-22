@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Food Crate</title>
-    <link rel="icon" href="img/favicon.png" />
+    <link rel="icon" href="img/smile.png" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <!-- animate CSS -->
@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="css/slick.css" />
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css" />
+    <!-- member CSS -->
+    <link rel="stylesheet" href="css/store.css">
 </head>
 
 <body>
@@ -34,8 +36,8 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="index.php">
-                            <img src="img/newLogo.png" alt="logo" style="height: 80px" />
-                            foodcrate
+                            <img src="img/foodcrate.png" alt="logo" height="80px" />
+                            Foodcrate
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
@@ -86,7 +88,6 @@
                                         <?php } ?>
                                     </div>
                                 </li>
-
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.php">聯絡我們</a>
                                 </li>
@@ -114,11 +115,13 @@
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
+
                                     <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
                                     <?php echo $_SESSION['sellerName']; ?>
+
                                     <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
@@ -127,8 +130,9 @@
                 </div>
             </div>
         </div>
+
+
     </header>
-    <!-- Header part end-->
 
     <!-- breadcrumb part start-->
     <section class="breadcrumb_part">
@@ -136,7 +140,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner">
-                        <h2>會員登入/註冊</h2>
+                        <h2>訂單狀態</h2>
                     </div>
                 </div>
             </div>
@@ -144,51 +148,72 @@
     </section>
     <!-- breadcrumb part end-->
 
-    <!--================login_part Area =================-->
-    <section class="login_part section_padding">
+    <!-- 店家修改刪除產品 -->
+    <section class="cart_area section_padding">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-md-6">
-                    <div class="login_part_text text-center">
-                        <div class="login_part_text_iner" style="width: 325px">
-                            <h2>沒有帳號嗎?</h2>
-                            <p>請點擊下方註冊鈕取得新帳號</p>
-                            <a href="userRegister.php" class="btn_3">註冊</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="login_part_form">
-                        <div class="login_part_form_iner">
-                            <h3>
-                                歡迎! <br />
-                                請登入帳號
-                            </h3>
-                            <div>
-                                <a class="btn_1 form-group" href="sellerLogin.php">商家登入
-                                </a>
-                            </div>
-                            <form class="row contact_form" action="./function/userLoginCheck.php" method="get">
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="name" name="userLoginEmail" value="" placeholder="電子信箱" />
-                                </div>
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="password" name="userLoginPassword" value="" placeholder="密碼" />
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <button type="submit" value="userlogin" name="act" class="btn_3">
-                                        登入
-                                    </button>
-                                    <a class="lost_pass" href="#">忘記密碼?</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="font-size: 30px;">產品名稱</th>
+                                <th scope="col" style="font-size: 30px;">賣家</th>
+                                <th scope="col" style="font-size: 30px;">價格</th>
+                                <th scope="col" style="font-size: 30px; padding-right: 25px;">數量</th>
+                                <th scope="col" style="font-size: 30px;">狀態</th>
+                                <th scope="col" style="font-size: 30px;">訂購人</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (isset($_SESSION['sellerName'])) {
+                                $sellerName = $_SESSION['sellerName'];
+                                $historyStatus = $row['historyStatus'];
+                                $userEmail = $row['userEmail'];
+                                $total = 0;
+                                $link = mysqli_connect("localhost", "root", '12345678', "sa");
+                                $sql = "select * from product,cart where product.productCode=cart.productCode 
+                                        and product.sellerName = '$sellerName';";
+                                $rs = mysqli_query($link, $sql);
+                                while ($row = mysqli_fetch_array($rs)) {
+                            ?>
+                                    <tr>
+                                        <form action="./function/changeStatus.php" method="get">
+                                            <td>
+                                                <?php echo $row['productName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['sellerName']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['productPrice']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['cartAmount']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['historyStatus']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['userEmail']; ?>
+                                            </td>
+                                            <input type="hidden" value="<?php echo $row['userEmail']; ?>" name="userEmail">
+                                            <td>
+                                                <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="pickUp" class="btn_5">可取貨
+                                                </button>
+                                            </td>
+                                        </form>
+                                    <tr>
+                                <?php
+                                }
+                            }
+                                ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
     </section>
-    <!--================login_part end =================-->
+    <!--================End Checkout Area =================-->
 
     <!--::footer_part start::-->
     <footer class="footer_part">

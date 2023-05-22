@@ -39,9 +39,7 @@
                             <img src="img/foodcrate.png" alt="logo" height="80px" />
                             Foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -58,27 +56,35 @@
                                         店家列表</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
                                         if (empty($_SESSION['level'])) {
                                         ?>
-                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
                                         <a class="dropdown-item" href="checkout.html">下單</a>
-                                        <a class="dropdown-item" href="cart.php">購物車</a>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                                        ?>
+                                            <a class="dropdown-item" href="cart.php">購物車</a>
+                                        <?php } ?>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                                        ?>
+                                            <a class="dropdown-item" href="orderStatus.php">訂單狀態</a>
+                                        <?php } ?>
                                         <a class="dropdown-item" href="confirmation.html">歷史訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                        <a class="dropdown-item" href="userCenter.php">會員中心</a>
+                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                        <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -91,28 +97,32 @@
                             <?php
                             if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                             ?>
-                            <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
                             <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                             ?>
-                            <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
                             <?php } else { ?>
-                            <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <?php } ?>
-                            <a href="cart.php">
-                                <i class="flaticon-shopping-cart-black-shape"></i>
-                            </a>
+                            <?php
+                            if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                            ?>
+                                <a href="cart.php">
+                                    <i class="flaticon-shopping-cart-black-shape"></i>
+                                </a>
+                            <?php } ?>
                             <a class=dropdown-item>
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
-                                <?php echo $_SESSION['sellerName']; ?>
+                                    <?php echo $_SESSION['sellerName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -183,7 +193,7 @@
                 </div>
             </div>
     </section>
-
+      
     <!-- 新增公告 -->
     <section class="checkout_area section_padding" style="padding: 0px;">
         <div class="container">
@@ -201,8 +211,7 @@
                                 <div class="creat_account">
                                     <h3>公告內容</h3>
                                 </div>
-                                <textarea class="form-control" name="newsContent" id="message" rows="1"
-                                    placeholder="早安"></textarea>
+                                <textarea class="form-control" name="newsContent" id="message" rows="1" placeholder="早安"></textarea>
                             </div>
                             <button type="submit" name="act" value="create" class="btn_3">
                                 新增公告
@@ -210,48 +219,46 @@
                         </form>
                     </div>
     </section>
+              
     <!--================產品刪除 =================-->
     <section class="cart_area section_padding">
         <div class="container">
             <div class="cart_inner">
                 <div class="table-responsive">
-                        <table class="table">
-                            <h3>商品們:</h3>
-                            <thead>
-                                <tr>
-                                    <th scope="col" style="font-size: 30px;">productPicture</th>
-                                    <th scope="col" style="font-size: 30px;">productName</th>
-                                    <th scope="col" style="font-size: 30px;">sellerName</th>
-                                    <th scope="col" style="font-size: 30px;">productPrice</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                    $link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
-                                    $sql = "SELECT * FROM product";
-                                    $result = mysqli_query($link, $sql);
-                                    while($row=mysqli_fetch_array($result)){
-                                ?>
-                                <form action="./function/managerProductCRUD.php" method="get">
-                                 <tr>
-                                    <td><img src="<?php echo $row["productPicture"] ?>" alt="#" class="img-fluid" /></td>
-                                    <td><input type="text" style="border-color:#b08ead;border-style:double" name="productName"value="<?php echo $row['productName'];?>"></td>   
-                                    <td><?php echo $row['sellerName'];?></td>
-                                    <td><input type="number" style="border-color:#b08ead;border-style:double" name="productPrice"value="<?php echo $row['productPrice'];?>"></td>
-                                    <td><button type="submit" name="act" value="update" class="btn_3">修改</button></td>
-                                    <td><button type="submit" name="act" value="delete" class="btn_3">刪除</button></td>
-                                    <td><input type="hidden" name="productAmount" value="<?php echo $row['productAmount'];?>">
-                                    <td><input type="hidden" name="productPicture"value="<?php echo $row['productPicture'];?>"></td>
-                                    <td><input type="hidden" name="productCode"value="<?php echo $row['productCode'];?>"></td>    
-                                    <td><input type="hidden" name="productTag"value="<?php echo $row['productTag'];?>"></td>
-                                    
-                                    </td>
-                                 </tr>
-                                </form>
-                                <?php }?>
-                            </tbody>
-                        </table>
-                    </form>
+                      <table class="table">
+                          <h3>商品們:</h3>
+                          <thead>
+                              <tr>
+                                  <th scope="col" style="font-size: 30px;">productPicture</th>
+                                  <th scope="col" style="font-size: 30px;">productName</th>
+                                  <th scope="col" style="font-size: 30px;">sellerName</th>
+                                  <th scope="col" style="font-size: 30px;">productPrice</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <?php
+                              $link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
+                              $sql = "SELECT * FROM product";
+                              $result = mysqli_query($link, $sql);
+                              while ($row = mysqli_fetch_array($result)) {
+                              ?>
+                              <form action="./function/managerProductCRUD.php" method="get">
+                               <tr>
+                                  <td><img src="<?php echo $row["productPicture"] ?>" alt="#" class="img-fluid" /></td>
+                                  <td><input type="text" style="border-color:#b08ead;border-style:double" name="productName"value="<?php echo $row['productName'];?>"></td>   
+                                  <td><?php echo $row['sellerName'];?></td>
+                                  <td><input type="number" style="border-color:#b08ead;border-style:double" name="productPrice"value="<?php echo $row['productPrice'];?>"></td>
+                                  <td><button type="submit" name="act" value="update" class="btn_3">修改</button></td>
+                                  <td><button type="submit" name="act" value="delete" class="btn_3">刪除</button></td>
+                                  <td><input type="hidden" name="productAmount" value="<?php echo $row['productAmount'];?>"></td>
+                                  <td><input type="hidden" name="productPicture"value="<?php echo $row['productPicture'];?>"></td>
+                                  <td><input type="hidden" name="productCode"value="<?php echo $row['productCode'];?>"></td>    
+                                  <td><input type="hidden" name="productTag"value="<?php echo $row['productTag'];?>"></td>
+                               </tr>
+                              </form>
+                              <?php }?>
+                          </tbody>
+                      </table>
                 </div>
             </div>
     </section>
@@ -260,44 +267,43 @@
         <div class="container">
             <div class="cart_inner">
                 <div class="table-responsive">
-                        <table class="table">
-                            <h3>店家帳號:</h3>
-                            <thead>
-                                <tr>
-                                    <th scope="col" style="font-size: 30px;">sellerName</th>
-                                    <th scope="col" style="font-size: 30px;">sellerEmail</th>
-                                    <th scope="col" style="font-size: 30px;">sellerPhone</th>
-                                    <th scope="col" style="font-size: 30px;">sellerAddress</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                $link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
-                                $sql = "select * from seller;";
-                                $result = mysqli_query($link, $sql);
-                                while($row=mysqli_fetch_array($result)){
-                            ?>
-                            <form action="./function/managerSellerCRUD.php" method="get">
-                                <tr>
-                                    <td><?php echo $row['sellerName'];?></td>
-                                    <td><?php echo $row['sellerEmail'];?></td>
-                                    <td><?php echo $row['sellerPhone'];?></td>
-                                    <td><?php echo $row['sellerAddress'];?></td>
-                                    <td><button type="submit" name="act" value="delete" class="btn_3">刪除</button></td>
-                                    <td><input type="hidden" name="sellerName" value="<?php echo $row['sellerName'];?>"></td>
-                                    <td><input type="hidden" name="sellerEmail"value="<?php echo $row['sellerEmail'];?>"></td>
-                                    <td><input type="hidden" name="sellerPhone"value="<?php echo $row['sellerPhone'];?>"></td>
-                                    <td><input type="hidden" name="sellerAddress"value="<?php echo $row['sellerAddress'];?>"></td>
-                                    <td><input type="hidden" name="sellerPassword"value="<?php echo $row['sellerPassword'];?>"></td>
-                                    <td><input type="hidden" name="sellerPhoto"value="<?php echo $row['sellerPhoto'];?>"></td>
-                                    <td><input type="hidden" name="sellerInfo"value="<?php echo $row['sellerInfo'];?>"></td>
-                                    <td><input type="hidden" name="level"value="<?php echo $row['level'];?>"></td>
-                                </tr>
-                                </form>
-                                <?php }?>
-                            </tbody>
-                        </table>
-                    </form>
+                    <table class="table">
+                        <h3>店家帳號:</h3>
+                        <thead>
+                            <tr>
+                                <th scope="col" style="font-size: 30px;">sellerName</th>
+                                <th scope="col" style="font-size: 30px;">sellerEmail</th>
+                                <th scope="col" style="font-size: 30px;">sellerPhone</th>
+                                <th scope="col" style="font-size: 30px;">sellerAddress</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <?php
+                          $link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
+                          $sql = "select * from seller;";
+                          $result = mysqli_query($link, $sql);
+                          while($row=mysqli_fetch_array($result)){
+                          ?>
+                          <form action="./function/managerSellerCRUD.php" method="get">
+                            <tr>
+                                <td><?php echo $row['sellerName'];?></td>
+                                <td><?php echo $row['sellerEmail'];?></td>
+                                <td><?php echo $row['sellerPhone'];?></td>
+                                <td><?php echo $row['sellerAddress'];?></td>
+                                <td><button type="submit" name="act" value="delete" class="btn_3">刪除</button></td>
+                                <td><input type="hidden" name="sellerName" value="<?php echo $row['sellerName'];?>"></td>
+                                <td><input type="hidden" name="sellerEmail"value="<?php echo $row['sellerEmail'];?>"></td>
+                                <td><input type="hidden" name="sellerPhone"value="<?php echo $row['sellerPhone'];?>"></td>
+                                <td><input type="hidden" name="sellerAddress"value="<?php echo $row['sellerAddress'];?>"></td>
+                                <td><input type="hidden" name="sellerPassword"value="<?php echo $row['sellerPassword'];?>"></td>
+                                <td><input type="hidden" name="sellerPhoto"value="<?php echo $row['sellerPhoto'];?>"></td>
+                                <td><input type="hidden" name="sellerInfo"value="<?php echo $row['sellerInfo'];?>"></td>
+                                <td><input type="hidden" name="level"value="<?php echo $row['level'];?>"></td>
+                            </tr>
+                            </form>
+                            <?php }?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
     </section>
@@ -306,43 +312,42 @@
         <div class="container">
             <div class="cart_inner">
                 <div class="table-responsive">
-                        <table class="table">
-                            <h3>會員帳號:</h3>
-                            <thead>
-                                <tr>
-                                    <th scope="col" style="font-size: 30px;">userName</th>
-                                    <th scope="col" style="font-size: 30px;">userEmail</th>
-                                    <th scope="col" style="font-size: 30px;">userPhone</th>
-                                    <th scope="col" style="font-size: 30px;">userAddress</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                $link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
-                                $sql = "select * from user";
-                                $result = mysqli_query($link, $sql);
-                                while($row=mysqli_fetch_array($result)){
+                    <table class="table">
+                        <h3>會員帳號:</h3>
+                        <thead>
+                            <tr>
+                                <th scope="col" style="font-size: 30px;">userName</th>
+                                <th scope="col" style="font-size: 30px;">userEmail</th>
+                                <th scope="col" style="font-size: 30px;">userPhone</th>
+                                <th scope="col" style="font-size: 30px;">userAddress</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
+                            $sql = "select * from user";
+                            $result = mysqli_query($link, $sql);
+                            while($row=mysqli_fetch_array($result)){
                             ?>
                             <form action="./function/managerUserCRUD.php" method="get">
-                                <tr>
-                                    <td><?php echo $row['userName'];?></td>
-                                    <td><?php echo $row['userEmail'];?></td>
-                                    <td><?php echo $row['userPhone'];?></td>
-                                    <td><?php echo $row['userAddress'];?></td>
-                                    <td><button type="submit" name="act" value="delete" class="btn_3">刪除</button></td>
-                                    <td><input type="hidden" name="userName" value="<?php echo $row['userName'];?>"></td>
-                                    <td><input type="hidden" name="userEmail" value="<?php echo $row['userEmail'];?>"></td>
-                                    <td><input type="hidden" name="userPhone" value="<?php echo $row['userPhone'];?>"></td>
-                                    <td><input type="hidden" name="userPassword" value="<?php echo $row['userPassword'];?>"></td>
-                                    <td><input type="hidden" name="userAddress"value="<?php echo $row['userAddress'];?>"></td>
-                                    <td><input type="hidden" name="userBirthday" value="<?php echo $row['userBirthday'];?>"></td>
-                                    <td><input type="hidden" name="level" value="<?php echo $row['level'];?>"></td>
-                                </tr>
+                            <tr>
+                                <td><?php echo $row['userName'];?></td>
+                                <td><?php echo $row['userEmail'];?></td>
+                                <td><?php echo $row['userPhone'];?></td>
+                                <td><?php echo $row['userAddress'];?></td>
+                                <td><button type="submit" name="act" value="delete" class="btn_3">刪除</button></td>
+                                <td><input type="hidden" name="userName" value="<?php echo $row['userName'];?>"></td>
+                                <td><input type="hidden" name="userEmail" value="<?php echo $row['userEmail'];?>"></td>
+                                <td><input type="hidden" name="userPhone" value="<?php echo $row['userPhone'];?>"></td>
+                                <td><input type="hidden" name="userPassword" value="<?php echo $row['userPassword'];?>"></td>
+                                <td><input type="hidden" name="userAddress"value="<?php echo $row['userAddress'];?>"></td>
+                                <td><input type="hidden" name="userBirthday" value="<?php echo $row['userBirthday'];?>"></td>
+                                <td><input type="hidden" name="level" value="<?php echo $row['level'];?>"></td>
+                            </tr>
                             </form>
-                                <?php }?>
-                            </tbody>
-                        </table>
-                    </form>
+                            <?php }?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
     </section>
@@ -360,7 +365,7 @@
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                document.write(new Date().getFullYear());
+                                    document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by
