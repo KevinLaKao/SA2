@@ -65,7 +65,9 @@
                                         ?>
                                             <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
-                                        <a class="dropdown-item" href="checkout.php">下單</a>
+                                        <?php if (isset($_SESSION['userName'])) { ?>
+                                            <a class="dropdown-item" href="checkout.php">下單</a>
+                                        <?php } ?>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
@@ -148,7 +150,7 @@
     </section>
     <!-- breadcrumb part end-->
 
-    <!-- 店家修改刪除產品 -->
+    <!-- 店家顯示訂單狀態 -->
     <section class="cart_area section_padding">
         <div class="container">
             <div class="cart_inner">
@@ -177,33 +179,41 @@
                                 $rs = mysqli_query($link, $sql);
                                 while ($row = mysqli_fetch_array($rs)) {
                             ?>
+
                                     <tr>
                                         <form action="./function/changeStatus.php" method="get">
-                                            <td>
-                                                <?php echo $row['productName']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row['sellerName']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row['productPrice']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row['cartAmount']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row['historyStatus']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row['userEmail']; ?>
-                                            </td>
-                                            <input type="hidden" value="<?php echo $row['userEmail']; ?>" name="userEmail">
-                                            <td>
-                                                <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="pickUp" class="btn_5">可取貨
-                                                </button>
-                                            </td>
+                                            <?php if ($row['historyStatus'] == 'pickUp' or $row['historyStatus'] == 'processing') { ?>
+                                                <td>
+                                                    <?php echo $row['productName']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['sellerName']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['productPrice']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['cartAmount']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['historyStatus']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['userEmail']; ?>
+                                                </td>
+                                                <input type="hidden" value="<?php echo $row['userEmail']; ?>" name="userEmail">
+                                                <td>
+                                                    <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="pickUp" class="btn_5">可取貨
+                                                    </button>
+                                                    <?php if ($row['historyStatus'] == 'pickUp') { ?>
+                                                        <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="complete" class="btn_5">已取貨完成訂單
+                                                        </button>
+                                                    <?php } ?>
+                                                </td>
+                                            <?php } ?>
                                         </form>
                                     <tr>
+
                                 <?php
                                 }
                             }

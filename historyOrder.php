@@ -69,7 +69,9 @@
                     ?>
                       <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                     <?php } ?>
-                    <a class="dropdown-item" href="checkout.php">下單</a>
+                    <?php if (isset($_SESSION['userName'])) { ?>
+                      <a class="dropdown-item" href="checkout.php">下單</a>
+                    <?php } ?>
                     <?php
                     if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                     ?>
@@ -144,14 +146,71 @@
   <section class="confirmation_part section_padding">
     <div class="container">
       <!-- 追蹤訂單 -->
+      <?php if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {  ?>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="order_details_iner">
+              <h3>追蹤訂單</h3>
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col">店家名稱</th>
+                    <th scope="col">產品名稱</th>
+                    <th scope="col">數量</th>
+                    <th scope="col">總額</th>
+                    <th scope="col">狀態</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  if (isset($_SESSION['userName'])) {
+                    $userEmail = $_SESSION['userEmail'];
+                    $link = mysqli_connect("localhost", "root", '12345678', "sa");
+                    $sql = "select * from cart, product where cart.productCode = product.productCode and (historyStatus='processing' or historyStatus='pickUp') and userEmail='$userEmail' order by product.sellerName;";
+                    $rs = mysqli_query($link, $sql);
+                    while ($row = mysqli_fetch_array($rs)) {
+                  ?>
+                      <tr>
+                        <td>
+                          <span><?php echo $row['sellerName']; ?></span>
+                        </td>
+                        <td>
+                          <span><?php echo $row['productName']; ?></span>
+                        </td>
+                        <td>
+                          <span>x<?php echo $row['cartAmount']; ?></span>
+                        </td>
+                        <td>
+                          <span>$<?php echo $row['productPrice'] * $row['cartAmount']; ?></span>
+                        </td>
+                        <td>
+                          <span><?php echo $row['historyStatus']; ?></span>
+                        </td>
+                      </tr>
+                  <?php
+                    }
+                  }
+                  ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      <?php } ?>
+      <!-- 歷史訂單 -->
       <div class="row">
         <div class="col-lg-12">
           <div class="order_details_iner">
-            <h3>追蹤訂單</h3>
+            <h3>歷史訂單</h3>
             <table class="table table-borderless">
               <thead>
                 <tr>
-                  <th scope="col">店家名稱</th>
+                  <?php if (isset($_SESSION['sellerName'])) { ?>
+                    <th scope="col">賣家電郵</th>
+                  <?php } else if (isset($_SESSION['userEmail'])) { ?>
+                    <th scope="col">店家名稱</th>
+                  <?php }
+                  ?>
                   <th scope="col">產品名稱</th>
                   <th scope="col">數量</th>
                   <th scope="col">總額</th>
@@ -160,16 +219,16 @@
               </thead>
               <tbody>
                 <?php
-                if (isset($_SESSION['userName'])) {
-                  $userEmail = $_SESSION['userEmail'];
+                if (isset($_SESSION['sellerName'])) {
+                  $sellerName = $_SESSION['sellerName'];
                   $link = mysqli_connect("localhost", "root", '12345678', "sa");
-                  $sql = "select * from cart, product where cart.productCode = product.productCode and (historyStatus='processing' or historyStatus='pickUp') and userEmail='$userEmail' order by product.sellerName;";
+                  $sql = "select * from cart, product where cart.productCode = product.productCode and historyStatus='complete' and sellerName = '$sellerName' order by product.sellerName;";
                   $rs = mysqli_query($link, $sql);
                   while ($row = mysqli_fetch_array($rs)) {
                 ?>
                     <tr>
                       <td>
-                        <span><?php echo $row['sellerName']; ?></span>
+                        <span><?php echo $row['userEmail']; ?></span>
                       </td>
                       <td>
                         <span><?php echo $row['productName']; ?></span>
@@ -184,39 +243,15 @@
                         <span><?php echo $row['historyStatus']; ?></span>
                       </td>
                     </tr>
-                <?php
+                  <?php
                   }
-                }
-                ?>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- 歷史訂單 -->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="order_details_iner">
-            <h3>追蹤訂單</h3>
-            <table class="table table-borderless">
-              <thead>
-                <tr>
-                  <th scope="col">店家名稱</th>
-                  <th scope="col">產品名稱</th>
-                  <th scope="col">數量</th>
-                  <th scope="col">總額</th>
-                  <th scope="col">狀態</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                if (isset($_SESSION['userName'])) {
+                } else if (isset($_SESSION['userName'])) {
+                  $userEmail = $_SESSION['userEmail'];
                   $link = mysqli_connect("localhost", "root", '12345678', "sa");
-                  $sql = "select * from cart, product where cart.productCode = product.productCode and historyStatus='complete' order by product.sellerName;";
+                  $sql = "select * from cart, product where cart.productCode = product.productCode and historyStatus='complete' and userEmail='$userEmail'  order by product.sellerName;";
                   $rs = mysqli_query($link, $sql);
                   while ($row = mysqli_fetch_array($rs)) {
-                ?>
+                  ?>
                     <tr>
                       <td>
                         <span><?php echo $row['sellerName']; ?></span>

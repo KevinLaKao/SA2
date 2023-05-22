@@ -69,7 +69,9 @@
                     ?>
                       <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                     <?php } ?>
-                    <a class="dropdown-item" href="checkout.php">下單</a>
+                    <?php if (isset($_SESSION['userName'])) { ?>
+                      <a class="dropdown-item" href="checkout.php">下單</a>
+                    <?php } ?>
                     <?php
                     if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                     ?>
