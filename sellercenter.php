@@ -279,7 +279,6 @@
                                 <th scope="col" style="font-size: 30px;">價格</th>
                                 <th scope="col" style="font-size: 30px; padding-right: 25px;">數量</th>
                                 <th scope="col" style="font-size: 30px;">類型</th>
-                                <th scope="col" style="font-size: 30px;">簡介</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -329,13 +328,7 @@
                                                 style="text-align: center; padding-left: 0px; ">
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="product_count">
-                                            <input class="input-number" name='productInfo' type="text"
-                                                value="<?php echo $product['productInfo']; ?>" min="0" max="10"
-                                                style="text-align: center; padding-left: 0px; ">
-                                        </div>
-                                    </td>
+                                    
                                     <input type="hidden" value="<?php echo $product['productPicture']; ?>"
                                         name="productPicture">
                                     <input type="hidden" value="<?php echo $product['productCode']; ?>"
