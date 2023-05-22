@@ -37,9 +37,7 @@
                             <img src="img/newLogo.png" alt="logo" style="height: 80px" />
                             foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -56,27 +54,35 @@
                                         店家列表</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
                                         if (empty($_SESSION['level'])) {
                                         ?>
-                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
                                         <a class="dropdown-item" href="checkout.php">下單</a>
-                                        <a class="dropdown-item" href="cart.php">購物車</a>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                                        ?>
+                                            <a class="dropdown-item" href="cart.php">購物車</a>
+                                        <?php } ?>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                                        ?>
+                                            <a class="dropdown-item" href="orderStatus.php">訂單狀態</a>
+                                        <?php } ?>
                                         <a class="dropdown-item" href="historyOrder.php">歷史訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                        <a class="dropdown-item" href="userCenter.php">會員中心</a>
+                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                        <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -90,26 +96,30 @@
                             <?php
                             if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                             ?>
-                            <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
                             <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                             ?>
-                            <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
                             <?php } else { ?>
-                            <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <?php } ?>
-                            <a href="cart.php">
-                                <i class="flaticon-shopping-cart-black-shape"></i>
-                            </a>
+                            <?php
+                            if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                            ?>
+                                <a href="cart.php">
+                                    <i class="flaticon-shopping-cart-black-shape"></i>
+                                </a>
+                            <?php } ?>
                             <a class=dropdown-item>
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
-                                <?php echo $_SESSION['sellerName']; ?>
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <?php echo $_SESSION['sellerName']; ?>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -160,12 +170,10 @@
                             </div>
                             <form class="row contact_form" action="./function/sellerLoginCheck.php" method="get">
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" name="sellerLoginEmail"
-                                        placeholder="電子信箱" />
+                                    <input type="text" class="form-control" name="sellerLoginEmail" placeholder="電子信箱" />
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" name="sellerLoginPassword"
-                                        placeholder="密碼" />
+                                    <input type="password" class="form-control" name="sellerLoginPassword" placeholder="密碼" />
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <button type="submit" value="sellerLogin" name="act" class="btn_3">
@@ -193,7 +201,7 @@
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                document.write(new Date().getFullYear());
+                                    document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by

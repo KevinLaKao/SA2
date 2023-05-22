@@ -39,9 +39,7 @@
                             <img src="img/foodcrate.png" alt="logo" height="80px" />
                             Foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -58,27 +56,35 @@
                                         店家列表</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
-                    if (empty($_SESSION['level'])) {
-                    ?>
-                      <a class="dropdown-item" href="userLogin.php"> 登入 </a>
-                    <?php } ?>
-                    <a class="dropdown-item" href="checkout.php">下單</a>
-                    <a class="dropdown-item" href="cart.php">購物車</a>
-                    <a class="dropdown-item" href="historyOrder.php">歷史訂單</a>
-                    <?php
-                    if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
-                    ?>
-                                        <a class="dropdown-item" href="userCenter.php">會員中心</a>
+                                        if (empty($_SESSION['level'])) {
+                                        ?>
+                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <?php } ?>
+                                        <a class="dropdown-item" href="checkout.php">下單</a>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                                        ?>
+                                            <a class="dropdown-item" href="cart.php">購物車</a>
+                                        <?php } ?>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                                        ?>
+                                            <a class="dropdown-item" href="orderStatus.php">訂單狀態</a>
+                                        <?php } ?>
+                                        <a class="dropdown-item" href="historyOrder.php">歷史訂單</a>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                                        ?>
+                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
-                    if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
-                    ?>
-                                        <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                                        ?>
+                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -91,28 +97,32 @@
                             <?php
                             if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                             ?>
-                            <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
                             <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                             ?>
-                            <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
                             <?php } else { ?>
-                            <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <?php } ?>
-                            <a href="cart.php">
-                                <i class="flaticon-shopping-cart-black-shape"></i>
-                            </a>
+                            <?php
+                            if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                            ?>
+                                <a href="cart.php">
+                                    <i class="flaticon-shopping-cart-black-shape"></i>
+                                </a>
+                            <?php } ?>
                             <a class=dropdown-item>
                                 <?php
-                if (isset($_SESSION['userName'])) {
-                  echo $_SESSION['userName']; ?>
+                                if (isset($_SESSION['userName'])) {
+                                    echo $_SESSION['userName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
-                } else if (isset($_SESSION['sellerName'])) {
-                ?>
-                                <?php echo $_SESSION['sellerName']; ?>
+                                } else if (isset($_SESSION['sellerName'])) {
+                                ?>
+                                    <?php echo $_SESSION['sellerName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -148,54 +158,50 @@
                             <div class="col-md-6 form-group p_star">
                                 用戶名稱
                                 <input value="<?php if (isset($_SESSION['userName'])) {
-                                echo $_SESSION['userName'];
-                              } ?>" placeholder="<?php if (isset($_SESSION['userName'])) {
                                                     echo $_SESSION['userName'];
-                                                  } ?>" type="text" class="form-control" id="first" name="userName"
-                                    disabled />
+                                                } ?>" placeholder="<?php if (isset($_SESSION['userName'])) {
+                                                                        echo $_SESSION['userName'];
+                                                                    } ?>" type="text" class="form-control" id="first" name="userName" disabled />
                             </div>
                             <div class="col-md-6 form-group p_star">
                                 用戶電郵
                                 <input value="<?php if (isset($_SESSION['userEmail'])) {
-                                echo $_SESSION['userEmail'];
-                              } ?>" placeholder="<?php if (isset($_SESSION['userEmail'])) {
                                                     echo $_SESSION['userEmail'];
-                                                  } ?>" type="text" class="form-control" id="email" name="userEmail"
-                                    disabled />
+                                                } ?>" placeholder="<?php if (isset($_SESSION['userEmail'])) {
+                                                                        echo $_SESSION['userEmail'];
+                                                                    } ?>" type="text" class="form-control" id="email" name="userEmail" disabled />
                             </div>
                             <div class="col-md-12 form-group p_star">
                                 用戶電話
                                 <input value="<?php if (isset($_SESSION['userPhone'])) {
-                                echo $_SESSION['userPhone'];
-                              } ?>" placeholder="<?php if (isset($_SESSION['userPhone'])) {
                                                     echo $_SESSION['userPhone'];
-                                                  } ?>" type="text" class="form-control" id="add1" name="userPhone" />
+                                                } ?>" placeholder="<?php if (isset($_SESSION['userPhone'])) {
+                                                                        echo $_SESSION['userPhone'];
+                                                                    } ?>" type="text" class="form-control" id="add1" name="userPhone" />
                             </div>
                             <div class="col-md-12 form-group p_star">
                                 用戶密碼
                                 <input value="<?php if (isset($_SESSION['userPassword'])) {
-                                echo $_SESSION['userPassword'];
-                              } ?>" placeholder="<?php if (isset($_SESSION['userPassword'])) {
                                                     echo $_SESSION['userPassword'];
-                                                  } ?>" type="text" class="form-control" id="city" name="userPassword"
-                                    disabled />
+                                                } ?>" placeholder="<?php if (isset($_SESSION['userPassword'])) {
+                                                                        echo $_SESSION['userPassword'];
+                                                                    } ?>" type="text" class="form-control" id="city" name="userPassword" disabled />
                             </div>
                             <div class="col-md-12 form-group p_star">
                                 用戶地址
                                 <input value="<?php if (isset($_SESSION['userAddress'])) {
-                                echo $_SESSION['userAddress'];
-                              } ?>" placeholder="<?php if (isset($_SESSION['userAddress'])) {
                                                     echo $_SESSION['userAddress'];
-                                                  } ?>" type="text" class="form-control" id="city"
-                                    name="userAddress" />
+                                                } ?>" placeholder="<?php if (isset($_SESSION['userAddress'])) {
+                                                                        echo $_SESSION['userAddress'];
+                                                                    } ?>" type="text" class="form-control" id="city" name="userAddress" />
                             </div>
                             <div class="col-md-12 form-group p_star">
                                 用戶生日 例:(2000/0X/0X)
                                 <input value="<?php if (isset($_SESSION['userBirthday'])) {
-                                echo $_SESSION['userBirthday'];
-                              } ?>" placeholder="<?php if (isset($_SESSION['userBirthday'])) {
                                                     echo $_SESSION['userBirthday'];
-                                                  } ?>" type="text" class="form-control" name="userBirthday" />
+                                                } ?>" placeholder="<?php if (isset($_SESSION['userBirthday'])) {
+                                                                        echo $_SESSION['userBirthday'];
+                                                                    } ?>" type="text" class="form-control" name="userBirthday" />
                             </div>
                             <button type="submit" value="submit" class="btn_3">修改</button>
                         </form>
@@ -225,7 +231,7 @@
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                document.write(new Date().getFullYear());
+                                    document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by

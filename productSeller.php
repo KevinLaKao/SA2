@@ -73,7 +73,16 @@
                                             <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
                                         <a class="dropdown-item" href="checkout.php">下單</a>
-                                        <a class="dropdown-item" href="cart.php">購物車</a>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                                        ?>
+                                            <a class="dropdown-item" href="cart.php">購物車</a>
+                                        <?php } ?>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                                        ?>
+                                            <a class="dropdown-item" href="orderStatus.php">訂單狀態</a>
+                                        <?php } ?>
                                         <a class="dropdown-item" href="historyOrder.php">歷史訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
@@ -103,9 +112,13 @@
                             <?php } else { ?>
                                 <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <?php } ?>
-                            <a href="cart.php">
-                                <i class="flaticon-shopping-cart-black-shape"></i>
-                            </a>
+                            <?php
+                            if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                            ?>
+                                <a href="cart.php">
+                                    <i class="flaticon-shopping-cart-black-shape"></i>
+                                </a>
+                            <?php } ?>
                             <a class=dropdown-item>
                                 <?php
                                 if (isset($_SESSION['userName'])) {
@@ -197,7 +210,7 @@
                     <div class="product_list">
                         <div class="row">
                             <?php
-                            $link = mysqli_connect("localhost", "root", "12345678", "sa");
+                            $link = mysqli_connect("localhost", "root", '12345678', "sa");
                             if (isset($_GET['Categories'])) {
                                 $sql = "select * from seller where sellerAddress like '%$Categories%'";
                             } else {

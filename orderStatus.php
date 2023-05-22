@@ -140,129 +140,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner">
-                        <h2>店家中心</h2>
+                        <h2>訂單狀態</h2>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- breadcrumb part end-->
-
-    <!--================Checkout Area =================-->
-    <section class="checkout_area section_padding">
-        <div class="container">
-            <div class="billing_details">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h3>店家資訊</h3>
-                        <form class="row contact_form" action="./function/sellerInfoCRUD.php" method="get" novalidate="novalidate">
-                            <?php
-                            $sellerName = $_SESSION['sellerName'];
-                            $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
-                            $sql = "select * from seller where sellerName='$sellerName'";
-                            $result = mysqli_query($link, $sql);
-                            $row = mysqli_fetch_array($result)
-                            ?>
-                            <div class="col-md-6 form-group ">
-                                店家名稱:
-                                <input type="text" disabled="disabled" class="form-control" id="number" name="sellerPhone" placeholder=<?php echo $_SESSION['sellerName'] ?> />
-                                <span class="placeholder"></span>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                電話號碼
-                                <input type="text" class="form-control" id="number" name="sellerPhone" placeholder="<?php echo $_SESSION['sellerPhone'] ?>" />
-                                <span class="placeholder"></span>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                電子郵件
-                                <input type="text" disabled="disabled" class="form-control" id="email" name="sellerEmail" placeholder="<?php echo $_SESSION['sellerEmail'] ?>" />
-                                <span class="placeholder"></span>
-                            </div>
-                            <div class="col-md-12 form-group">
-                                店家地址
-                                <input type="text" class="form-control" id="add1" name="sellerAddress" placeholder="<?php echo $_SESSION['sellerAddress'] ?>" />
-                                <span class="placeholder"></span>
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <div class="creat_account">
-                                    <h3>店家簡介</h3>
-                                </div>
-                                <textarea class="form-control" name="sellerInfo" id="message" rows="1" placeholder="<?php echo $_SESSION['sellerInfo'] ?>"></textarea>
-                            </div>
-                            <button type="submit" name="act" value="update" class="btn_3">
-                                送出修改資料
-                            </button>
-                        </form>
-                    </div>
-                    <div class="sellerPhoto">
-                        <div class="sellerImg">
-                            <img src="img/client_2.png">
-                        </div>
-                        <div class="imgRevise">
-                            <button type="submit" value="submit" class="btn_3 stick">
-                                修改大頭貼
-                            </button>
-                        </div>
-                    </div>
-                </div>
-    </section>
-
-    <!-- 新增商品 -->
-    <section class="checkout_area section_padding" style="padding: 0px;">
-        <div class="container">
-            <div class="billing_details">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h3>新增商品</h3>
-                        <form class="row contact_form" action="./function/productCRUD.php" method="get">
-                            <div class="col-md-6 form-group ">
-                                店家名稱
-                                <input type="text" class="form-control" id="first" name="sellerName" disabled="disabled" placeholder="<?php echo $_SESSION['sellerName'] ?>" />
-                                <span class="placeholder"></span>
-                            </div>
-                            <div class="col-md-6 form-group ">
-                                商品名稱
-                                <input type="text" class="form-control" id="number" name="productName" placeholder="商品名稱" />
-                                <span class="placeholder"></span>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                商品價格
-                                <input type="text" class="form-control" id="number" name="productPrice" placeholder="商品價格" />
-                                <span class="placeholder"></span>
-                            </div>
-                            <div class="col-md-6 form-group ">
-                                商品數量
-                                <input type="text" class="form-control" id="number" name="productAmount" placeholder="商品數量" />
-                                <span class="placeholder"></span>
-                            </div>
-                            <div class="col-md-6 form-group ">
-                                商品類別
-                                <input type="text" class="form-control" id="number" name="productTag" placeholder="請輸入:生鮮or雜糧or蔬果" />
-                                <span class="placeholder"></span>
-                            </div>
-
-                            <div class="col-md-12 form-group">
-                                <div class="creat_account">
-                                    <h3>商品簡介</h3>
-                                </div>
-                                <textarea class="form-control" name="productInfo" id="message" rows="1" placeholder="商品簡介"></textarea>
-                            </div>
-                            <button type="submit" name="act" value="create" class="btn_3">
-                                送出產品資料
-                            </button>
-                        </form>
-                    </div>
-                    <div class="sellerPhoto">
-                        <div class="sellerImg">
-                            <img src="img/client_1.png">
-                        </div>
-                        <div class="imgRevise">
-                            <button type="submit" value="submit" class="btn_3 stick">
-                                新增產品照片
-                            </button>
-                        </div>
-                        <div>
-    </section>
 
     <!-- 店家修改刪除產品 -->
     <section class="cart_area section_padding">
@@ -272,64 +156,50 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col" style="font-size: 30px;"></th>
-                                <th scope="col" style="font-size: 30px;">名稱</th>
+                                <th scope="col" style="font-size: 30px;">產品名稱</th>
+                                <th scope="col" style="font-size: 30px;">賣家</th>
                                 <th scope="col" style="font-size: 30px;">價格</th>
                                 <th scope="col" style="font-size: 30px; padding-right: 25px;">數量</th>
-                                <th scope="col" style="font-size: 30px;">類型</th>
-                                <th scope="col" style="font-size: 30px;">簡介</th>
+                                <th scope="col" style="font-size: 30px;">狀態</th>
+                                <th scope="col" style="font-size: 30px;">訂購人</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             if (isset($_SESSION['sellerName'])) {
                                 $sellerName = $_SESSION['sellerName'];
+                                $historyStatus = $row['historyStatus'];
+                                $userEmail = $row['userEmail'];
                                 $total = 0;
                                 $link = mysqli_connect("localhost", "root", '12345678', "sa");
-                                $sql = "select * from product where product.sellerName = '$sellerName'";
+                                $sql = "select * from product,cart where product.productCode=cart.productCode 
+                                        and product.sellerName = '$sellerName';";
                                 $rs = mysqli_query($link, $sql);
-                                while ($product = mysqli_fetch_array($rs)) {
+                                while ($row = mysqli_fetch_array($rs)) {
                             ?>
                                     <tr>
-                                        <form action="./function/productCRUD.php">
+                                        <form action="./function/changeStatus.php" method="get">
                                             <td>
-                                                <div class="media">
-                                                    <div class="d-flex">
-                                                        <img src="<?php echo $product['productPicture'] ?>" alt="" />
-                                                    </div>
-                                                </div>
+                                                <?php echo $row['productName']; ?>
                                             </td>
                                             <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productName' type="text" value="<?php echo $product['productName']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
+                                                <?php echo $row['sellerName']; ?>
                                             </td>
                                             <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productPrice' type="text" value="<?php echo $product['productPrice']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
+                                                <?php echo $row['productPrice']; ?>
                                             </td>
                                             <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productAmount' type="text" value="<?php echo $product['productAmount']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
+                                                <?php echo $row['cartAmount']; ?>
                                             </td>
                                             <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productTag' type="text" value="<?php echo $product['productTag']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
+                                                <?php echo $row['historyStatus']; ?>
                                             </td>
                                             <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productInfo' type="text" value="<?php echo $product['productInfo']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
+                                                <?php echo $row['userEmail']; ?>
                                             </td>
-                                            <input type="hidden" value="<?php echo $product['productPicture']; ?>" name="productPicture">
-                                            <input type="hidden" value="<?php echo $product['productCode']; ?>" name="productCode">
+                                            <input type="hidden" value="<?php echo $row['userEmail']; ?>" name="userEmail">
                                             <td>
-                                                <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="update" class="btn_5">修改
-                                                </button>
-                                                <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="delete" class="btn_5">刪除
+                                                <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="pickUp" class="btn_5">可取貨
                                                 </button>
                                             </td>
                                         </form>

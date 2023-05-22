@@ -5,14 +5,14 @@ if (isset($_GET["delete"])) {
     $sql = "DELETE FROM `cart` WHERE productCode='$productCode'";
     $result = mysqli_query($link, $sql);
     if ($result) { ?>
-<script>
-alert("刪除成功");
-</script>
-<?php } else {
+        <script>
+            alert("刪除成功");
+        </script>
+    <?php } else {
     ?>
-<script>
-alert("刪除失敗");
-</script>
+        <script>
+            alert("刪除失敗");
+        </script>
 <?php
     }
 }
@@ -75,9 +75,7 @@ alert("更新失敗");
                             <img src="img/newLogo.png" alt="logo" style="height: 80px;" />
                             foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -94,27 +92,35 @@ alert("更新失敗");
                                         店家列表</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
                                         if (empty($_SESSION['level'])) {
                                         ?>
-                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
                                         <a class="dropdown-item" href="checkout.php">下單</a>
-                                        <a class="dropdown-item" href="cart.php">購物車</a>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                                        ?>
+                                            <a class="dropdown-item" href="cart.php">購物車</a>
+                                        <?php } ?>
+                                        <?php
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                                        ?>
+                                            <a class="dropdown-item" href="orderStatus.php">訂單狀態</a>
+                                        <?php } ?>
                                         <a class="dropdown-item" href="historyOrder.php">歷史訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                        <a class="dropdown-item" href="userCenter.php">會員中心</a>
+                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                        <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -128,28 +134,33 @@ alert("更新失敗");
                             <?php
                             if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                             ?>
-                            <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
                             <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                             ?>
-                            <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
                             <?php } else { ?>
-                            <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <?php } ?>
-                            <a href="cart.php">
-                                <i class="flaticon-shopping-cart-black-shape"></i>
-                            </a>
+                            <?php
+                            if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                            ?>
+                                <a href="cart.php">
+                                    <i class="flaticon-shopping-cart-black-shape"></i>
+                                </a>
+                            <?php } ?>
+
                             <a class=dropdown-item>
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
-                                <?php echo $_SESSION['sellerName']; ?>
+                                    <?php echo $_SESSION['sellerName']; ?>
 
-                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -279,7 +290,7 @@ alert("更新失敗");
                                 <!-- Link back to Colorlib can' t be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                document.write(new Date().getFullYear());
+                                    document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by
