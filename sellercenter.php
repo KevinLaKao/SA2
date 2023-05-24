@@ -39,7 +39,9 @@
                             <img src="img/foodcrate.png" alt="logo" height="80px" />
                             Foodcrate
                         </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
                         </button>
 
@@ -56,37 +58,38 @@
                                         店家列表</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         其他
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <?php
                                         if (empty($_SESSION['level'])) {
                                         ?>
-                                            <a class="dropdown-item" href="userLogin.php"> 登入 </a>
+                                        <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
                                         <?php if (isset($_SESSION['userName'])) { ?>
-                                            <a class="dropdown-item" href="checkout.php">下單</a>
+                                        <a class="dropdown-item" href="checkout.php">下單</a>
                                         <?php } ?>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                            <a class="dropdown-item" href="cart.php">購物車</a>
+                                        <a class="dropdown-item" href="cart.php">購物車</a>
                                         <?php } ?>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                            <a class="dropdown-item" href="orderStatus.php">訂單狀態</a>
+                                        <a class="dropdown-item" href="orderStatus.php">訂單狀態</a>
                                         <?php } ?>
                                         <a class="dropdown-item" href="historyOrder.php">歷史訂單</a>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
-                                            <a class="dropdown-item" href="userCenter.php">會員中心</a>
+                                        <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
-                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                        <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -99,32 +102,32 @@
                             <?php
                             if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                             ?>
-                                <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
+                            <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
                             <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                             ?>
-                                <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                            <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
                             <?php } else { ?>
-                                <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
+                            <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <?php } ?>
                             <?php
                             if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                             ?>
-                                <a href="cart.php">
-                                    <i class="flaticon-shopping-cart-black-shape"></i>
-                                </a>
+                            <a href="cart.php">
+                                <i class="flaticon-shopping-cart-black-shape"></i>
+                            </a>
                             <?php } ?>
                             <a class=dropdown-item>
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
 
-                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
-                                    <?php echo $_SESSION['sellerName']; ?>
+                                <?php echo $_SESSION['sellerName']; ?>
 
-                                    <a class="dropdown-item" href="./function/logOut.php">登出</a>
+                                <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>
                         </div>
@@ -157,7 +160,8 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <h3>店家資訊</h3>
-                        <form class="row contact_form" action="./function/sellerInfoCRUD.php" method="get" novalidate="novalidate">
+                        <form class="row contact_form" action="./function/sellerInfoCRUD.php" method="get"
+                            novalidate="novalidate">
                             <?php
                             $sellerName = $_SESSION['sellerName'];
                             $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
@@ -167,44 +171,59 @@
                             ?>
                             <div class="col-md-6 form-group ">
                                 店家名稱:
-                                <input type="text" disabled="disabled" class="form-control" id="number" name="sellerPhone" placeholder=<?php echo $_SESSION['sellerName'] ?> />
+                                <input type="text" disabled="disabled" class="form-control" id="number"
+                                    name="sellerPhone" placeholder=<?php echo $_SESSION['sellerName'] ?> />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group">
                                 電話號碼
-                                <input type="text" class="form-control" id="number" name="sellerPhone" placeholder="<?php echo $_SESSION['sellerPhone'] ?>" />
+                                <input type="text" class="form-control" id="number" name="sellerPhone"
+                                    placeholder="<?php echo $_SESSION['sellerPhone'] ?>" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group">
                                 電子郵件
-                                <input type="text" disabled="disabled" class="form-control" id="email" name="sellerEmail" placeholder="<?php echo $_SESSION['sellerEmail'] ?>" />
+                                <input type="text" disabled="disabled" class="form-control" id="email"
+                                    name="sellerEmail" placeholder="<?php echo $_SESSION['sellerEmail'] ?>" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-12 form-group">
                                 店家地址
-                                <input type="text" class="form-control" id="add1" name="sellerAddress" placeholder="<?php echo $_SESSION['sellerAddress'] ?>" />
+                                <input type="text" class="form-control" id="add1" name="sellerAddress"
+                                    placeholder="<?php echo $_SESSION['sellerAddress'] ?>" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-12 form-group">
                                 <div class="creat_account">
                                     <h3>店家簡介</h3>
                                 </div>
-                                <textarea class="form-control" name="sellerInfo" id="message" rows="1" placeholder="<?php echo $_SESSION['sellerInfo'] ?>"></textarea>
+                                <textarea class="form-control" name="sellerInfo" id="message" rows="1"
+                                    placeholder="<?php echo $_SESSION['sellerInfo'] ?>"></textarea>
                             </div>
                             <button type="submit" name="act" value="update" class="btn_3">
                                 送出修改資料
                             </button>
                         </form>
                     </div>
-                    <div class="sellerPhoto">
+                    <div class="col-lg-4 userPhoto">
+                        <?php
+                        $sellerEmail = $_SESSION['sellerEmail'];
+                        $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+                        $sql = "SELECT sellerPhoto FROM seller WHERE sellerEmail='$sellerEmail'";
+                        $result = mysqli_query($link, $sql);
+                        while ($rs = mysqli_fetch_array($result)) {
+                            $photoAddress = $rs['sellerPhoto'];
+                        ?>
                         <div class="sellerImg">
-                            <img src="img/client_2.png">
+                            <img src="<?php echo substr($photoAddress, 1); ?>" alt="沒有" />
                         </div>
-                        <div class="imgRevise">
-                            <button type="submit" value="submit" class="btn_3 stick">
-                                修改大頭貼
-                            </button>
-                        </div>
+                        <?php } ?>
+                        <form action="./function/uploadPicture.php" method="POST" class="imgRevise"
+                            enctype="multipart/form-data">
+                            <div>
+                                <input type="file" name="image" />
+                                <input type="submit" class="btn_3" value="修改" />
+                            </div>
                     </div>
                 </div>
     </section>
@@ -219,27 +238,32 @@
                         <form class="row contact_form" action="./function/productCRUD.php" method="get">
                             <div class="col-md-6 form-group ">
                                 店家名稱
-                                <input type="text" class="form-control" id="first" name="sellerName" disabled="disabled" placeholder="<?php echo $_SESSION['sellerName'] ?>" />
+                                <input type="text" class="form-control" id="first" name="sellerName" disabled="disabled"
+                                    placeholder="<?php echo $_SESSION['sellerName'] ?>" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group ">
                                 商品名稱
-                                <input type="text" class="form-control" id="number" name="productName" placeholder="商品名稱" />
+                                <input type="text" class="form-control" id="number" name="productName"
+                                    placeholder="商品名稱" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group">
                                 商品價格
-                                <input type="text" class="form-control" id="number" name="productPrice" placeholder="商品價格" />
+                                <input type="text" class="form-control" id="number" name="productPrice"
+                                    placeholder="商品價格" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group ">
                                 商品數量
-                                <input type="text" class="form-control" id="number" name="productAmount" placeholder="商品數量" />
+                                <input type="text" class="form-control" id="number" name="productAmount"
+                                    placeholder="商品數量" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group ">
                                 商品類別
-                                <input type="text" class="form-control" id="number" name="productTag" placeholder="請輸入:生鮮or雜糧or蔬果" />
+                                <input type="text" class="form-control" id="number" name="productTag"
+                                    placeholder="請輸入:生鮮or雜糧or蔬果" />
                                 <span class="placeholder"></span>
                             </div>
 
@@ -247,7 +271,8 @@
                                 <div class="creat_account">
                                     <h3>商品簡介</h3>
                                 </div>
-                                <textarea class="form-control" name="productInfo" id="message" rows="1" placeholder="商品簡介"></textarea>
+                                <textarea class="form-control" name="productInfo" id="message" rows="1"
+                                    placeholder="商品簡介"></textarea>
                             </div>
                             <button type="submit" name="act" value="create" class="btn_3">
                                 送出產品資料
@@ -328,7 +353,7 @@
                                                 style="text-align: center; padding-left: 0px; ">
                                         </div>
                                     </td>
-                                    
+
                                     <input type="hidden" value="<?php echo $product['productPicture']; ?>"
                                         name="productPicture">
                                     <input type="hidden" value="<?php echo $product['productCode']; ?>"
@@ -345,10 +370,10 @@
                                     </td>
                                 </form>
                             <tr>
-                            <?php
+                                <?php
                                 }
                             }
-                            ?>
+                                ?>
                         </tbody>
                     </table>
                 </div>
@@ -367,7 +392,7 @@
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
                                 <script>
-                                    document.write(new Date().getFullYear());
+                                document.write(new Date().getFullYear());
                                 </script>
                                 All rights reserved | This template is made with
                                 <i class="ti-heart" aria-hidden="true"></i> by

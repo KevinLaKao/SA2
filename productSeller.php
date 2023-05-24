@@ -223,7 +223,7 @@
                             ?>
                                 <div class="col-lg-6 col-sm-6">
                                     <div class="single_product_item">
-                                        <img src="<?php echo $seller["sellerPhoto"] ?>" alt="#" class="img-fluid" />
+                                        <img src="<?php echo substr($seller['sellerPhoto'], 1) ?>" alt="#" class="img-fluid" />
                                         <h3>
                                             <?php echo $seller['sellerName'] ?>
                                         </h3>
