@@ -209,12 +209,23 @@
                         </form>
                     </div>
                     <div class="col-lg-4 userPhoto">
-                        <div class="userImg">
-                            <img src="img/client_2.png" alt="" />
-                        </div>
-                        <div class="imgRevise">
-                            <button type="submit" value="submit" class="btn_3">修改</button>
-                        </div>
+                        <?php
+                        $userEmail = $_SESSION['userEmail'];
+                        $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+                        $sql = "SELECT photoAddress FROM user WHERE userEmail='$userEmail'";
+                        $result = mysqli_query($link, $sql);
+                        while ($rs = mysqli_fetch_array($result)) {
+                            $photoAddress = $rs['photoAddress'];
+                        ?>
+                            <div class="userImg">
+                                <img src="<?php echo substr($photoAddress, 1); ?>" alt="沒有" />
+                            </div>
+                        <?php } ?>
+                        <form action="./function/uploadPicture.php" method="POST" class="imgRevise" enctype="multipart/form-data">
+                            <div>
+                                <input type="file" name="image" />
+                                <input type="submit" class="btn_3" value="修改" />
+                            </div>
                     </div>
                 </div>
             </div>
