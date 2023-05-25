@@ -94,7 +94,11 @@
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
                                             <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
-                                        <?php } ?>
+                                        <?php } 
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'manager') {
+                                            ?>
+                                            <a class="dropdown-item" href="manager.php">管理中心</a>
+                                        <?php }?>
                                     </div>
                                 </li>
 

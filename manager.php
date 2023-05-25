@@ -147,8 +147,17 @@
         </div>
     </section>
     <!-- breadcrumb part end-->
+    <section class="cart_area section_padding" >
+        <div class="container">
+            <center>
+                <a href="#news"><button class="btn_3">公告管理</button>
+                <a href="#product"><button class="btn_3">商品管理</button>
+                <a href="#account"><button class="btn_3">帳號管理</button>
+            </center>
+        </div>
+    </section>
     <!-- 管理者刪除公告-->
-    <section class="cart_area section_padding">
+    <section class="cart_area section_padding" id="news">
         <div class="container">
             <div class="cart_inner">
                 <div class="table-responsive">
@@ -221,7 +230,7 @@
     </section>
               
     <!--================產品刪除 =================-->
-    <section class="cart_area section_padding">
+    <section class="cart_area section_padding" id="product">
         <div class="container">
             <div class="cart_inner">
                 <div class="table-responsive">
@@ -263,7 +272,7 @@
             </div>
     </section>
     <!-- 店家帳號 -->
-    <section class="cart_area section_padding">
+    <section class="cart_area section_padding" id="account">
         <div class="container">
             <div class="cart_inner">
                 <div class="table-responsive">
