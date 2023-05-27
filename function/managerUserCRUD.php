@@ -5,7 +5,7 @@ $userEmail = $_GET['userEmail'];
 $userPhone = $_GET['userPhone'];
 $userAddress = $_GET['userAddress'];
 $userBirthday = $_GET['userBirthday'];
-$link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
+$link = @mysqli_connect('localhost', 'root', '', 'sa');
 if ($act == 'delete') {
     //這裡是刪除
     $sql = "delete from user where userName='$userName'";

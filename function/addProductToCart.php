@@ -12,7 +12,7 @@ if (!empty($_GET['userEmail'])) {
     <?php
 }
 
-$link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+$link = mysqli_connect('localhost', 'root', '', 'sa');
 $isExistSql = "select * from cart";
 $result = mysqli_query($link, $isExistSql);
 while ($row = mysqli_fetch_array($result)) {

@@ -63,9 +63,12 @@
                                         ?>
                                             <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
-                                        <?php if (isset($_SESSION['userName'])) { ?>
+                                        <?php 
+                                        if (isset($_SESSION['userName'])) { 
+                                            if($_SESSION['level'] != 'manager'){
+                                        ?>
                                             <a class="dropdown-item" href="checkout.php">下單</a>
-                                        <?php } ?>
+                                        <?php }} ?>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
@@ -87,9 +90,9 @@
                                             <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
                                         <?php }
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'manager') {
-                                            ?>
+                                        ?>
                                             <a class="dropdown-item" href="manager.php">管理中心</a>
-                                        <?php }?>
+                                        <?php } ?>
                                     </div>
                                 </li>
 
@@ -105,7 +108,10 @@
                                 <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
                             <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                             ?>
-                                <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="sellerCenter.php"><i class="ti-user"></i></a>
+                            <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'manager') {
+                            ?>
+                                <a id="search_1" href="manager.php"><i class="ti-user"></i></a>
                             <?php } else { ?>
                                 <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <?php } ?>
@@ -116,15 +122,18 @@
                                     <i class="flaticon-shopping-cart-black-shape"></i>
                                 </a>
                             <?php } ?>
+
                             <a class=dropdown-item>
                                 <?php
                                 if (isset($_SESSION['userName'])) {
                                     echo $_SESSION['userName']; ?>
+
                                     <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php
                                 } else if (isset($_SESSION['sellerName'])) {
                                 ?>
                                     <?php echo $_SESSION['sellerName']; ?>
+
                                     <a class="dropdown-item" href="./function/logOut.php">登出</a>
                                 <?php } ?>
                             </a>

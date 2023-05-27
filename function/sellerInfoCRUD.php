@@ -6,7 +6,7 @@ $sellerPhone = $_GET['sellerPhone'];
 $sellerAddress = $_GET['sellerAddress'];
 $sellerInfo = $_GET['sellerInfo'];
 
-$link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+$link = mysqli_connect('localhost', 'root', '', 'sa');
 if ($act == "create") {
     //這裡是新增的語法
     $sql  = "insert into account (member_id, member_password, member_name) 

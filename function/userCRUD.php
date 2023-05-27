@@ -6,11 +6,11 @@ $userphone = $_GET['userphone'];
 $username = $_GET['username'];
 $useraddress = $_GET['useraddress'];
 $userbirthday = $_GET['userbirthday'];
-$link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
+$link = @mysqli_connect('localhost', 'root', '', 'sa');
 if ($act == "usercreate") {
     //這裡是新增的語法
-    $sql = "INSERT INTO `user`(`userName`, `userEmail`, `userPhone`, `userPassword`, `userAddress`, `userBirthday`, `level`) 
-    VALUES ('$username', '$useremail','$userphone','$userpassword','$useraddress','$userbirthday','user')";
+    $sql = "INSERT INTO `user`(`userName`, `userEmail`, `userPhone`, `userPassword`, `userAddress`, `userPhoto`, `userBirthday`, `level`) 
+    VALUES ('$username', '$useremail','$userphone','$userpassword','$useraddress', '','$userbirthday','user')";
     if (mysqli_query($link, $sql)) {
 ?>
         <script>

@@ -36,8 +36,8 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="index.php">
-                            <img src="img/foodcrate.png" alt="logo" height="80px" />
-                            Foodcrate
+                            <img src="img/newLogo.png" alt="logo" style="height: 80px;" />
+                            foodcrate
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
@@ -87,13 +87,10 @@
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
                                             <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
-                                        <?php }
-                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'manager') {
-                                            ?>
-                                            <a class="dropdown-item" href="manager.php">管理中心</a>
-                                        <?php }?>
+                                        <?php } ?>
                                     </div>
                                 </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.php">聯絡我們</a>
                                 </li>
@@ -106,7 +103,10 @@
                                 <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
                             <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                             ?>
-                                <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="sellerCenter.php"><i class="ti-user"></i></a>
+                            <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'manager') {
+                            ?>
+                                <a id="search_1" href="manager.php"><i class="ti-user"></i></a>
                             <?php } else { ?>
                                 <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <?php } ?>
@@ -117,6 +117,7 @@
                                     <i class="flaticon-shopping-cart-black-shape"></i>
                                 </a>
                             <?php } ?>
+
                             <a class=dropdown-item>
                                 <?php
                                 if (isset($_SESSION['userName'])) {
@@ -136,7 +137,6 @@
                 </div>
             </div>
         </div>
-
 
     </header>
 
@@ -177,7 +177,7 @@
                                 $historyStatus = $row['historyStatus'];
                                 $userEmail = $row['userEmail'];
                                 $total = 0;
-                                $link = mysqli_connect("localhost", "root", '12345678', "sa");
+                                $link = mysqli_connect("localhost", "root", '', "sa");
                                 $sql = "select * from product,cart where product.productCode=cart.productCode 
                                         and product.sellerName = '$sellerName';";
                                 $rs = mysqli_query($link, $sql);
