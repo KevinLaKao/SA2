@@ -1,38 +1,41 @@
 <?php
-$act = $_GET['act'];
-$productName = $_GET['productName'];
-$productPrice = $_GET['productPrice'];
-$productInfo = $_GET['productInfo'];
-$productAmount = $_GET['productAmount'];
+$act = $_POST['act'];
+$productName = $_POST['productName'];
+$productPrice = $_POST['productPrice'];
+$productAmount = $_POST['productAmount'];
 $sellerName = $_SESSION['sellerName'];
-$productTag = $_GET['productTag'];
-$file_name = $_FILES['image']['name'];
-$file_tmp = $_FILES['image']['tmp_name'];
-$target_dir = '../img/';
-$target_file = $target_dir . basename($file_name);
-
+$productTag = $_POST['productTag'];
+if (isset($_FILES['image']['name'])) {
+    $file_name = $_FILES['image']['name'];
+    $file_tmp = $_FILES['image']['tmp_name'];
+    $target_dir = '../img/';
+    $target_file = $target_dir . basename($file_name);
+}
 $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
 if ($act == "create") {
     //這裡是新增的語法
     $sqlProduct = "SELECT * FROM product";
     $productCount = mysqli_query($link, $sqlProduct);
     $countRows = mysqli_num_rows($productCount) + 1;
-    $sql  = "INSERT INTO product (productName, productPrice, productInfo, productAmount, sellerName, productCode , productTag, productPicture) 
-            values ('$productName', '$productPrice','$productInfo' ,'$productAmount','$sellerName','$countRows','$productTag','$target_file')";
-    if (mysqli_query($link, $sql)) {
+    if (move_uploaded_file($file_tmp, $target_file)) {
+        $sql  = "INSERT INTO `product`(`productCode`, `productName`, `productAmount`, `productPicture`, `sellerName`, `productTag`, `productPrice`)
+     VALUES ('$countRows','$productName','$productAmount','$target_file','$sellerName','$productTag','$productPrice')";
+        echo $sql;
+        if (mysqli_query($link, $sql)) {
 ?>
-        <script>
-            alert(" 新 增 成 功 ！");
-            location = '../sellerCenter.php';
-        </script>
-    <?php
-    } else {
-    ?>
-        <script>
-            alert(" 新 增 失 敗 ！");
-            location = '../sellerCenter.php';
-        </script>
-    <?php
+            <script>
+                alert(" 新 增 成 功 ！");
+                location = '../sellercenter.php';
+            </script>
+        <?php
+        } else {
+        ?>
+            <script>
+                alert(" 新 增 失 敗 ！");
+                location = '../sellercenter.php';
+            </script>
+        <?php
+        }
     }
 } elseif ($act == "update") {
     //這裡是修改
@@ -43,17 +46,17 @@ if ($act == "create") {
             where productCode='$productCode'";
 
     if (mysqli_query($link, $sql)) {
-    ?>
+        ?>
         <script>
             alert(" 修 改 成 功 ！");
-            location = '../sellerCenter.php';
+            location = '../sellercenter.php';
         </script>
     <?php
     } else {
     ?>
         <script>
             alert(" 修 改 失 敗 ！");
-            location = '../sellerCenter.php';
+            location = '../sellercenter.php';
         </script>
     <?php
     }
@@ -66,14 +69,14 @@ if ($act == "create") {
     ?>
         <script>
             alert(" 刪 除 成 功 ！");
-            location = '../sellerCenter.php';
+            location = '../sellercenter.php';
         </script>
     <?php
     } else {
     ?>
         <script>
             alert(" 刪 除 失 敗 ！");
-            location = '../sellerCenter.php';
+            location = '../sellercenter.php';
         </script>
 <?php
     }
