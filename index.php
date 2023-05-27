@@ -67,7 +67,7 @@
                                             <a class="dropdown-item" href="checkout.php">下單</a>
                                         <?php } ?>
                                         <?php
-                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'user'&& $_SESSION['level'] == 'manager') {
                                         ?>
                                             <a class="dropdown-item" href="cart.php">購物車</a>
                                         <?php } ?>
@@ -82,9 +82,9 @@
                                         ?>
                                             <a class="dropdown-item" href="userCenter.php">會員中心</a>
                                         <?php }
-                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'manager') {
                                         ?>
-                                            <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                            <a class="dropdown-item" href="manager.php">管理中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
