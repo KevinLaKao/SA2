@@ -6,7 +6,7 @@ $sellerPhone = $_GET['sellerPhone'];
 $sellerName = $_GET['sellerName'];
 $sellerAddress = $_GET['sellerAddress'];
 $sellerInfo = $_GET['sellerInfo'];
-$link = @mysqli_connect('localhost', 'root', '12345678', 'sa');
+$link = @mysqli_connect('localhost', 'root', '', 'sa');
 if ($act == "sellerCreate") {
     //這裡是新增的語法
     $sql = "INSERT INTO `seller`(`sellerName`, `sellerEmail`, `sellerPhone`, `sellerPassword`, `sellerPhoto`, `sellerAddress`, `sellerInfo`, `level`) 

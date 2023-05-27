@@ -3,7 +3,7 @@ $act = $_GET['act'];
 $newsId = $_GET['newsId'];
 $newsTitle = $_GET['newsTitle'];
 $newsContent = $_GET['newsContent'];
-$link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+$link = mysqli_connect('localhost', 'root', '', 'sa');
 if ($act == "create") {
     //這裡是新增的語法
     $sqlNews = "SELECT * FROM news";

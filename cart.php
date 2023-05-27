@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET["delete"])) {
     $productCode = $_GET["delete"];
-    $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+    $link = mysqli_connect('localhost', 'root', '', 'sa');
     $sql = "DELETE FROM `cart` WHERE productCode='$productCode'";
     $result = mysqli_query($link, $sql);
     if ($result) { ?>
@@ -13,7 +13,7 @@ if (isset($_GET["delete"])) {
         <script>
             alert("刪除失敗");
         </script>
-<?php
+    <?php
     }
 }
 if (isset($_GET["update"])) {
@@ -21,18 +21,18 @@ if (isset($_GET["update"])) {
     echo $productCode;
     $cartAmount = $_GET["amount"];
     echo $cartAmount;
-    $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+    $link = mysqli_connect('localhost', 'root', '', 'sa');
     $sql = "UPDATE `cart` SET cartAmount='$cartAmount'  WHERE productCode='$productCode'";
     $result = mysqli_query($link, $sql);
     if ($result) { ?>
-<script>
-alert("更新成功");
-</script>
-<?php } else {
+        <script>
+            alert("更新成功");
+        </script>
+    <?php } else {
     ?>
-<script>
-alert("更新失敗");
-</script>
+        <script>
+            alert("更新失敗");
+        </script>
 <?php
     }
 }
@@ -139,7 +139,10 @@ alert("更新失敗");
                                 <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
                             <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                             ?>
-                                <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="sellerCenter.php"><i class="ti-user"></i></a>
+                            <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'manager') {
+                            ?>
+                                <a id="search_1" href="manager.php"><i class="ti-user"></i></a>
                             <?php } else { ?>
                                 <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <?php } ?>
@@ -207,69 +210,60 @@ alert("更新失敗");
                             if (isset($_SESSION['userName']) || isset($_SESSION['sellerName'])) {
                                 $userEmail = $_SESSION['userEmail'];
                                 $total = 0;
-                                $link = mysqli_connect("localhost", "root", "12345678", "sa");
+                                $link = mysqli_connect("localhost", "root", '', "sa");
                                 $sql = "select * from cart, product where cart.productCode = product.productCode and historyStatus = 'notReady' and cart.userEmail = '$userEmail';";
                                 $rs = mysqli_query($link, $sql);
                                 while ($product = mysqli_fetch_array($rs)) {
                             ?>
-                            <form method="get" action="cart.php">
-                                <tr>
-                                    <td>
-                                        <div class="media">
-                                            <div class="d-flex">
-                                                <img src="<?php echo $product['productPicture'] ?>" alt="" />
-                                            </div>
-                                            <div class="media-body">
-                                                <p style="font-size: 20px;">
-                                                    <?php echo $product['productName'] ?>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>$<?php $total += $product['productPrice'] * $product['cartAmount'];
+                                    <form method="get" action="cart.php">
+                                        <tr>
+                                            <td>
+                                                <div class="media">
+                                                    <div class="d-flex">
+                                                        <img src="<?php echo $product['productPicture'] ?>" alt="" />
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <p style="font-size: 20px;">
+                                                            <?php echo $product['productName'] ?>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>$<?php $total += $product['productPrice'] * $product['cartAmount'];
                                                         echo $product['productPrice']; ?></h5>
-                                    </td>
-                                    <td>
-                                        <div class="product_count">
-                                            <input class="input-number" name='amount' type="number"
-                                                value="<?php echo $product['cartAmount'] ?>"
-                                                placeholder="<?php echo $product['cartAmount'] ?>" min="0" max="50"
-                                                style="text-align: center; padding-left: 0px; " />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <h5>$<?php echo $product['productPrice'] * $product['cartAmount']; ?>
+                                            </td>
+                                            <td>
+                                                <div class="product_count">
+                                                    <input class="input-number" name='amount' type="number" value="<?php echo $product['cartAmount'] ?>" placeholder="<?php echo $product['cartAmount'] ?>" min="0" max="50" style="text-align: center; padding-left: 0px; " />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <h5>$<?php echo $product['productPrice'] * $product['cartAmount']; ?>
 
-                                                <button
-                                                    style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;"
-                                                    name="update" value="<?php echo $product['productCode'] ?>"
-                                                    class="btn_5">更新</button>
-                                                <button
-                                                    style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;"
-                                                    name="delete" value="<?php echo $product['productCode'] ?>"
-                                                    class="btn_5">刪除
-                                                </button>
+                                                        <button style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="update" value="<?php echo $product['productCode'] ?>" class="btn_5">更新</button>
+                                                        <button style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="delete" value="<?php echo $product['productCode'] ?>" class="btn_5">刪除
+                                                        </button>
 
-                                            </h5>
-                                        </div>
-                                <tr>
-                            </form>
-                            <?php
+                                                    </h5>
+                                                </div>
+                                        <tr>
+                                    </form>
+                                <?php
                                 }
                                 ?>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <h5>總額</h5>
-                                </td>
-                                <td>
-                                    <h5>$<?php echo $total;
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <h5>總額</h5>
+                                    </td>
+                                    <td>
+                                        <h5>$<?php echo $total;
                                             } ?></h5>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
 
                         </tbody>
                     </table>

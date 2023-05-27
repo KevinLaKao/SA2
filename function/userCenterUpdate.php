@@ -6,7 +6,7 @@ $userAddress = $_GET['userAddress'];
 $userBirthday = $_GET['userBirthday'];
 $userEmail = $_SESSION['userEmail'];
 
-$link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+$link = mysqli_connect('localhost', 'root', '', 'sa');
 $sql = "update user set userPhone='$userPhone',
     userAddress='$userAddress',
     userBirthday='$userBirthday'

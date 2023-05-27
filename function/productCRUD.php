@@ -11,7 +11,7 @@ if (isset($_FILES['image']['name'])) {
     $target_dir = '../img/';
     $target_file = $target_dir . basename($file_name);
 }
-$link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+$link = mysqli_connect('localhost', 'root', '', 'sa');
 if ($act == "create") {
     //這裡是新增的語法
     $sqlProduct = "SELECT * FROM product";
@@ -25,14 +25,14 @@ if ($act == "create") {
 ?>
             <script>
                 alert(" 新 增 成 功 ！");
-                location = '../sellercenter.php';
+                location = '../sellerCenter.php';
             </script>
         <?php
         } else {
         ?>
             <script>
                 alert(" 新 增 失 敗 ！");
-                location = '../sellercenter.php';
+                location = '../sellerCenter.php';
             </script>
         <?php
         }
@@ -49,14 +49,14 @@ if ($act == "create") {
         ?>
         <script>
             alert(" 修 改 成 功 ！");
-            location = '../sellercenter.php';
+            location = '../sellerCenter.php';
         </script>
     <?php
     } else {
     ?>
         <script>
             alert(" 修 改 失 敗 ！");
-            location = '../sellercenter.php';
+            location = '../sellerCenter.php';
         </script>
     <?php
     }
@@ -69,14 +69,14 @@ if ($act == "create") {
     ?>
         <script>
             alert(" 刪 除 成 功 ！");
-            location = '../sellercenter.php';
+            location = '../sellerCenter.php';
         </script>
     <?php
     } else {
     ?>
         <script>
             alert(" 刪 除 失 敗 ！");
-            location = '../sellercenter.php';
+            location = '../sellerCenter.php';
         </script>
 <?php
     }

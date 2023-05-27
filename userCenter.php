@@ -36,8 +36,8 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="index.php">
-                            <img src="img/foodcrate.png" alt="logo" height="80px" />
-                            Foodcrate
+                            <img src="img/newLogo.png" alt="logo" style="height: 80px;" />
+                            foodcrate
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="menu_icon"><i class="fas fa-bars"></i></span>
@@ -90,6 +90,7 @@
                                         <?php } ?>
                                     </div>
                                 </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.php">聯絡我們</a>
                                 </li>
@@ -102,7 +103,10 @@
                                 <a id="search_1" href="userCenter.php"><i class="ti-user"></i></a>
                             <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                             ?>
-                                <a id="search_1" href="sellercenter.php"><i class="ti-user"></i></a>
+                                <a id="search_1" href="sellerCenter.php"><i class="ti-user"></i></a>
+                            <?php } else if (isset($_SESSION['level']) && $_SESSION['level'] == 'manager') {
+                            ?>
+                                <a id="search_1" href="manager.php"><i class="ti-user"></i></a>
                             <?php } else { ?>
                                 <a id="search_1" href="userLogin.php"><i class="ti-user"></i></a>
                             <?php } ?>
@@ -113,6 +117,7 @@
                                     <i class="flaticon-shopping-cart-black-shape"></i>
                                 </a>
                             <?php } ?>
+
                             <a class=dropdown-item>
                                 <?php
                                 if (isset($_SESSION['userName'])) {
@@ -132,6 +137,7 @@
                 </div>
             </div>
         </div>
+
     </header>
 
     <!-- breadcrumb part start-->
@@ -211,14 +217,14 @@
                     <div class="col-lg-4 userPhoto">
                         <?php
                         $userEmail = $_SESSION['userEmail'];
-                        $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
-                        $sql = "SELECT photoAddress FROM user WHERE userEmail='$userEmail'";
+                        $link = mysqli_connect('localhost', 'root', '', 'sa');
+                        $sql = "SELECT userPhoto FROM user WHERE userEmail='$userEmail'";
                         $result = mysqli_query($link, $sql);
                         while ($rs = mysqli_fetch_array($result)) {
-                            $photoAddress = $rs['photoAddress'];
+                            $userPhoto = $rs['userPhoto'];
                         ?>
                             <div class="userImg">
-                                <img src="<?php echo substr($photoAddress, 1); ?>" alt="沒有" />
+                                <img src="<?php echo substr($userPhoto, 1); ?>" alt="沒有" />
                             </div>
                         <?php } ?>
                         <form action="./function/uploadPicture.php" method="POST" class="imgRevise" enctype="multipart/form-data">

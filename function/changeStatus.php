@@ -2,7 +2,7 @@
 $act = $_GET['act'];
 $userEmail = $_SESSION['userEmail'];
 
-$link = mysqli_connect('localhost', 'root', '12345678', 'sa');
+$link = mysqli_connect('localhost', 'root', '', 'sa');
 if ($act == "processing") {
     $processing = "update cart set historyStatus = 'processing' where userEmail = '$userEmail'";
     $result = mysqli_query($link, $processing);
