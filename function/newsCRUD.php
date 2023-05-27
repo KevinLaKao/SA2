@@ -10,7 +10,6 @@ if ($act == "create") {
     $productCount = mysqli_query($link, $sqlNews);
     $sql  = "INSERT INTO news (newsId, newsTitle, newsContent) 
             values ('$newsId', '$newsTitle','$newsContent')";
-            echo $sql;
     if (mysqli_query($link, $sql)) {
 ?>
         <script>
