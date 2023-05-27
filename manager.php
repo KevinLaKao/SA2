@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -26,8 +25,26 @@
     <link rel="stylesheet" href="css/style.css" />
     <!-- member CSS -->
     <link rel="stylesheet" href="css/store.css">
-</head>
 
+    <style>
+        #inputBar{
+            border: 2px solid rgba(176, 142, 173, 0.2);
+        }
+        #inputBar:focus{
+            border: 2px solid rgba(176, 142, 173, 1);
+        }
+        #inputTextArea{
+            border: 2px solid rgba(176, 142, 173, 0.2);
+            height:136px; 
+            width:378px;
+        }
+        #inputTextArea:focus{
+            border: 2px solid rgba(176, 142, 173, 1);
+            height:136px; 
+            width:378px;
+        }
+    </style>
+</head>
 <body>
     <!--::header part start::-->
     <header class="main_menu home_menu">
@@ -85,6 +102,10 @@
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
                                             <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                        <?php }
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'manager') {
+                                            ?>
+                                            <a class="dropdown-item" href="sellerCenter.php">管理中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -147,22 +168,22 @@
         </div>
     </section>
     <!-- breadcrumb part end-->
-    <section class="cart_area section_padding" >
+    <section class="cart_area section_padding"  style="padding:50px 0px;">
         <div class="container">
-            <center>
-                <a href="#news"><button class="btn_3">公告管理</button>
-                <a href="#product"><button class="btn_3">商品管理</button>
-                <a href="#account"><button class="btn_3">帳號管理</button>
-            </center>
+            <center style="display: flex;flex-direction: row;justify-content: space-evenly; position:sticky; top:20px;">
+                <a href="#news"><button class="btn_3">公告管理</button></a>
+                <a href="#product"><button class="btn_3">商品管理</button></a>
+                <a href="#account"><button class="btn_3">帳號管理</button></a>
+            </center>      
         </div>
     </section>
     <!-- 管理者刪除公告-->
-    <section class="cart_area section_padding" id="news">
+    <section class="cart_area section_padding" style="padding:50px 0px;">
         <div class="container">
             <div class="cart_inner">
                 <div class="table-responsive">
                     <table class="table">
-                        <h3>最新公告們:</h3>
+                        <h3 id="news">最新公告們:</h3>
                         <thead>
                             <tr>
                                 <th scope="col" style="font-size: 30px;">newsTitle</th>
@@ -179,8 +200,8 @@
                             ?>
                             <form action="./function/newsCRUD.php" method="get">
                                 <tr>
-                                    <td><input style="border-color:#b08ead;border-style:double" type="text" name="newsTitle" value="<?php echo $row['newsTitle'];?>" /></td>
-                                    <td><textarea style="border-color:#b08ead;border-style:double;height:136px;width:378px" type="text" name="newsContent"value="<?php echo $row['newsContent'];?>"><?php echo $row['newsContent'];?></textarea></td>
+                                    <td><input id="inputBar" type="text" name="newsTitle" value="<?php echo $row['newsTitle'];?>" /></td>
+                                    <td><textarea id="inputTextArea" type="text" name="newsContent"value="<?php echo $row['newsContent'];?>"><?php echo $row['newsContent'];?></textarea></td>
                                     <td><input type="hidden" name="newsId" value="<?php echo $row['newsId'];?>"></td>
                                     <td><button type="submit" name="act" value="update" class="btn_3">修改</button></td>
                                     <td><button type="submit" name="act" value="delete" class="btn_3">刪除</button></td>
@@ -191,8 +212,8 @@
                         <tbody>
                             <form action="./function/newsCRUD.php" method="get">
                                 <tr>
-                                    <td><input style="border-color:#b08ead;border-style:double" type="text" name="newsTitle"  /></td>
-                                    <td><textarea style="border-color:#b08ead;border-style:double;height:136px;width:378px" type="text" name="newsContent"></textarea></td>
+                                    <td><input id="inputBar" type="text" name="newsTitle"  /></td>
+                                    <td><textarea id="inputTextArea" type="text" name="newsContent"></textarea></td>
                                     <td></td>
                                     <td><button type="submit" name="act" value="create" class="btn_3">新增公告</button> 
                                 </tr>
@@ -202,40 +223,14 @@
                 </div>
             </div>
     </section>
-      
-    <!-- 新增公告 -->
-    <section class="checkout_area section_padding" style="padding: 0px;">
-        <div class="container">
-            <div class="billing_details">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h3>最新公告新增</h3>
-                        <form class="row contact_form" action="./function/newsCRUD.php" method="get">
-                            <div class="col-md-12 form-group">
-                                公告標題
-                                <input type="text" class="form-control" id="add1" name="newsTitle" placeholder="早安" />
-                                <span class="placeholder"></span>
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <div class="creat_account">
-                                    <h3>公告內容</h3>
-                                </div>
-                                <textarea class="form-control" name="newsContent" id="message" rows="1" placeholder="早安"></textarea>
-                            </div>
-                            <button type="submit" name="act" value="create" class="btn_3">
-                                新增公告
-                            </button>
-                        </form>
-                    </div>
-    </section>
-              
+        
     <!--================產品刪除 =================-->
-    <section class="cart_area section_padding" id="product">
+    <section class="cart_area section_padding" style="padding:50px 0px;">
         <div class="container">
             <div class="cart_inner">
                 <div class="table-responsive">
                       <table class="table">
-                          <h3>商品們:</h3>
+                          <h3 id="product">商品們:</h3>
                           <thead>
                               <tr>
                                   <th scope="col" style="font-size: 30px;">productPicture</th>
@@ -271,13 +266,12 @@
                 </div>
             </div>
     </section>
-    <!-- 店家帳號 -->
-    <section class="cart_area section_padding" id="account">
+    <!-- 店家帳號 -->>
         <div class="container">
             <div class="cart_inner">
                 <div class="table-responsive">
                     <table class="table">
-                        <h3>店家帳號:</h3>
+                        <h3 id="account">店家帳號:</h3>
                         <thead>
                             <tr>
                                 <th scope="col" style="font-size: 30px;">sellerName</th>
@@ -317,7 +311,7 @@
             </div>
     </section>
     <!-- 會員帳號 -->
-    <section class="cart_area section_padding">
+    <section class="cart_area section_padding" style="padding:50px 0px;">
         <div class="container">
             <div class="cart_inner">
                 <div class="table-responsive">
