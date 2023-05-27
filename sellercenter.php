@@ -224,6 +224,7 @@
                                 <input type="file" name="image" />
                                 <input type="submit" class="btn_3" value="修改" />
                             </div>
+                        </form>
                     </div>
                 </div>
     </section>
@@ -235,11 +236,12 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <h3>新增商品</h3>
-                        <form class="row contact_form" action="./function/productCRUD.php" method="get">
-                            <div class="col-md-6 form-group ">
+                        <form class="row contact_form imgRevise" action="./function/productCRUD.php" method="get"
+                            enctype="multipart/form-data">
+                            <div class=" col-md-6 form-group ">
                                 店家名稱
-                                <input type="text" class="form-control" id="first" name="sellerName" disabled="disabled"
-                                    placeholder="<?php echo $_SESSION['sellerName'] ?>" />
+                                <input type=" text" class="form-control" id="first" name="sellerName"
+                                    disabled="disabled" placeholder="<?php echo $_SESSION['sellerName'] ?>" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group ">
@@ -263,7 +265,7 @@
                             <div class="col-md-6 form-group ">
                                 商品類別
                                 <input type="text" class="form-control" id="number" name="productTag"
-                                    placeholder="請輸入:生鮮or雜糧or蔬果" />
+                                    placeholder="請輸入:生鮮or雜糧or蔬果"></input>
                                 <span class="placeholder"></span>
                             </div>
 
@@ -274,21 +276,18 @@
                                 <textarea class="form-control" name="productInfo" id="message" rows="1"
                                     placeholder="商品簡介"></textarea>
                             </div>
-                            <button type="submit" name="act" value="create" class="btn_3">
-                                送出產品資料
-                            </button>
+                            <div class="sellerPhoto">
+                                <div class="sellerImg">
+                                    <input type="file" name="image" />
+                                </div>
+                                <div>
+                                    <button type="submit" name="act" value="create" class="btn_3">
+                                        送出產品資料
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
-                    <div class="sellerPhoto">
-                        <div class="sellerImg">
-                            <img src="img/client_1.png">
-                        </div>
-                        <div class="imgRevise">
-                            <button type="submit" value="submit" class="btn_3 stick">
-                                新增產品照片
-                            </button>
-                        </div>
-                        <div>
     </section>
 
     <!-- 店家修改刪除產品 -->

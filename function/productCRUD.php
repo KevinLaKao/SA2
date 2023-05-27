@@ -6,6 +6,10 @@ $productInfo = $_GET['productInfo'];
 $productAmount = $_GET['productAmount'];
 $sellerName = $_SESSION['sellerName'];
 $productTag = $_GET['productTag'];
+$file_name = $_FILES['image']['name'];
+$file_tmp = $_FILES['image']['tmp_name'];
+$target_dir = '../img/';
+$target_file = $target_dir . basename($file_name);
 
 $link = mysqli_connect('localhost', 'root', '12345678', 'sa');
 if ($act == "create") {
@@ -14,7 +18,7 @@ if ($act == "create") {
     $productCount = mysqli_query($link, $sqlProduct);
     $countRows = mysqli_num_rows($productCount) + 1;
     $sql  = "INSERT INTO product (productName, productPrice, productInfo, productAmount, sellerName, productCode , productTag, productPicture) 
-            values ('$productName', '$productPrice','$productInfo' ,'$productAmount','$sellerName','$countRows','$productTag','img/d5.jpg')";
+            values ('$productName', '$productPrice','$productInfo' ,'$productAmount','$sellerName','$countRows','$productTag','$target_file')";
     if (mysqli_query($link, $sql)) {
 ?>
         <script>
