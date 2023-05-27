@@ -45,7 +45,7 @@ if (isset($_GET["update"])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Food Crate</title>
-    <link rel="icon" href="img/favicon.png">
+    <link rel="icon" href="img/foodcrate.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- animate CSS -->

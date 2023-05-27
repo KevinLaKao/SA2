@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>foodcrate</title>
-    <link rel="icon" href="img/smile.png">
+    <link rel="icon" href="img/foodcrate.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- animate CSS -->
@@ -63,12 +63,13 @@
                                         ?>
                                             <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
-                                        <?php 
-                                        if (isset($_SESSION['userName'])) { 
-                                            if($_SESSION['level'] != 'manager'){
+                                        <?php
+                                        if (isset($_SESSION['userName'])) {
+                                            if ($_SESSION['level'] != 'manager') {
                                         ?>
-                                            <a class="dropdown-item" href="checkout.php">下單</a>
-                                        <?php }} ?>
+                                                <a class="dropdown-item" href="checkout.php">下單</a>
+                                        <?php }
+                                        } ?>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
