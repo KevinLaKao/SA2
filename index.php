@@ -173,7 +173,9 @@
                 ?>
                     <div class="col-lg-4 col-sm-6" align='center'>
                         <div class="single_product_item">
-                            <a href="productList.php?sellerName=<?php echo $row['sellerName'] ?>"><img src="<?php echo $row['sellerPhoto']; ?>" alt="#" class="img-fluid" /></a>
+                            <a href="productList.php?sellerName=<?php echo $row['sellerName'] ?>">
+                                <img src="<?php echo $row['sellerPhoto']; ?>" alt="#" class="img-fluid"  style="width: 300px; height:250px; border-radius:10px;"/>
+                            </a>
                             <a href="productList.php?sellerName=<?php echo $row['sellerName'] ?>">
                                 <h3>
                                     <?php echo $row['sellerName']; ?>

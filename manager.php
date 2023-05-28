@@ -168,7 +168,7 @@
             </div>
         </div>
     </header>
-
+    
     <!-- breadcrumb part start-->
     <section class="breadcrumb_part">
         <div class="container">

@@ -36,7 +36,7 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="index.php">
-                            <img src="img/newLogo.png" alt="logo" style="height: 80px;" />
+                            <img src="img/newLogo.png" alt="logo" style="height: 80px" />
                             foodcrate
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,9 +65,13 @@
                                         ?>
                                             <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
-                                        <?php if (isset($_SESSION['userName'])) { ?>
-                                            <a class="dropdown-item" href="checkout.php">下單</a>
-                                        <?php } ?>
+                                        <?php
+                                        if (isset($_SESSION['userName'])) {
+                                            if ($_SESSION['level'] != 'manager') {
+                                        ?>
+                                                <a class="dropdown-item" href="checkout.php">下單</a>
+                                        <?php }
+                                        } ?>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
@@ -87,6 +91,10 @@
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
                                             <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                        <?php }
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'manager') {
+                                        ?>
+                                            <a class="dropdown-item" href="manager.php">管理中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -137,7 +145,6 @@
                 </div>
             </div>
         </div>
-
     </header>
 
     <!-- breadcrumb part start-->
@@ -174,8 +181,6 @@
                             <?php
                             if (isset($_SESSION['sellerName'])) {
                                 $sellerName = $_SESSION['sellerName'];
-                                $historyStatus = $row['historyStatus'];
-                                $userEmail = $row['userEmail'];
                                 $total = 0;
                                 $link = mysqli_connect("localhost", "root", '', "sa");
                                 $sql = "select * from product,cart where product.productCode=cart.productCode 
@@ -183,7 +188,6 @@
                                 $rs = mysqli_query($link, $sql);
                                 while ($row = mysqli_fetch_array($rs)) {
                             ?>
-
                                     <tr>
                                         <form action="./function/changeStatus.php" method="get">
                                             <?php if ($row['historyStatus'] == 'pickUp' or $row['historyStatus'] == 'processing') { ?>
@@ -207,8 +211,10 @@
                                                 </td>
                                                 <input type="hidden" value="<?php echo $row['userEmail']; ?>" name="userEmail">
                                                 <td>
-                                                    <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="pickUp" class="btn_5">可取貨
+                                                    <?php if ($row['historyStatus'] == 'processing') { ?>
+                                                        <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="pickUp" class="btn_5">可取貨
                                                     </button>
+                                                    <?php } ?>
                                                     <?php if ($row['historyStatus'] == 'pickUp') { ?>
                                                         <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="complete" class="btn_5">已取貨完成訂單
                                                         </button>
@@ -217,10 +223,9 @@
                                             <?php } ?>
                                         </form>
                                     <tr>
-
                                 <?php
+                                    }
                                 }
-                            }
                                 ?>
                         </tbody>
                     </table>
