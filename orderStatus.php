@@ -73,49 +73,52 @@
                                 $rs = mysqli_query($link, $sql);
                                 while ($row = mysqli_fetch_array($rs)) {
                             ?>
-                                    <tr>
-                                        <form action="./function/changeStatus.php" method="get">
-                                            <?php if ($row['historyStatus'] == 'pickUp' or $row['historyStatus'] == 'processing') { ?>
-                                                <td>
-                                                    <?php echo $row['productName']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $row['sellerName']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $row['productPrice']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $row['cartAmount']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $row['historyStatus']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $row['userEmail']; ?>
-                                                </td>
-                                                <input type="hidden" value="<?php echo $row['userEmail']; ?>" name="userEmail">
-                                                <td>
-                                                    <?php if ($row['historyStatus'] == 'processing') { ?>
-                                                        <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="pickUp" class="btn_5">可取貨
-                                                    </button>
-                                                    <?php } ?>
-                                                    <?php if ($row['historyStatus'] == 'pickUp') { ?>
-                                                        <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="complete" class="btn_5">已取貨完成訂單
-                                                        </button>
-                                                    <?php } ?>
-                                                </td>
+                            <tr>
+                                <form action="./function/changeStatus.php" method="get">
+                                    <?php if ($row['historyStatus'] == 'pickUp' or $row['historyStatus'] == 'processing') { ?>
+                                        <td>
+                                            <?php echo $row['productName']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $row['sellerName']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $row['productPrice']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $row['cartAmount']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $row['historyStatus']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $row['userEmail']; ?>
+                                        </td>
+                                        <input type="hidden" value="<?php echo $row['userEmail']; ?>" name="userEmail">
+                                        <td>
+                                            <?php if ($row['historyStatus'] == 'processing') { ?>
+                                                <input type="hidden" name="productCode" value="<?php echo $row['productCode']; ?>">
+                                                <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="pickUp" class="btn_5">可取貨
+                                            </button>
                                             <?php } ?>
-                                        </form>
-                                    <tr>
-                                <?php
-                                    }
+                                            <?php if ($row['historyStatus'] == 'pickUp') { ?>
+                                                <input type="hidden" name="productCode" value="<?php echo $row['productCode']; ?>">
+                                                <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="complete" class="btn_5">已取貨完成訂單
+                                                </button>
+                                            <?php } ?>
+                                        </td>
+                                    <?php } ?>
+                                </form>
+                            <tr>
+                            <?php
                                 }
-                                ?>
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
     </section>
     <!--================End Checkout Area =================-->
 

@@ -127,11 +127,9 @@ if (isset($_GET["update"])) {
                                             <td>
                                                 <div>
                                                     <h5>$<?php echo $product['productPrice'] * $product['cartAmount']; ?>
-
                                                         <button style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="update" value="<?php echo $product['productCode'] ?>" class="btn_5">更新</button>
                                                         <button style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="delete" value="<?php echo $product['productCode'] ?>" class="btn_5">刪除
                                                         </button>
-
                                                     </h5>
                                                 </div>
                                         <tr>

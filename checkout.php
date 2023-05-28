@@ -28,9 +28,9 @@
 
 <body>
   <!--::header part start::-->
-  <?php include("header.php");?>
-  
-    <!-- breadcrumb part start-->
+  <?php include("header.php"); ?>
+
+  <!-- breadcrumb part start-->
   <section class="breadcrumb_part">
     <div class="container">
       <div class="row">
@@ -45,76 +45,46 @@
   <!-- breadcrumb part end-->
 
   <!--================Checkout Area =================-->
-  <section class="checkout_area section_padding">
+  <section class="confirmation_part section_padding">
     <div class="container">
-      <div class="billing_details">
-        <div class="row">
-          <div class="col-lg-8">
-            <h3>領貨人資訊</h3>
-            <form class="row contact_form" action="historyOrder.php" method="post" novalidate="novalidate">
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="first" name="name" />
-                <span class="placeholder" data-placeholder="姓名"></span>
-              </div>
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="number" name="number" />
-                <span class="placeholder" data-placeholder="電話號碼"></span>
-              </div>
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="email" name="compemailany" />
-                <span class="placeholder" data-placeholder="電子郵件"></span>
-              </div>
-
-              <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="add1" name="add1" />
-                <span class="placeholder" data-placeholder="住家地址"></span>
-              </div>
-              <div class="col-md-12 form-group">
-                <div class="creat_account">
-                  <h3>意見回饋</h3>
-                </div>
-                <textarea class="form-control" name="message" id="message" rows="1" placeholder="Order Notes"></textarea>
-              </div>
-            </form>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="order_box">
-              <h2>你的訂單</h2>
-              <form action="./function/changeStatus.php" method="get">
-                <table>
-                  <thead>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="order_details_iner">
+            <h3>歷史訂單</h3>
+            <form action="./function/changeStatus.php" method="get">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th style="width: 200px;">品名</th>
+                  <th style="width: 200px;">數量</th>
+                  <th style="width: 200px;">單價</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                if (isset($_SESSION['userName'])) {
+                  $link = mysqli_connect("localhost", "root", '', "sa");
+                  $sql = "select * from cart, product where cart.productCode = product.productCode and historyStatus='notReady';";
+                  $rs = mysqli_query($link, $sql);
+                  $total = 0;
+                  while ($row = mysqli_fetch_array($rs)) {
+                    $total += $row['productPrice'] * $row['cartAmount'];
+                ?>
                     <tr>
-                      <th>品名</th>
-                      <th>數量</th>
-                      <th>單價</th>
+                      <td><?php echo $row['productName']; ?></td>
+                      <td>x<?php echo $row['cartAmount']; ?></td>
+                      <td>$<?php echo $row['productPrice']; ?></td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    if (isset($_SESSION['userName'])) {
-                      $link = mysqli_connect("localhost", "root", '', "sa");
-                      $sql = "select * from cart, product where cart.productCode = product.productCode and historyStatus='notReady';";
-                      $rs = mysqli_query($link, $sql);
-                      $total = 0;
-                      while ($row = mysqli_fetch_array($rs)) {
-                        $total += $row['productPrice'] * $row['cartAmount'];
-                    ?>
-                        <tr>
-                          <td><?php echo $row['productName']; ?></td>
-                          <td>x<?php echo $row['cartAmount']; ?></td>
-                          <td>$<?php echo $row['productPrice']; ?></td>
-                        </tr>
-                    <?php
-                      }
-                    }
-                    ?>
-                  </tbody>
-                </table>
-                總計$<?php echo $total; ?>
-                <button class="btn_3" type="submit" name="act" value="processing">確認下單</button>
-              </form>
+                  <?php
+                  }
+                  ?>
+              </tbody>
+            </table>
+            <div style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center;">
+              <td>總計$<?php echo $total; } ?></td>
+              <td><button style="width: 150px;" class="btn_3" type="submit" name="act" value="processing">確認下單</button></td>
             </div>
+            </form>
           </div>
         </div>
       </div>
