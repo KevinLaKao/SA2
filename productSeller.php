@@ -233,11 +233,12 @@
                                 $sql = "select * from seller";
                             }
                             $rs = mysqli_query($link, $sql);
-                            while ($seller = mysqli_fetch_array($rs)) {
+                            $times = 0;
+                            while ($seller = mysqli_fetch_array($rs) and $times < 8) {
                             ?>
                                 <div class="col-lg-6 col-sm-6">
                                     <div class="single_product_item">
-                                        <img src="<?php echo $seller['sellerPhoto'] ?>" alt="#" class="img-fluid" />
+                                        <img src="<?php echo $seller['sellerPhoto'] ?>" alt="#" class="img-fluid" style="width: 300px; height:250px; border-radius:10px;"/>
                                         <h3>
                                             <?php echo $seller['sellerName'] ?>
                                         </h3>
@@ -251,13 +252,13 @@
                                         </form>
                                     </div>
                                 </div>
-
                             <?php
+                                $times += 1;
                             }
                             ?>
                         </div>
                         <div class="load_more_btn text-center">
-                            <a href="#" class="btn_3">更多商品</a>
+                            <a href="" class="btn_3">更多商品</a>
                         </div>
                     </div>
                 </div>

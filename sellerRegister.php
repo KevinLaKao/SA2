@@ -34,7 +34,7 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="index.php">
-                            <img src="img/newLogo.png" alt="logo" style="height: 80px;" />
+                            <img src="img/newLogo.png" alt="logo" style="height: 80px" />
                             foodcrate
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,9 +63,13 @@
                                         ?>
                                             <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
-                                        <?php if (isset($_SESSION['userName'])) { ?>
-                                            <a class="dropdown-item" href="checkout.php">下單</a>
-                                        <?php } ?>
+                                        <?php
+                                        if (isset($_SESSION['userName'])) {
+                                            if ($_SESSION['level'] != 'manager') {
+                                        ?>
+                                                <a class="dropdown-item" href="checkout.php">下單</a>
+                                        <?php }
+                                        } ?>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
@@ -85,6 +89,10 @@
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
                                             <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                        <?php }
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'manager') {
+                                        ?>
+                                            <a class="dropdown-item" href="manager.php">管理中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -135,7 +143,6 @@
                 </div>
             </div>
         </div>
-
     </header>
     <!-- Header part end-->
 

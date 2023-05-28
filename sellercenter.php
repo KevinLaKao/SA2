@@ -36,7 +36,7 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="index.php">
-                            <img src="img/newLogo.png" alt="logo" style="height: 80px;" />
+                            <img src="img/newLogo.png" alt="logo" style="height: 80px" />
                             foodcrate
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,9 +65,13 @@
                                         ?>
                                             <a class="dropdown-item" href="userLogin.php"> 登入 </a>
                                         <?php } ?>
-                                        <?php if (isset($_SESSION['userName'])) { ?>
-                                            <a class="dropdown-item" href="checkout.php">下單</a>
-                                        <?php } ?>
+                                        <?php
+                                        if (isset($_SESSION['userName'])) {
+                                            if ($_SESSION['level'] != 'manager') {
+                                        ?>
+                                                <a class="dropdown-item" href="checkout.php">下單</a>
+                                        <?php }
+                                        } ?>
                                         <?php
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'user') {
                                         ?>
@@ -87,6 +91,10 @@
                                         if (isset($_SESSION['level']) && $_SESSION['level'] == 'seller') {
                                         ?>
                                             <a class="dropdown-item" href="sellerCenter.php">店家中心</a>
+                                        <?php }
+                                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'manager') {
+                                        ?>
+                                            <a class="dropdown-item" href="manager.php">管理中心</a>
                                         <?php } ?>
                                     </div>
                                 </li>
@@ -137,7 +145,6 @@
                 </div>
             </div>
         </div>
-
     </header>
 
     <!-- breadcrumb part start-->
@@ -162,45 +169,38 @@
                     <div class="col-lg-8">
                         <h3>店家資訊</h3>
                         <form class="row contact_form" action="./function/sellerInfoCRUD.php" method="get" novalidate="novalidate">
-                            <?php
-                            $sellerName = $_SESSION['sellerName'];
-                            $link = mysqli_connect('localhost', 'root', '', 'sa');
-                            $sql = "select * from seller where sellerName='$sellerName'";
-                            $result = mysqli_query($link, $sql);
-                            $row = mysqli_fetch_array($result)
-                            ?>
                             <div class="col-md-6 form-group ">
                                 店家名稱:
-                                <input type="text" disabled="disabled" class="form-control" id="number" name="sellerPhone" placeholder=<?php echo $_SESSION['sellerName'] ?> />
+                                <input type="text" disabled="disabled" class="form-control" id="number" name="sellerPhone" value=<?php echo $_SESSION['sellerName'] ?> />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group">
                                 電話號碼
-                                <input type="text" class="form-control" id="number" name="sellerPhone" placeholder="<?php echo $_SESSION['sellerPhone'] ?>" />
+                                <input type="text" class="form-control" id="number" name="sellerPhone" value="<?php echo $_SESSION['sellerPhone'] ?>" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-6 form-group">
                                 電子郵件
-                                <input type="text" disabled="disabled" class="form-control" id="email" name="sellerEmail" placeholder="<?php echo $_SESSION['sellerEmail'] ?>" />
+                                <input type="text" disabled="disabled" class="form-control" id="email" name="sellerEmail" value="<?php echo $_SESSION['sellerEmail'] ?>" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-12 form-group">
                                 店家地址
-                                <input type="text" class="form-control" id="add1" name="sellerAddress" placeholder="<?php echo $_SESSION['sellerAddress'] ?>" />
+                                <input type="text" class="form-control" id="add1" name="sellerAddress" value="<?php echo $_SESSION['sellerAddress'] ?>" />
                                 <span class="placeholder"></span>
                             </div>
                             <div class="col-md-12 form-group">
                                 <div class="creat_account">
                                     <h3>店家簡介</h3>
                                 </div>
-                                <textarea class="form-control" name="sellerInfo" id="message" rows="1" placeholder="<?php echo $_SESSION['sellerInfo'] ?>"></textarea>
+                                <textarea class="form-control" name="sellerInfo" id="message" rows="1" aria-valuetext="<?php echo $_SESSION['sellerInfo'] ?>"></textarea>
                             </div>
-                            <button type="submit" name="act" value="update" class="btn_3">
+                            <button type="submit" name="act" value="update" class="btn_3" style="margin-left: 15px;">
                                 送出修改資料
                             </button>
                         </form>
                     </div>
-                    <div class="col-lg-4 userPhoto">
+                    <div class="col-lg-4 userPhoto" style="display: flex; flex-direction:column; justify-content:space-around;">
                         <?php
                         $sellerEmail = $_SESSION['sellerEmail'];
                         $link = mysqli_connect('localhost', 'root', '', 'sa');
@@ -208,13 +208,12 @@
                         $result = mysqli_query($link, $sql);
                         while ($rs = mysqli_fetch_array($result)) {
                             $userPhoto = $rs['sellerPhoto'];
+                        }
                         ?>
-                            <div class="sellerImg">
-                                <img src="<?php echo substr($userPhoto, 1); ?>" alt="沒有" />
-                            </div>
-                        <?php } ?>
-                        <form action="./function/uploadPicture.php" method="POST" class="imgRevise" enctype="multipart/form-data">
-                            <div>
+                        <img src="<?php echo $userPhoto; ?>" alt="沒有" />
+                        <form action="./function/uploadPicture.php" method="POST" enctype="multipart/form-data">
+                            <h3>修改圖片</h3>
+                            <div style="display: flex;">
                                 <input type="file" name="image" />
                                 <input type="submit" class="btn_3" value="修改" />
                             </div>
@@ -227,45 +226,53 @@
     <section class="checkout_area section_padding" style="padding: 0px;">
         <div class="container">
             <div class="billing_details">
-                <div class="row">
+                <form class="row contact_form imgRevise" action="./function/productCRUD.php" method="post" enctype="multipart/form-data">
                     <div class="col-lg-8">
                         <h3>新增商品</h3>
-                        <form class="row contact_form imgRevise" action="./function/productCRUD.php" method="post" enctype="multipart/form-data">
-                            <div class=" col-md-6 form-group ">
-                                店家名稱
-                                <input type=" text" class="form-control" id="first" name="sellerName" disabled="disabled" placeholder="<?php echo $_SESSION['sellerName'] ?>" />
-                                <span class="placeholder"></span>
+                        <div>
+                            <div style="display: flex; justify-content: space-evenly; padding-bottom: 25px;">
+                                <div>
+                                    店家名稱
+                                    <input type=" text" class="form-control" id="first" name="sellerName" disabled="disabled" placeholder="<?php echo $_SESSION['sellerName'] ?>" />
+                                    <span class="placeholder"></span>
+                                </div>
+                                <div>
+                                    商品名稱
+                                    <input type="text" class="form-control" id="number" name="productName" placeholder="商品名稱" />
+                                    <span class="placeholder"></span>
+                                </div>
                             </div>
-                            <div class="col-md-6 form-group ">
-                                商品名稱
-                                <input type="text" class="form-control" id="number" name="productName" placeholder="商品名稱" />
-                                <span class="placeholder"></span>
+                            <div style="display: flex; justify-content: space-evenly; padding-bottom: 25px;">
+                                <div>
+                                    商品價格
+                                    <input type="text" class="form-control" id="number" name="productPrice" placeholder="商品價格" />
+                                    <span class="placeholder"></span>
+                                </div>
+                                <div>
+                                    商品數量
+                                    <input type="text" class="form-control" id="number" name="productAmount" placeholder="商品數量" />
+                                    <span class="placeholder"></span>
+                                </div>
                             </div>
-                            <div class="col-md-6 form-group">
-                                商品價格
-                                <input type="text" class="form-control" id="number" name="productPrice" placeholder="商品價格" />
-                                <span class="placeholder"></span>
+                            <div style="display: flex; justify-content: space-evenly; padding-bottom: 25px;">
+                                <div>
+                                    商品類別
+                                    <input type="text" class="form-control" id="number" name="productTag" placeholder="請輸入:生鮮or雜糧or蔬果"></input>
+                                </div>
+                                <div style="width: 182.5px; display: grid;align-items: center;justify-content: center;">
+                                    <input type="file" name="image" />
+                                </div>
                             </div>
-                            <div class="col-md-6 form-group ">
-                                商品數量
-                                <input type="text" class="form-control" id="number" name="productAmount" placeholder="商品數量" />
-                                <span class="placeholder"></span>
-                            </div>
-                            <div class="col-md-6 form-group ">
-                                商品類別
-                                <input type="text" class="form-control" id="number" name="productTag" placeholder="請輸入:生鮮or雜糧or蔬果"></input>
-                            </div>
-                            <div class="sellerImg">
-                                <input type="file" name="image" />
-                            </div>
-                            <div>
-                                <button type="submit" name="act" value="create" class="btn_3">
-                                    送出產品資料
-                                </button>
-                            </div>
+                        </div>
                     </div>
-                    </form>
-                </div>
+                    <div class="col-lg-4" style="display: flex; flex-direction: column; justify-content: flex-end;">
+                        <button type="submit" name="act" value="create" class="btn_3">
+                            送出產品資料
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </section>
 
     <!-- 店家修改刪除產品 -->
@@ -293,50 +300,49 @@
                                 $rs = mysqli_query($link, $sql);
                                 while ($product = mysqli_fetch_array($rs)) {
                             ?>
-                                    <tr>
-                                        <form action="./function/productCRUD.php">
-                                            <td>
-                                                <div class="media">
-                                                    <div class="d-flex">
-                                                        <img src="<?php echo $product['productPicture'] ?>" alt="" />
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productName' type="text" value="<?php echo $product['productName']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productPrice' type="text" value="<?php echo $product['productPrice']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productAmount' type="text" value="<?php echo $product['productAmount']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="product_count">
-                                                    <input class="input-number" name='productTag' type="text" value="<?php echo $product['productTag']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                                </div>
-                                            </td>
-
-                                            <input type="hidden" value="<?php echo $product['productPicture']; ?>" name="productPicture">
-                                            <input type="hidden" value="<?php echo $product['productCode']; ?>" name="productCode">
-                                            <td>
-                                                <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="update" class="btn_5">修改
-                                                </button>
-                                                <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="delete" class="btn_5">刪除
-                                                </button>
-                                            </td>
-                                        </form>
-                                    <tr>
-                                <?php
+                            <tr>
+                                <form action="./function/productCRUD.php">
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="<?php echo $product['productPicture'] ?>" alt="" />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        <input class="input-number" name='productName' type="text" value="<?php echo $product['productName']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        <input class="input-number" name='productPrice' type="text" value="<?php echo $product['productPrice']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        <input class="input-number" name='productAmount' type="text" value="<?php echo $product['productAmount']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        <input class="input-number" name='productTag' type="text" value="<?php echo $product['productTag']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
+                                    </div>
+                                </td>
+                                <input type="hidden" value="<?php echo $product['productPicture']; ?>" name="productPicture">
+                                <input type="hidden" value="<?php echo $product['productCode']; ?>" name="productCode">
+                                <td>
+                                    <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="update" class="btn_5">修改
+                                    </button>
+                                    <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="delete" class="btn_5">刪除
+                                    </button>
+                                </td>
+                                </form>
+                            <tr>
+                            <?php
                                 }
                             }
-                                ?>
+                            ?>
                         </tbody>
                     </table>
                 </div>
