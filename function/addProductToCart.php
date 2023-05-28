@@ -26,7 +26,7 @@ while($row = mysqli_fetch_array($productAmountResult)){
     $limit = $row['productAmount'];
 }
 
-if($limit > $cartTotalAmount){
+if($limit <= $cartTotalAmount){
     ?>
         <script>
             alert(" 無法加入購物車，商品數量不夠，待商家補貨。 ");

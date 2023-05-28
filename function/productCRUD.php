@@ -60,7 +60,6 @@ if ($act == "create") {
     //這裡是刪除
     $productCode = $_GET['productCode'];
     $sql = "delete from product where productCode='$productCode';";
-    echo $sql;
     if (mysqli_query($link, $sql)) {
     ?>
         <script>
