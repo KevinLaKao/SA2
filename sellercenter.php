@@ -207,10 +207,10 @@
                         $sql = "SELECT sellerPhoto FROM seller WHERE sellerEmail='$sellerEmail'";
                         $result = mysqli_query($link, $sql);
                         while ($rs = mysqli_fetch_array($result)) {
-                            $userPhoto = $rs['sellerPhoto'];
+                            $sellerPhoto = $rs['sellerPhoto'];
                         }
                         ?>
-                        <img src="<?php echo $userPhoto; ?>" alt="沒有" />
+                        <img src="<?php echo $sellerPhoto; ?>" alt="沒有" />
                         <form action="./function/uploadPicture.php" method="POST" enctype="multipart/form-data">
                             <h3>修改圖片</h3>
                             <div style="display: flex;">
@@ -225,10 +225,10 @@
     <!-- 新增商品 -->
     <section class="checkout_area section_padding" style="padding: 0px;">
         <div class="container">
-            <div class="billing_details">
-                <form class="row contact_form imgRevise" action="./function/productCRUD.php" method="post" enctype="multipart/form-data">
-                    <div class="col-lg-8">
-                        <h3>新增商品</h3>
+            <div class="billing_details row">
+                <div class="col-lg-8">
+                    <h3>新增商品</h3>
+                    <form id="form1" action="./function/productCRUD.php" method="get">
                         <div>
                             <div style="display: flex; justify-content: space-evenly; padding-bottom: 25px;">
                                 <div>
@@ -259,18 +259,17 @@
                                     商品類別
                                     <input type="text" class="form-control" id="number" name="productTag" placeholder="請輸入:生鮮or雜糧or蔬果"></input>
                                 </div>
-                                <div style="width: 182.5px; display: grid;align-items: center;justify-content: center;">
-                                    <input type="file" name="image" />
-                                </div>
+                                <div style="width: 182.5px;"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4" style="display: flex; flex-direction: column; justify-content: flex-end;">
-                        <button type="submit" name="act" value="create" class="btn_3">
-                            送出產品資料
-                        </button>
-                    </div>
-                </form>
+                        <input type="hidden" name="act" value="create">
+                    </form>
+                </div>
+                <div class="col-lg-4" style="display: flex; flex-direction: column; justify-content: flex-end;">
+                    <button type="submit" name="act" value="create" class="btn_3" onclick="submitForm();">
+                        送出產品資料
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -288,6 +287,8 @@
                                 <th scope="col" style="font-size: 30px;">價格</th>
                                 <th scope="col" style="font-size: 30px; padding-right: 25px;">數量</th>
                                 <th scope="col" style="font-size: 30px;">類型</th>
+                                <th scope="col" style="font-size: 30px;"></th>
+                                <th scope="col" style="font-size: 30px;"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -299,54 +300,99 @@
                                 $sql = "select * from product where product.sellerName = '$sellerName'";
                                 $rs = mysqli_query($link, $sql);
                                 while ($product = mysqli_fetch_array($rs)) {
+                                    if ($product['productPicture'] != '') {
                             ?>
-                            <tr>
-                                <form action="./function/productCRUD.php">
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="<?php echo $product['productPicture'] ?>" alt="" />
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input class="input-number" name='productName' type="text" value="<?php echo $product['productName']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input class="input-number" name='productPrice' type="text" value="<?php echo $product['productPrice']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input class="input-number" name='productAmount' type="text" value="<?php echo $product['productAmount']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input class="input-number" name='productTag' type="text" value="<?php echo $product['productTag']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
-                                    </div>
-                                </td>
-                                <input type="hidden" value="<?php echo $product['productPicture']; ?>" name="productPicture">
-                                <input type="hidden" value="<?php echo $product['productCode']; ?>" name="productCode">
-                                <td>
-                                    <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="update" class="btn_5">修改
-                                    </button>
-                                    <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="delete" class="btn_5">刪除
-                                    </button>
-                                </td>
-                                </form>
-                            <tr>
-                            <?php
+                                        <tr>
+                                            <form action="./function/productCRUD.php" method="get">
+                                                <td>
+                                                    <div class="media">
+                                                        <div class="d-flex">
+                                                            <img src="<?php echo $product['productPicture']; ?>" alt="" />
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="product_count">
+                                                        <input class="input-number" name='productName' type="text" value="<?php echo $product['productName']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="product_count">
+                                                        <input class="input-number" name='productPrice' type="text" value="<?php echo $product['productPrice']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="product_count">
+                                                        <input class="input-number" name='productAmount' type="text" value="<?php echo $product['productAmount']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="product_count">
+                                                        <input class="input-number" name='productTag' type="text" value="<?php echo $product['productTag']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
+                                                    </div>
+                                                </td>
+                                                <input type="hidden" value="<?php echo $product['productPicture']; ?>" name="productPicture">
+                                                <input type="hidden" value="<?php echo $product['productCode']; ?>" name="productCode">
+                                                <td>
+                                                    <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="update" class="btn_5">修改
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="delete" class="btn_5">刪除
+                                                    </button>
+                                                </td>
+                                            </form>
+                                        <tr>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <div style="display: flex;">
+                                                    <form action="./function/uploadPicture.php" method="post" enctype="multipart/form-data" id="abcd">
+                                                        <input type="hidden" name="productCode" value="<?php echo $product['productCode']; ?>">
+                                                        <input type="file" name="image" />
+                                                    </form>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="product_count">
+                                                    <input class="input-number" name='productName' type="text" value="<?php echo $product['productName']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="product_count">
+                                                    <input class="input-number" name='productPrice' type="text" value="<?php echo $product['productPrice']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="product_count">
+                                                    <input class="input-number" name='productAmount' type="text" value="<?php echo $product['productAmount']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="product_count">
+                                                    <input class="input-number" name='productTag' type="text" value="<?php echo $product['productTag']; ?>" min="0" max="10" style="text-align: center; padding-left: 0px; ">
+                                                </div>
+                                            </td>
+                                            <input type="hidden" value="<?php echo $product['productPicture']; ?>" name="productPicture">
+                                            <input type="hidden" value="<?php echo $product['productCode']; ?>" name="productCode">
+                                            <td>
+                                                <button form="abcd" type="submit" style="border-radius: 5px; margin-top: 10px; border-color: gainsboro;" name="act" value="update" class="btn_5">新增圖片
+                                                </button>
+                                            </td>
+                                            <td></td>
+                                        <tr>
+                                <?php
+                                    }
                                 }
                             }
-                            ?>
+                                ?>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
     </section>
     <!--================End Checkout Area =================-->
 
@@ -412,6 +458,12 @@
     <script src="js/mail-script.js"></script>
     <!-- custom js -->
     <script src="js/custom.js"></script>
+
+    <script>
+        submitForm = () => {
+            document.getElementById("form1").submit();
+        }
+    </script>
 </body>
 
 </html>
