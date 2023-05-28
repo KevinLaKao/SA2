@@ -19,6 +19,7 @@ if (isset($_FILES['image']) && isset($_SESSION['userEmail'])) {
                 location = '../userCenter.php';
             </script>
         <?php
+            exit();
         }
     } else {
         ?>
@@ -27,6 +28,7 @@ if (isset($_FILES['image']) && isset($_SESSION['userEmail'])) {
             location = '../userCenter.php';
         </script>
         <?php
+        exit();
     }
 } else if (isset($_FILES['image']) && isset($_SESSION['sellerEmail'])) {
     $sellerEmail = $_SESSION['sellerEmail'];
@@ -39,7 +41,14 @@ if (isset($_FILES['image']) && isset($_SESSION['userEmail'])) {
     // 將文件移動到目標位置
     if (move_uploaded_file($file_tmp, $target_file)) {
         $link = mysqli_connect('localhost', 'root', '', 'sa');
+
         $sql = "UPDATE `seller` SET `sellerPhoto`='$target_file' WHERE sellerEmail='$sellerEmail'";
+
+        if (isset($_POST['productCode'])) {
+            $productCode = $_POST['productCode'];
+            $file = substr($target_file, 3, strlen($target_file));
+            $sql = "UPDATE `product` SET `productPicture`='$file' WHERE productCode='$productCode';";
+        }
         if ($result = mysqli_query($link, $sql)) {
         ?>
             <script>
@@ -47,6 +56,7 @@ if (isset($_FILES['image']) && isset($_SESSION['userEmail'])) {
                 location = '../sellerCenter.php';
             </script>
         <?php
+            exit();
         }
     } else {
         ?>
@@ -55,5 +65,7 @@ if (isset($_FILES['image']) && isset($_SESSION['userEmail'])) {
             location = '../sellerCenter.php';
         </script>
 <?php
+        exit();
     }
 }
+?>
