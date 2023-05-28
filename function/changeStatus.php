@@ -1,6 +1,13 @@
 <?php
 $act = $_GET['act'];
-$userEmail = $_SESSION['userEmail'];
+if(isset($_SESSION['userEmail'])){
+    $userEmail = $_SESSION['userEmail'];
+}
+
+if(isset($_GET['userEmail'])){
+    $userEmail = $_GET['userEmail'];
+}
+
 
 $link = mysqli_connect('localhost', 'root', '', 'sa');
 if ($act == "processing") {
@@ -12,8 +19,8 @@ if ($act == "processing") {
 }
 if ($act == "pickUp") {
     $userEmail = $_GET['userEmail'];
-    $sellerName = $_SESSION['sellerName'];
-    $pickUp = "update cart join product on cart.productCode = product.productCode set historyStatus = 'pickUp' where userEmail = '$userEmail' and sellerName = '$sellerName'";
+    $productCode = $_GET['productCode'];
+    $pickUp = "update cart set historyStatus = 'pickUp' where userEmail = '$userEmail' and productCode = '$productCode';";
     $result = mysqli_query($link, $pickUp);
     if ($result) {
         header("Location:../orderStatus.php");
@@ -21,8 +28,8 @@ if ($act == "pickUp") {
 }
 if ($act == "complete") {
     $userEmail = $_GET['userEmail'];
-    $sellerName = $_SESSION['sellerName'];
-    $complete = "update cart join product on cart.productCode = product.productCode set historyStatus = 'complete' where userEmail = '$userEmail' and sellerName = '$sellerName'";
+    $productCode = $_GET['productCode'];
+    $complete = "update cart set historyStatus = 'complete' where userEmail = '$userEmail' and productCode = '$productCode';";
     $result = mysqli_query($link, $complete);
     if ($result) {
         header("Location:../orderStatus.php");

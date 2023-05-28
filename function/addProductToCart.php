@@ -26,7 +26,7 @@ while($row = mysqli_fetch_array($productAmountResult)){
     $limit = $row['productAmount'];
 }
 
-if($limit <= $cartTotalAmount){
+if($limit == $cartTotalAmount){
     ?>
         <script>
             alert(" 無法加入購物車，商品數量不夠，待商家補貨。 ");
@@ -45,7 +45,9 @@ while ($row = mysqli_fetch_array($isExistResult)) {
         $newAmount = $row['cartAmount'] + 1;
         $update = "update cart set cartAmount='$newAmount'
             where productCode='$productCode' and userEmail='$userEmail' and historyStatus = 'notReady';";
-        if (mysqli_query($link, $update)) {
+        
+        $newProuctAmount = "update product set productAmount=(select productAmount where productCode='$productCode')-1 where productCode='$productCode';";
+        if (mysqli_query($link, $update) and mysqli_query($link, $newProuctAmount)) {
             header("location:../productSeller.php");
             exit();
         } else {
@@ -55,13 +57,17 @@ while ($row = mysqli_fetch_array($isExistResult)) {
                 location = '../productSeller.php';
             </script>
     <?php
+            exit();
         }
     }
 }
 
+$newProuctAmount = "update product set 
+    productAmount=(select productAmount where productCode='$productCode')-1 
+    where productCode='$productCode';";
 $sql  = "insert into cart (productCode, userEmail) 
             values ('$productCode', '$userEmail')";
-if (mysqli_query($link, $sql)) {
+if (mysqli_query($link, $sql) and mysqli_query($link, $newProuctAmount)) {
     header("location:../productSeller.php");
     exit();
 } else {
@@ -71,5 +77,6 @@ if (mysqli_query($link, $sql)) {
         location = '../productSeller.php';
     </script>
 <?php
+exit();
 }
 ?>
