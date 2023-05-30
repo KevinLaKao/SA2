@@ -50,7 +50,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="order_details_iner">
-            <h3>歷史訂單</h3>
+            <h3>下單</h3>
             <form action="./function/changeStatus.php" method="get">
             <table class="table table-borderless">
               <thead>

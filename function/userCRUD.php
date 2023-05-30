@@ -18,6 +18,7 @@ if ($act == "usercreate") {
             location = '../userLogin.php';
         </script>
     <?php
+        exit();
     } else {
     ?>
         <script>
@@ -25,6 +26,7 @@ if ($act == "usercreate") {
             location = '../userRegister.php';
         </script>
     <?php
+        exit();
     }
 } elseif ($act == "update") {
     //這裡是修改
@@ -39,6 +41,7 @@ where member_name='$member_name'";
             location = 'backStage.php';
         </script>
     <?php
+        exit();
     } else {
     ?>
         <script>
@@ -46,6 +49,7 @@ where member_name='$member_name'";
             location = 'backStage.php';
         </script>
     <?php
+    exit();
     }
 } else if ($act == 'delete') {
     //這裡是刪除
@@ -57,6 +61,7 @@ where member_name='$member_name'";
             location = 'backStage.php';
         </script>
     <?php
+    exit();
     } else {
     ?>
         <script>
@@ -64,6 +69,7 @@ where member_name='$member_name'";
             location = 'backStage.php';
         </script>
 <?php
+    exit();
     }
 }
 ?>
